@@ -112,6 +112,10 @@ CategorySortHeaders:
   branch: _branch_
   path: extensions/CategorySortHeaders
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CategorySortHeaders
+CategoryTests:
+  branch: _branch_
+  path: extensions/CategoryTests
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-CategoryTests
 CategoryTree:
   branch: _branch_
   path: extensions/CategoryTree
