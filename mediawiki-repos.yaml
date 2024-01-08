@@ -1272,7 +1272,7 @@ WikiLove:
   path: extensions/WikiLove
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiLove
 WikiSEO:
-  branch: _branch_
+  branch: b05926d5fdf8bf76b7eb5882734e0d9f5c2c3315
   path: extensions/WikiSEO
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiSEO
 WikiTextLoggedInOut:
