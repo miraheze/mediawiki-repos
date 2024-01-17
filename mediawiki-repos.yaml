@@ -1384,3 +1384,7 @@ sanecase:
   branch: master
   path: extensions/SaneCase
   repo_url: https://github.com/ciencia/mediawiki-extensions-SaneCase
+requestssl:
+  branch: main
+  path: extensions/RequestSSL
+  repo_url: https://github.com/miraheze/RequestSSL
