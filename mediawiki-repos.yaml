@@ -279,6 +279,10 @@ DisplayTitle:
   branch: _branch_
   path: extensions/DisplayTitle
   repo_url: https://github.com/wikimedia/mediawiki-extensions-DisplayTitle
+Drafts:
+  branch: _branch_
+  path: extensions/Drafts
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-Drafts
 DummyFandoomMainpageTags:
   branch: master
   path: extensions/DummyFandoomMainpageTags
