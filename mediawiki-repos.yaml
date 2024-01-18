@@ -965,6 +965,10 @@ Report:
   branch: master
   path: extensions/Report
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Report
+RequestSSL:
+  branch: main
+  path: extensions/RequestSSL
+  repo_url: https://github.com/miraheze/RequestSSL
 RevisionSlider:
   branch: _branch_
   path: extensions/RevisionSlider
@@ -1380,11 +1384,3 @@ wikihiero:
   branch: _branch_
   path: extensions/wikihiero
   repo_url: https://github.com/wikimedia/mediawiki-extensions-wikihiero
-sanecase:
-  branch: master
-  path: extensions/SaneCase
-  repo_url: https://github.com/ciencia/mediawiki-extensions-SaneCase
-requestssl:
-  branch: main
-  path: extensions/RequestSSL
-  repo_url: https://github.com/miraheze/RequestSSL
