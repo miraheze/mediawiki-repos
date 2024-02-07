@@ -659,10 +659,6 @@ MirahezeMagic:
   path: extensions/MirahezeMagic
   repo_url: https://github.com/miraheze/MirahezeMagic
   latest: true
-MixedNamespaceSearchSuggestions:
-  branch: _branch_
-  path: extensions/MixedNamespaceSearchSuggestions
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-MixedNamespaceSearchSuggestions
 MobileDetect:
   branch: master
   path: extensions/MobileDetect
