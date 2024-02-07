@@ -349,10 +349,6 @@ FlaggedRevs:
   branch: _branch_
   path: extensions/FlaggedRevs
   repo_url: https://github.com/wikimedia/mediawiki-extensions-FlaggedRevs
-Flatbox:
-  branch: master
-  path: skins/Flatbox
-  repo_url: https://github.com/enginbyram/mediawiki-flatbox
 FlexDiagrams:
   branch: master
   path: extensions/FlexDiagrams
