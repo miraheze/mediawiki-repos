@@ -10,10 +10,6 @@ AbuseFilter:
   branch: _branch_
   path: extensions/AbuseFilter
   repo_url: https://github.com/wikimedia/mediawiki-extensions-AbuseFilter
-AddHTMLMetaAndTitle:
-  branch: _branch_
-  path: extensions/AddHTMLMetaAndTitle
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-AddHTMLMetaAndTitle
 AdminLinks:
   branch: _branch_
   path: extensions/AdminLinks
