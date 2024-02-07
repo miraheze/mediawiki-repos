@@ -953,10 +953,6 @@ RemoveRedlinks:
   branch: master
   path: extensions/RemoveRedlinks
   repo_url: https://github.com/marohh/mediawikiRemoveRedlinks
-Renameuser:
-  branch: _branch_
-  path: extensions/Renameuser
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-Renameuser
 ReplaceText:
   branch: _branch_
   path: extensions/ReplaceText
