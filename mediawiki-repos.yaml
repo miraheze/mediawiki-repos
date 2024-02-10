@@ -888,7 +888,7 @@ ProtectionIndicator:
 Purge:
   branch: master
   path: extensions/Purge
-  repo_url: https://github.com/Hutchy68/Purge
+  repo_url: https://github.com/AlPha5130/mediawiki-extensions-Purge
 QuickInstantCommons:
   branch: master
   path: extensions/QuickInstantCommons
