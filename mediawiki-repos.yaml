@@ -1043,6 +1043,10 @@ SkinPerPage:
   branch: _branch_
   path: extensions/SkinPerPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SkinPerPage
+SnapBlocks:
+  branch: master
+  path: extensions/SnapBlocks
+  repo_url: https://github.com/snap-blocks/mw-snapblocks
 SnapProjectEmbed:
   branch: stable
   path: extensions/SnapProjectEmbed
