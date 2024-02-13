@@ -1203,6 +1203,10 @@ UniversalLanguageSelector:
   branch: master
   path: extensions/UniversalLanguageSelector
   repo_url: https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector
+UnlinkedWikibase:
+  branch: master
+  path: extensions/UnlinkedWikibase
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-UnlinkedWikibase
 UploadWizard:
   branch: _branch_
   path: extensions/UploadWizard
