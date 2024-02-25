@@ -1045,7 +1045,7 @@ SkinPerPage:
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SkinPerPage
 SnapBlocks:
   branch: master
-  path: extensions/SnapBlocks
+  path: extensions/mw-snapblocks
   repo_url: https://github.com/snap-blocks/mw-snapblocks
 SnapProjectEmbed:
   branch: stable
