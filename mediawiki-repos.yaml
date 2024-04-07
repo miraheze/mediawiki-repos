@@ -618,6 +618,10 @@ MediaSearch:
   branch: _branch_
   path: extensions/MediaSearch
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MediaSearch
+MediaSpoiler:
+  branch: master
+  path: extensions/MediaSpoiler
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-MediaSpoiler
 MediaWikiChat:
   branch: _branch_
   path: extensions/MediaWikiChat
