@@ -328,10 +328,18 @@ Evelution:
   branch: main
   path: skins/Evelution
   repo_url: https://github.com/AWikia/SkinEvelution
+EventBus:
+  branch: _branch_
+  path: extensions/EventBus
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-EventBus
 EventLogging:
   branch: _branch_
   path: extensions/EventLogging
   repo_url: https://github.com/wikimedia/mediawiki-extensions-EventLogging
+EventStreamConfig:
+  branch: _branch_
+  path: extensions/EventStreamConfig
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-EventStreamConfig
 ExternalData:
   branch: master
   path: extensions/ExternalData
@@ -894,7 +902,7 @@ Purge:
   path: extensions/Purge
   repo_url: https://github.com/AlPha5130/mediawiki-extensions-Purge
 QuickInstantCommons:
-  branch: master
+  branch: _branch_
   path: extensions/QuickInstantCommons
   repo_url: https://github.com/wikimedia/mediawiki-extensions-QuickInstantCommons
 Quiz:
@@ -1212,7 +1220,7 @@ UniversalLanguageSelector:
   path: extensions/UniversalLanguageSelector
   repo_url: https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector
 UnlinkedWikibase:
-  branch: master
+  branch: _branch_
   path: extensions/UnlinkedWikibase
   repo_url: https://github.com/wikimedia/mediawiki-extensions-UnlinkedWikibase
 UploadWizard:
