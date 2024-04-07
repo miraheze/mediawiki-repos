@@ -627,7 +627,7 @@ MediaSearch:
   path: extensions/MediaSearch
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MediaSearch
 MediaSpoiler:
-  branch: master
+  branch: _branch_
   path: extensions/MediaSpoiler
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MediaSpoiler
 MediaWikiChat:
