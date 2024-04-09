@@ -1021,11 +1021,6 @@ SemanticFormsSelect:
   branch: master
   path: extensions/SemanticFormsSelect
   repo_url: https://github.com/SemanticMediaWiki/SemanticFormsSelect
-SemanticMediaWiki:
-  branch: master
-  path: extensions/SemanticMediaWiki
-  repo_url: https://github.com/SemanticMediaWiki/SemanticMediaWiki
-  composer: true
 SemanticScribunto:
   branch: master
   path: extensions/SemanticScribunto
