@@ -828,7 +828,7 @@ PageImages:
   path: extensions/PageImages
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PageImages
 PageLanguage:
-  branch: master
+  branch: _branch_
   path: extensions/PageLanguage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PageLanguage
 PageNotice:
@@ -865,7 +865,7 @@ PdfHandler:
   path: extensions/PdfHandler
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PdfHandler
 PerPageLanguage:
-  branch: master
+  branch: _branch_
   path: extensions/PerPageLanguage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PerPageLanguage
 PipeEscape:
