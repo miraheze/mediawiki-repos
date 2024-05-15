@@ -864,6 +864,10 @@ PdfHandler:
   branch: _branch_
   path: extensions/PdfHandler
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PdfHandler
+PerPageLanguage:
+  branch: master
+  path: extensions/PerPageLanguage
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-PerPageLanguage
 PipeEscape:
   branch: _branch_
   path: extensions/PipeEscape
