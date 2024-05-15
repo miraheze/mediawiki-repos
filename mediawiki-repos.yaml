@@ -827,6 +827,10 @@ PageImages:
   branch: _branch_
   path: extensions/PageImages
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PageImages
+PageLanguage:
+  branch: master
+  path: extensions/PageLanguage
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-PageLanguage
 PageNotice:
   branch: _branch_
   path: extensions/PageNotice
