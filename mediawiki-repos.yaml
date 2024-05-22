@@ -553,6 +553,10 @@ Lingo:
   path: extensions/Lingo
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Lingo
   composer: true
+LinkCards:
+  branch: _branch_
+  path: extensions/LinkCards
+  repo_url: https://github.com/Wikimedia-AU/MediaWiki-extension-LinkCards
 LinkSuggest:
   branch: _branch_
   path: extensions/LinkSuggest
