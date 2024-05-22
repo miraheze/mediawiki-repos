@@ -230,6 +230,10 @@ CreatedPagesList:
   branch: _branch_
   path: extensions/CreatedPagesList
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CreatedPagesList
+CustomSubtitle:
+  branch: master
+  path: extensions/CustomSubtitle
+  repo_url: https://github.com/lingua-libre/CustomSubtitle
 DPLForum:
   branch: _branch_
   path: extensions/DPLForum
