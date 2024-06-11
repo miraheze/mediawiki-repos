@@ -230,6 +230,10 @@ CreatedPagesList:
   branch: _branch_
   path: extensions/CreatedPagesList
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CreatedPagesList
+CustomSearchProfiles:
+  branch: master
+  path: extensions/CustomSearchProfiles
+  repo_url: https://git.average.name/BlankEclair/CustomSearchProfiles
 CustomSubtitle:
   branch: master
   path: extensions/CustomSubtitle
