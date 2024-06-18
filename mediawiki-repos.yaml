@@ -332,6 +332,10 @@ Evelution:
   branch: main
   path: skins/Evelution
   repo_url: https://github.com/AWikia/SkinEvelution
+Eveskin:
+  branch: master
+  path: skins/Eveskin
+  repo_url: https://github.com/cforcomputer/eveskin
 EventBus:
   branch: _branch_
   path: extensions/EventBus
