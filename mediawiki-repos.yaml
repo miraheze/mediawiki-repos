@@ -3,7 +3,8 @@
   path: extensions/3D
   repo_url: https://github.com/wikimedia/mediawiki-extensions-3D
 AJAXPoll:
-  branch: _branch_
+  branch: master
+  commit: 20ad08e088b244ede24fa06f4d1412a21c27293a
   path: extensions/AJAXPoll
   repo_url: https://github.com/wikimedia/mediawiki-extensions-AJAXPoll
 AbuseFilter:
@@ -178,7 +179,8 @@ Commentbox:
   path: extensions/Commentbox
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Commentbox
 Comments:
-  branch: _branch_
+  branch: master
+  commit: f16024082bc5916e9fba6263ad1fa12df8a887e4
   path: extensions/Comments
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Comments
 CommonsMetadata:
@@ -937,7 +939,8 @@ Quiz:
   path: extensions/Quiz
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Quiz
 QuizGame:
-  branch: _branch_
+  branch: master
+  commit: 78401e4dada677a521651d8ba134bc0f35266485
   path: extensions/QuizGame
   repo_url: https://github.com/wikimedia/mediawiki-extensions-QuizGame
 RSS:
@@ -1303,7 +1306,8 @@ VisualEditor:
   repo_url: https://github.com/wikimedia/mediawiki-extensions-VisualEditor
   shallow_submodules: true
 VoteNY:
-  branch: _branch_
+  branch: master
+  commit: 5456244f71ee0d994f2f207572c1dbd24acfd57a
   path: extensions/VoteNY
   repo_url: https://github.com/wikimedia/mediawiki-extensions-VoteNY
 WMAU:
@@ -1332,7 +1336,8 @@ WikiEditor:
   path: extensions/WikiEditor
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiEditor
 WikiForum:
-  branch: _branch_
+  branch: master
+  commit: 14d083f6bcf86f4e8ac4ada863a14dd75fec1e39
   path: extensions/WikiForum
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiForum
 WikiLove:
