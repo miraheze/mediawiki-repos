@@ -3,7 +3,7 @@
   path: extensions/3D
   repo_url: https://github.com/wikimedia/mediawiki-extensions-3D
 AJAXPoll:
-  branch: _branch_
+  branch: master
   path: extensions/AJAXPoll
   repo_url: https://github.com/wikimedia/mediawiki-extensions-AJAXPoll
 AbuseFilter:
@@ -170,7 +170,7 @@ CologneBlue:
   path: skins/CologneBlue
   repo_url: https://github.com/wikimedia/mediawiki-skins-CologneBlue
 CommentStreams:
-  branch: _branch_
+  branch: master
   path: extensions/CommentStreams
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CommentStreams
 Commentbox:
@@ -937,7 +937,7 @@ Quiz:
   path: extensions/Quiz
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Quiz
 QuizGame:
-  branch: _branch_
+  branch: master
   path: extensions/QuizGame
   repo_url: https://github.com/wikimedia/mediawiki-extensions-QuizGame
 RSS:
@@ -1303,7 +1303,7 @@ VisualEditor:
   repo_url: https://github.com/wikimedia/mediawiki-extensions-VisualEditor
   shallow_submodules: true
 VoteNY:
-  branch: _branch_
+  branch: master
   path: extensions/VoteNY
   repo_url: https://github.com/wikimedia/mediawiki-extensions-VoteNY
 WMAU:
@@ -1332,7 +1332,7 @@ WikiEditor:
   path: extensions/WikiEditor
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiEditor
 WikiForum:
-  branch: _branch_
+  branch: master
   path: extensions/WikiForum
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiForum
 WikiLove:
