@@ -170,7 +170,7 @@ CologneBlue:
   path: skins/CologneBlue
   repo_url: https://github.com/wikimedia/mediawiki-skins-CologneBlue
 CommentStreams:
-  branch: master
+  branch: _branch_
   path: extensions/CommentStreams
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CommentStreams
 Commentbox:
@@ -178,7 +178,7 @@ Commentbox:
   path: extensions/Commentbox
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Commentbox
 Comments:
-  branch: _branch_
+  branch: commit
   path: extensions/Comments
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Comments
 CommonsMetadata:
