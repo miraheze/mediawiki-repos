@@ -356,6 +356,10 @@ ExternalData:
   branch: master
   path: extensions/ExternalData
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ExternalData
+FeaturedFeeds:
+  branch: _branch_
+  path: extensions/FeaturedFeeds
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-FeaturedFeeds
 Femiwiki:
   branch: REL1_40
   path: skins/Femiwiki
