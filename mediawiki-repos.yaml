@@ -880,6 +880,10 @@ PerPageLanguage:
   branch: _branch_
   path: extensions/PerPageLanguage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PerPageLanguage
+Phonos:
+  branch: _branch_
+  path: extensions/Phonos
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-Phonos
 PipeEscape:
   branch: _branch_
   path: extensions/PipeEscape
