@@ -884,6 +884,7 @@ Phonos:
   branch: _branch_
   path: extensions/Phonos
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Phonos
+  composer: true
 PipeEscape:
   branch: _branch_
   path: extensions/PipeEscape
