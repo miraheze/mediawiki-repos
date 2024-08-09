@@ -446,6 +446,10 @@ GoogleDocs4MW:
   branch: _branch_
   path: extensions/GoogleDocs4MW
   repo_url: https://github.com/wikimedia/mediawiki-extensions-GoogleDocs4MW
+GoogleForms:
+  branch: main
+  path: extensions/GoogleForms
+  repo_url: https://git.average.name/BlankEclair/GoogleForms
 GoogleNewsSitemap:
   branch: _branch_
   path: extensions/GoogleNewsSitemap
