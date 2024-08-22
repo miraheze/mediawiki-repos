@@ -1256,6 +1256,10 @@ UnlinkedWikibase:
   branch: _branch_
   path: extensions/UnlinkedWikibase
   repo_url: https://github.com/wikimedia/mediawiki-extensions-UnlinkedWikibase
+UnusedRedirects:
+  branch: _branch_
+  path: extensions/UnusedRedirects
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-UnusedRedirects
 UploadWizard:
   branch: _branch_
   path: extensions/UploadWizard
