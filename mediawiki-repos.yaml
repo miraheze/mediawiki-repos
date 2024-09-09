@@ -760,6 +760,10 @@ NearbyPages:
   path: extensions/NearbyPages
   repo_url: https://github.com/wikimedia/mediawiki-extensions-NearbyPages
   composer: true
+Network:
+  branch: master
+  path: extensions/Network
+  repo_url: https://github.com/ProfessionalWiki/Network
 NewSignupPage:
   branch: _branch_
   path: extensions/NewSignupPage
