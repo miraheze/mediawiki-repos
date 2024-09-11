@@ -1200,6 +1200,10 @@ Tilesheets:
   branch: master
   path: extensions/Tilesheets
   repo_url: https://github.com/FTB-Gamepedia/Tilesheets
+TitleIcon
+  branch: _branch_
+  path: extensions/TitleIcon
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-TitleIcon
 TimeMachine:
   branch: _branch_
   path: extensions/TimeMachine
