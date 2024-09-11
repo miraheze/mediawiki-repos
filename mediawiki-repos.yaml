@@ -1225,6 +1225,10 @@ TitleBlacklist:
   branch: _branch_
   path: extensions/TitleBlacklist
   repo_url: https://github.com/wikimedia/mediawiki-extensions-TitleBlacklist
+TitleIcon:
+  branch: _branch_
+  path: extensions/TitleIcon
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-TitleIcon
 TitleKey:
   branch: _branch_
   path: extensions/TitleKey
