@@ -459,10 +459,6 @@ GoogleNewsSitemap:
   branch: _branch_
   path: extensions/GoogleNewsSitemap
   repo_url: https://github.com/wikimedia/mediawiki-extensions-GoogleNewsSitemap
-Graph:
-  branch: _branch_
-  path: extensions/Graph
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-Graph
 GroupsSidebar:
   branch: _branch_
   path: extensions/GroupsSidebar
