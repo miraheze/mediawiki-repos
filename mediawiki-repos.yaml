@@ -986,10 +986,6 @@ Refreshed:
   branch: _branch_
   path: skins/Refreshed
   repo_url: https://github.com/wikimedia/mediawiki-skins-Refreshed
-RegexFunctions:
-  branch: _branch_
-  path: extensions/RegexFunctions
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-RegexFunctions
 RelatedArticles:
   branch: _branch_
   path: extensions/RelatedArticles
