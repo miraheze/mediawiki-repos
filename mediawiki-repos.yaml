@@ -47,10 +47,6 @@ ArticleRatings:
   branch: _branch_
   path: extensions/ArticleRatings
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ArticleRatings
-ArticleToCategory2:
-  branch: _branch_
-  path: extensions/ArticleToCategory2
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-ArticleToCategory2
 AuthorProtect:
   branch: _branch_
   path: extensions/AuthorProtect
