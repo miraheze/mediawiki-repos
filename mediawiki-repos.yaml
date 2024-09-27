@@ -1144,6 +1144,10 @@ SubpageFun:
   branch: _branch_
   path: extensions/SubpageFun
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SubpageFun
+SubTranslate:
+  branch: _branch_
+  path: extensions/SubTranslate
+  repo_url: https://github.com/miraheze/SubTranslate
 SyntaxHighlight_GeSHi:
   branch: _branch_
   path: extensions/SyntaxHighlight_GeSHi
