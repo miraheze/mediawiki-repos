@@ -1141,7 +1141,7 @@ SubPageList3:
   path: extensions/SubPageList3
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SubPageList3
 SubTranslate:
-  branch: _branch_
+  branch: master
   path: extensions/SubTranslate
   repo_url: https://github.com/miraheze/SubTranslate
 SubpageFun:
