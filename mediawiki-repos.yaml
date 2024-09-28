@@ -1111,6 +1111,10 @@ SpamBlacklist:
   branch: _branch_
   path: extensions/SpamBlacklist
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SpamBlacklist
+SpeciallyCursed:
+  branch: main
+  path: extensions/SpeciallyCursed
+  repo_url: https://git.average.name/BlankEclair/SpeciallyCursed
 Splash:
   branch: _branch_
   path: skins/Splash
