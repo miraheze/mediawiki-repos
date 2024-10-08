@@ -84,6 +84,7 @@ CSS:
   branch: _branch_
   path: extensions/CSS
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CSS
+  composer: true
 Calendar:
   branch: _branch_
   path: extensions/Calendar
