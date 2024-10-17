@@ -688,7 +688,7 @@ MirahezeMagic:
   branch: master
   path: extensions/MirahezeMagic
   repo_url: https://github.com/miraheze/MirahezeMagic
-  latest: true
+  latest: false
 MobileDetect:
   branch: master
   path: extensions/MobileDetect
