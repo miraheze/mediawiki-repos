@@ -182,11 +182,6 @@ CommonsMetadata:
   branch: _branch_
   path: extensions/CommonsMetadata
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CommonsMetadata
-CommunityConfiguration:
-  branch: _branch_
-  path: extensions/CommunityConfiguration
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-CommunityConfiguration
-  versions: '1.43'
 ConfirmEdit:
   branch: _branch_
   path: extensions/ConfirmEdit
