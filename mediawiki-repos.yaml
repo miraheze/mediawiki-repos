@@ -565,10 +565,6 @@ LdapAuthentication:
   branch: _branch_
   path: extensions/LdapAuthentication
   repo_url: https://github.com/wikimedia/mediawiki-extensions-LdapAuthentication
-LibreTranslate:
-  branch: master
-  path: extensions/LibreTranslate
-  repo_url: https://github.com/miraheze/LibreTranslate
 Lingo:
   branch: _branch_
   path: extensions/Lingo
@@ -610,6 +606,10 @@ Loops:
   branch: _branch_
   path: extensions/Loops
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Loops
+MachineTranslation:
+  branch: master
+  path: extensions/MachineTranslation
+  repo_url: https://github.com/miraheze/MachineTranslation
 MagicNoCache:
   branch: _branch_
   path: extensions/MagicNoCache
