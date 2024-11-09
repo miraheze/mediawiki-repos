@@ -7,6 +7,7 @@
 		"merge-plugin": {
 			"include": [
 				"extensions/OOJSPlus/composer.json",
+				"extensions/TemplateStyles/composer.json",
 				"extensions/SemanticScribunto/composer.json",
 				"extensions/Wikibase/composer.json",
 				"extensions/WikibaseEdtf/composer.json"
