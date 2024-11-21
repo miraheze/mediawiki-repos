@@ -1068,7 +1068,7 @@ Share:
   path: extensions/Share
   repo_url: https://github.com/AgentIsai/Share
 ShortDescription:
-  branch: master
+  branch: main
   path: extensions/ShortDescription
   repo_url: https://github.com/StarCitizenTools/mediawiki-extensions-ShortDescription
 SimpleBatchUpload:
