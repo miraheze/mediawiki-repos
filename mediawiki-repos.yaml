@@ -1239,7 +1239,7 @@ TorBlock:
   path: extensions/TorBlock
   repo_url: https://github.com/wikimedia/mediawiki-extensions-TorBlock
 Translate:
-  branch: _branch_
+  branch: master
   path: extensions/Translate
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Translate
   composer: true
