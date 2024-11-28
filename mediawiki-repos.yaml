@@ -252,7 +252,7 @@ DataMaps:
   path: extensions/DataMaps
   repo_url: https://github.com/alex4401/mediawiki-extensions-DataMaps
 DataTransfer:
-  branch: _branch_
+  branch: master
   path: extensions/DataTransfer
   repo_url: https://github.com/wikimedia/mediawiki-extensions-DataTransfer
   composer: true
