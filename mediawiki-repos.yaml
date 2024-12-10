@@ -521,7 +521,7 @@ InterwikiDispatcher:
   path: extensions/InterwikiDispatcher
   repo_url: https://github.com/Markus-Rost/InterwikiDispatcher
 InterwikiSorting:
-  branch: _branch_
+  branch: REL1_39
   path: extensions/InterwikiSorting
   repo_url: https://github.com/wikimedia/mediawiki-extensions-InterwikiSorting
 JSBreadCrumbs:
