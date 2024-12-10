@@ -517,7 +517,7 @@ Interwiki:
   path: extensions/Interwiki
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Interwiki
 InterwikiDispatcher:
-  branch: fa43e72cd62075ca9bf7df0e972f5de412675340
+  branch: master
   path: extensions/InterwikiDispatcher
   repo_url: https://github.com/Markus-Rost/InterwikiDispatcher
 InterwikiSorting:
