@@ -143,7 +143,7 @@ CiteThisPage:
   path: extensions/CiteThisPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CiteThisPage
 Citizen:
-  branch: main
+  branch: REL1_39
   path: skins/Citizen
   repo_url: https://github.com/StarCitizenTools/mediawiki-skins-Citizen
 CleanChanges:
