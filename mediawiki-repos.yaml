@@ -81,7 +81,7 @@ Bootstrap:
   repo_url: https://github.com/ProfessionalWiki/Bootstrap
   composer: true
 BreadCrumbs2:
-  branch _branch_
+  branch: _branch_
   path: extensions/BreadCrumbs2
   repo_url: https://github.com/wikimedia/mediawiki-extensions-BreadCrumbs2
 CSS:
