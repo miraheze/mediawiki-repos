@@ -1197,6 +1197,10 @@ Theme:
   branch: _branch_
   path: extensions/Theme
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Theme
+ThemeToggle:
+  branch: _branch_
+  path: extensions/ThemeToggle
+  repo_url: https://github.com/wiki-gg-oss/mediawiki-extensions-ThemeToggle
 Tilesheets:
   branch: master
   path: extensions/Tilesheets
