@@ -316,6 +316,10 @@ Echo:
   branch: _branch_
   path: extensions/Echo
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Echo
+EditCountNeue:
+  branch: _branch_
+  path: extensions/EditCountNeue
+  repo_url: https://github.com/AlPha5130/mediawiki-extensions-EditCountNeue
 EditSubpages:
   branch: _branch_
   path: extensions/EditSubpages
@@ -324,10 +328,6 @@ Editcount:
   branch: _branch_
   path: extensions/Editcount
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Editcount
-EditCountNeue:
-  branch: _branch_
-  path: extensions/EditCountNeue
-  repo_url: https://github.com/AlPha5130/mediawiki-extensions-EditCountNeue
 Elastica:
   branch: _branch_
   path: extensions/Elastica
