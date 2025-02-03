@@ -579,9 +579,9 @@ Lingo:
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Lingo
   composer: true
 LinkCards:
-  branch: main
+  branch: master
   path: extensions/LinkCards
-  repo_url: https://github.com/Wikimedia-AU/MediaWiki-extension-LinkCards
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-LinkCards
 LinkSuggest:
   branch: _branch_
   path: extensions/LinkSuggest
