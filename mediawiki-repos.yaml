@@ -31,6 +31,10 @@ ApprovedRevs:
   branch: master
   path: extensions/ApprovedRevs
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ApprovedRevs
+ArticleFeedbackv5:
+  branch: _branch_
+  path: extensions/ArticleFeedbackv5
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
 Arrays:
   branch: _branch_
   path: extensions/Arrays
