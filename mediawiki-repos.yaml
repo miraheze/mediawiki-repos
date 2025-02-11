@@ -1094,7 +1094,7 @@ SimpleBatchUpload:
 SimpleBlogPage:
   branch: master
   path: extensions/SimpleBlogPage
-  repo_url: https://github.com/Universal-Omega/SimpleBlogPage
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-SimpleBlogPage
 SimpleChanges:
   branch: _branch_
   path: extensions/SimpleChanges
