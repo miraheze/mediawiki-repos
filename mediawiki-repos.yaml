@@ -1270,7 +1270,7 @@ TranslationNotifications:
 TreeAndMenu:
   branch: master
   path: extensions/TreeAndMenu
-  repo_url: https://gitlab.com/organicdesign/TreeAndMenu
+  repo_url: https://github.com/debtcompliance/TreeAndMenu
 Truglass:
   branch: master
   path: skins/Truglass
