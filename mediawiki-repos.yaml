@@ -1033,7 +1033,7 @@ RightFunctions:
 RobloxAPI:
   branch: master
   path: extensions/RobloxAPI
-  repo_url: https://github.com/dovedalewiki/mediawiki-extensions-RobloxAPI
+  repo_url: https://github.com/Roblox-Indie-Wikis/mediawiki-extensions-RobloxAPI
 RottenLinks:
   branch: master
   path: extensions/RottenLinks
