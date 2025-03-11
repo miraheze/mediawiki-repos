@@ -324,6 +324,10 @@ EditCountNeue:
   branch: _branch_
   path: extensions/EditCountNeue
   repo_url: https://github.com/AlPha5130/mediawiki-extensions-EditCountNeue
+EditSimilar:
+  branch: _branch_
+  path: extensions/EditSimilar
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-EditSimilar
 EditSubpages:
   branch: _branch_
   path: extensions/EditSubpages
