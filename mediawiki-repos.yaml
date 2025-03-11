@@ -332,6 +332,10 @@ Editcount:
   branch: _branch_
   path: extensions/Editcount
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Editcount
+EditSimilar:
+  branch: _branch_
+  path: extensions/EditSimilar
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-EditSimilar
 Elastica:
   branch: _branch_
   path: extensions/Elastica
