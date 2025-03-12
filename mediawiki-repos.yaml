@@ -991,6 +991,10 @@ RandomImage:
   branch: master
   path: extensions/RandomImage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-RandomImage
+RandomImageByCategory:
+  branch: _branch_
+  path: extensions/RandomImageByCategory
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-RandomImageByCategory
 RandomSelection:
   branch: _branch_
   path: extensions/RandomSelection
