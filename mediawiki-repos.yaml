@@ -97,6 +97,10 @@ Calendar:
   branch: _branch_
   path: extensions/Calendar
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Calendar
+CampaignEvents:
+  branch: _branch_
+  path: extensions/CampaignEvents
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-CampaignEvents
 Capiunto:
   branch: _branch_
   path: extensions/Capiunto
