@@ -151,7 +151,7 @@ CiteThisPage:
   path: extensions/CiteThisPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CiteThisPage
 Citizen:
-  branch: main
+  branch: REL1_39
   path: skins/Citizen
   repo_url: https://github.com/StarCitizenTools/mediawiki-skins-Citizen
 CleanChanges:
@@ -569,6 +569,11 @@ LabeledSectionTransclusion:
   branch: _branch_
   path: extensions/LabeledSectionTransclusion
   repo_url: https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion
+Lakeus:
+  branch: _branch_
+  path: skins/Lakeus
+  repo_url: https://github.com/lakejason0/mediawiki-skins-Lakeus
+  composer: true
 LanguageSelector:
   branch: _branch_
   path: extensions/LanguageSelector
