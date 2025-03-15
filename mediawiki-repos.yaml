@@ -533,11 +533,13 @@ InputBox:
   path: extensions/InputBox
   repo_url: https://github.com/wikimedia/mediawiki-extensions-InputBox
 Interwiki:
+  versions: '1.43'
   branch: _branch_
   path: extensions/Interwiki
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Interwiki
 InterwikiDispatcher:
   branch: REL1_39
+  alpha_branch: REL1_44
   path: extensions/InterwikiDispatcher
   repo_url: https://github.com/Markus-Rost/InterwikiDispatcher
 InterwikiSorting:
