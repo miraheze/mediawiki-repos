@@ -523,6 +523,7 @@ ImportDump:
   branch: master
   path: extensions/ImportDump
   repo_url: https://github.com/miraheze/ImportDump
+  commit: '37022c8'
 IncidentReporting:
   branch: master
   path: extensions/IncidentReporting
