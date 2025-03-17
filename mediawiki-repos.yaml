@@ -179,7 +179,7 @@ CologneBlue:
   path: skins/CologneBlue
   repo_url: https://github.com/wikimedia/mediawiki-skins-CologneBlue
 CommentStreams:
-  branch: _branch_
+  branch: REL1_43
   path: extensions/CommentStreams
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CommentStreams
   commit: dbbf3f7
