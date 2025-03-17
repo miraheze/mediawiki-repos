@@ -35,7 +35,7 @@ example_repo:
 
 5. commit:
    - Optional. The Git commit to checkout. This pins the repo to this commit, which will make `git pull` only be able to pull this commit. Requires branch to be set to a real branch that the commit exists on.
-  
+
 6. composer:
     - Optional. If set to true, runs Composer install for the repository.
 
