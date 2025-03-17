@@ -22,7 +22,7 @@ example_repo:
 ### Parameters
 
 1. branch:
-   - Required. Git branch to be cloned. If `_branch_` is used, it adapts based on the main MediaWiki branch.
+   - Required. The Git branch to be cloned. If `_branch_` is used, it adapts based on the main MediaWiki branch.
 
 2. path:
    - Required. The path where the repository will be cloned.
@@ -52,6 +52,6 @@ example_repo:
     - Optional. If set to true, clones submodules with only the latest commit.
 
 11. versions:
-   - Optional. A comma-separated list of versions for which the repository should be installed. If undefined, the repository will be installed for all versions.
+    - Optional. A comma-separated list of versions for which the repository should be installed. If undefined, the repository will be installed for all versions.
 
 **NOTE**: top-level keys in [mediawiki-repos.yaml](mediawiki-repos.yaml) **MUST** be sorted alphabetically.
