@@ -1008,14 +1008,14 @@ RealMe:
   branch: _branch_
   path: extensions/RealMe
   repo_url: https://github.com/wikimedia/mediawiki-extensions-RealMe
-Refreshed:
-  branch: _branch_
-  path: skins/Refreshed
-  repo_url: https://github.com/wikimedia/mediawiki-skins-Refreshed
 RefreshSpecial:
   branch: _branch_
   path: extensions/RefreshSpecial
   repo_url: https://github.com/wikimedia/mediawiki-extensions-RefreshSpecial
+Refreshed:
+  branch: _branch_
+  path: skins/Refreshed
+  repo_url: https://github.com/wikimedia/mediawiki-skins-Refreshed
 RelatedArticles:
   branch: _branch_
   path: extensions/RelatedArticles
