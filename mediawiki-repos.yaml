@@ -1161,10 +1161,6 @@ Spoilers:
   branch: master
   path: extensions/Spoilers
   repo_url: https://github.com/Telshin/Spoilers
-SpriteSheet:
-  branch: master
-  path: extensions/SpriteSheet
-  repo_url: https://github.com/miraheze/SpriteSheet
 StandardDialogs:
   branch: _branch_
   path: extensions/StandardDialogs
