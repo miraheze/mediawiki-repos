@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "file": "PageNotice_Add_global_top_and_bottom_notices.patch",
+        "public": true,
+        "versions": ["all"],
+        "path": "extensions/PageNotice",
+        "failureStrategy": "abort"
+    }
+]

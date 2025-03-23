@@ -1,0 +1,65 @@
+From ea4f05113590bef7e89c6ac723975a63999a562c Mon Sep 17 00:00:00 2001
+From: BlankEclair <blankeclair@disroot.org>
+Date: Wed, 12 Feb 2025 22:01:33 +1100
+Subject: [PATCH] Add global top and bottom notices
+
+Bug: T386076
+Change-Id: Ib7c3350d1ee1700686bca1603793a70d4d8d5ac9
+---
+ includes/Hooks.php                      | 10 ++++++++++
+ tests/phpunit/integration/HooksTest.php | 18 ++++++++++++++++++
+ 2 files changed, 28 insertions(+)
+
+diff --git a/includes/Hooks.php b/includes/Hooks.php
+index e984555..53fd3f8 100644
+--- a/includes/Hooks.php
++++ b/includes/Hooks.php
+@@ -52,6 +52,16 @@ class Hooks implements ArticleViewHeaderHook, ArticleViewFooterHook {
+ 			$out->wrapWikiTextAsInterface( "ext-pagenotice-$position-notice-ns", $wikitext );
+ 			$out->addModuleStyles( 'ext.pageNotice' );
+ 		}
++
++		// Messages:
++		// * top-notice-global
++		// * bottom-notice-global
++		$globalheader = $context->msg( "$position-notice-global" );
++		if ( !$globalheader->isBlank() ) {
++			// The <div> ID wrapper is intentionally omitted here as the previous ones
++			// were (mostly) for backwards compatibility
++			$out->wrapWikiTextAsInterface( "ext-pagenotice-$position-notice-global", $globalheader->plain() );
++		}
+ 	}
+ 
+ 	/**
+diff --git a/tests/phpunit/integration/HooksTest.php b/tests/phpunit/integration/HooksTest.php
+index 66373ad..e886133 100644
+--- a/tests/phpunit/integration/HooksTest.php
++++ b/tests/phpunit/integration/HooksTest.php
+@@ -76,6 +76,24 @@ class HooksTest extends MediaWikiIntegrationTestCase {
+ 		$this->assertStringContainsString( ':3', $output );
+ 	}
+ 
++	public function testAddNoticeGlobally(): void {
++		$context = $this->getContext(
++			Title::makeTitle( NS_MAIN, 'Sleep is important!' ),
++			new HashConfig( [ 'PageNoticeDisablePerPageNotices' => false ] ),
++			[
++				'top-notice-global' => new RawMessage( 'Love is love' ),
++				'bottom-notice-global' => new RawMessage( 'Bisexuality is not a phase' ),
++			],
++		);
++
++		$this->addNotice( $context, 'top' );
++		$this->addNotice( $context, 'bottom' );
++
++		$output = $context->getOutput()->getHTML();
++		$this->assertStringContainsString( 'Love is love', $output );
++		$this->assertStringContainsString( 'Bisexuality is not a phase', $output );
++	}
++
+ 	public function testAddNoticeDisabledPerPage(): void {
+ 		$context = $this->getContext(
+ 			Title::makeTitle( NS_MAIN, 'Catboys are cute' ),
+-- 
+2.48.1
+
