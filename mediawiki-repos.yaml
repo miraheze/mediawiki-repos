@@ -283,7 +283,7 @@ Disambiguator:
 DiscordNotifications:
   branch: master
   path: extensions/DiscordNotifications
-  repo_url: https://github.com/Universal-Omega/DiscordNotifications
+  repo_url: https://github.com/miraheze/DiscordNotifications
 DiscussionTools:
   branch: _branch_
   path: extensions/DiscussionTools
@@ -552,7 +552,7 @@ JSBreadCrumbs:
 JavascriptSlideshow:
   branch: master
   path: extensions/JavascriptSlideshow
-  repo_url: https://gitlab.com/hydrawiki/extensions/javascriptslideshow
+  repo_url: https://github.com/miraheze/JavascriptSlideshow
 Josa:
   branch: _branch_
   path: extensions/Josa
