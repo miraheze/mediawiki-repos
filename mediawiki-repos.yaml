@@ -369,10 +369,6 @@ EventStreamConfig:
   branch: _branch_
   path: extensions/EventStreamConfig
   repo_url: https://github.com/wikimedia/mediawiki-extensions-EventStreamConfig
-Eveskin:
-  branch: master
-  path: skins/Eveskin
-  repo_url: https://github.com/cforcomputer/eveskin
 ExternalData:
   branch: master
   path: extensions/ExternalData
