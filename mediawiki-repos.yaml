@@ -231,7 +231,7 @@ CreateRedirect:
   path: extensions/CreateRedirect
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CreateRedirect
 CreateWiki:
-  branch: master
+  branch: main
   path: extensions/CreateWiki
   repo_url: https://github.com/miraheze/CreateWiki
   composer: true
@@ -256,7 +256,7 @@ DarkMode:
   path: extensions/DarkMode
   repo_url: https://github.com/wikimedia/mediawiki-extensions-DarkMode
 DataDump:
-  branch: master
+  branch: main
   path: extensions/DataDump
   repo_url: https://github.com/miraheze/DataDump
 DataMaps:
@@ -281,7 +281,7 @@ Disambiguator:
   path: extensions/Disambiguator
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Disambiguator
 DiscordNotifications:
-  branch: master
+  branch: main
   path: extensions/DiscordNotifications
   repo_url: https://github.com/miraheze/DiscordNotifications
 DiscussionTools:
@@ -439,7 +439,7 @@ GlobalCssJs:
   path: extensions/GlobalCssJs
   repo_url: https://github.com/wikimedia/mediawiki-extensions-GlobalCssJs
 GlobalNewFiles:
-  branch: master
+  branch: main
   path: extensions/GlobalNewFiles
   repo_url: https://github.com/miraheze/GlobalNewFiles
 GlobalPreferences:
@@ -516,11 +516,11 @@ ImageRating:
   path: extensions/ImageRating
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ImageRating
 ImportDump:
-  branch: master
+  branch: main
   path: extensions/ImportDump
   repo_url: https://github.com/miraheze/ImportDump
 IncidentReporting:
-  branch: master
+  branch: main
   path: extensions/IncidentReporting
   repo_url: https://github.com/miraheze/IncidentReporting
 InputBox:
@@ -546,7 +546,7 @@ JSBreadCrumbs:
   path: extensions/JSBreadCrumbs
   repo_url: https://github.com/wikimedia/mediawiki-extensions-JSBreadCrumbs
 JavascriptSlideshow:
-  branch: master
+  branch: main
   path: extensions/JavascriptSlideshow
   repo_url: https://github.com/miraheze/JavascriptSlideshow
 Josa:
@@ -629,7 +629,7 @@ Loops:
   path: extensions/Loops
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Loops
 MachineTranslation:
-  branch: master
+  branch: main
   path: extensions/MachineTranslation
   repo_url: https://github.com/miraheze/MachineTranslation
 MagicNoCache:
@@ -637,7 +637,7 @@ MagicNoCache:
   path: extensions/MagicNoCache
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MagicNoCache
 ManageWiki:
-  branch: master
+  branch: main
   path: extensions/ManageWiki
   repo_url: https://github.com/miraheze/ManageWiki
 Maps:
@@ -662,7 +662,7 @@ Math:
   path: extensions/Math
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Math
 MatomoAnalytics:
-  branch: master
+  branch: main
   path: extensions/MatomoAnalytics
   repo_url: https://github.com/miraheze/MatomoAnalytics
 MediaSearch:
@@ -702,10 +702,9 @@ Mirage:
   path: skins/Mirage
   repo_url: https://github.com/wikimedia/mediawiki-skins-Mirage
 MirahezeMagic:
-  branch: master
+  branch: main
   path: extensions/MirahezeMagic
   repo_url: https://github.com/miraheze/MirahezeMagic
-  latest: false
 MobileDetect:
   branch: master
   path: extensions/MobileDetect
@@ -851,7 +850,7 @@ OrphanedTalkPages:
   path: extensions/OrphanedTalkPages
   repo_url: https://github.com/wikimedia/mediawiki-extensions-OrphanedTalkPages
 PDFEmbed:
-  branch: master
+  branch: main
   path: extensions/PDFEmbed
   repo_url: https://github.com/miraheze/PDFEmbed
 PWA:
@@ -1013,7 +1012,7 @@ RelatedArticles:
   path: extensions/RelatedArticles
   repo_url: https://github.com/wikimedia/mediawiki-extensions-RelatedArticles
 RemovePII:
-  branch: master
+  branch: main
   path: extensions/RemovePII
   repo_url: https://github.com/miraheze/RemovePII
 RemoveRedlinks:
@@ -1033,7 +1032,7 @@ ReportIncident:
   path: extensions/ReportIncident
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ReportIncident
 RequestSSL:
-  branch: master
+  branch: main
   path: extensions/RequestSSL
   repo_url: https://github.com/miraheze/RequestSSL
 RevisionSlider:
@@ -1049,7 +1048,7 @@ RobloxAPI:
   path: extensions/RobloxAPI
   repo_url: https://github.com/Roblox-Indie-Wikis/mediawiki-extensions-RobloxAPI
 RottenLinks:
-  branch: master
+  branch: main
   path: extensions/RottenLinks
   repo_url: https://github.com/miraheze/RottenLinks
 SandboxLink:
@@ -1385,7 +1384,7 @@ WikiCategoryTagCloud:
   path: extensions/WikiCategoryTagCloud
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiCategoryTagCloud
 WikiDiscover:
-  branch: master
+  branch: main
   path: extensions/WikiDiscover
   repo_url: https://github.com/miraheze/WikiDiscover
 WikiEditor:
@@ -1454,7 +1453,7 @@ WikimediaIncubator:
   path: extensions/WikimediaIncubator
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikimediaIncubator
 YouTube:
-  branch: master
+  branch: main
   path: extensions/YouTube
   repo_url: https://github.com/miraheze/YouTube
 apex:
