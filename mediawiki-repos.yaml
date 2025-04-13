@@ -60,7 +60,7 @@ AutoCreateCategoryPages:
   path: extensions/AutoCreateCategoryPages
   repo_url: https://github.com/wikimedia/mediawiki-extensions-AutoCreateCategoryPages
 AutoCreatePage:
-  branch: master
+  branch: main
   path: extensions/AutoCreatePage
   repo_url: https://github.com/Universal-Omega/AutoCreatePage
 Babel:
@@ -313,7 +313,7 @@ DynamicPageList:
   path: extensions/DynamicPageList
   repo_url: https://github.com/wikimedia/mediawiki-extensions-intersection
 DynamicPageList3:
-  branch: master
+  branch: main
   path: extensions/DynamicPageList3
   repo_url: https://github.com/Universal-Omega/DynamicPageList3
 DynamicSidebar:
@@ -726,7 +726,7 @@ Modern:
   path: skins/Modern
   repo_url: https://github.com/wikimedia/mediawiki-skins-Modern
 Monaco:
-  branch: master
+  branch: main
   path: skins/Monaco
   repo_url: https://github.com/Universal-Omega/Monaco
 MonoBook:
@@ -936,11 +936,11 @@ Popups:
   path: extensions/Popups
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Popups
 PortableInfobox:
-  branch: master
+  branch: main
   path: extensions/PortableInfobox
   repo_url: https://github.com/Universal-Omega/PortableInfobox
 Preloader:
-  branch: master
+  branch: main
   path: extensions/Preloader
   repo_url: https://github.com/Universal-Omega/Preloader
 ProofreadPage:
@@ -1113,7 +1113,7 @@ SimpleChanges:
   path: extensions/SimpleChanges
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SimpleChanges
 SimpleTooltip:
-  branch: master
+  branch: main
   path: extensions/SimpleTooltip
   repo_url: https://github.com/Universal-Omega/SimpleTooltip
 SkinPerPage:
