@@ -236,7 +236,6 @@ CreateWiki:
   path: extensions/CreateWiki
   repo_url: https://github.com/miraheze/CreateWiki
   composer: true
-  commit: 28c9035
 CreatedPagesList:
   branch: _branch_
   path: extensions/CreatedPagesList
@@ -642,7 +641,6 @@ ManageWiki:
   branch: main
   path: extensions/ManageWiki
   repo_url: https://github.com/miraheze/ManageWiki
-  commit: eab19d5
 Maps:
   branch: master
   path: extensions/Maps
