@@ -766,10 +766,6 @@ NamespacePreload:
   branch: master
   path: extensions/NamespacePreload
   repo_url: https://gitlab.com/nonsensopedia/extensions/namespacepreload
-NativeSvgHandler:
-  branch: _branch_
-  path: extensions/NativeSvgHandler
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-NativeSvgHandler
 NearbyPages:
   branch: _branch_
   path: extensions/NearbyPages
