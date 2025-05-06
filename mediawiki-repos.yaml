@@ -326,7 +326,7 @@ Echo:
   path: extensions/Echo
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Echo
 EditCountNeue:
-  branch: _branch_
+  branch: REL1_43
   path: extensions/EditCountNeue
   repo_url: https://github.com/AlPha5130/mediawiki-extensions-EditCountNeue
 EditSimilar:
