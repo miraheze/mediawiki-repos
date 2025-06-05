@@ -277,6 +277,10 @@ Description2:
   branch: _branch_
   path: extensions/Description2
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Description2
+Details:
+  branch: main
+  path: extensions/Details
+  repo_url: https://github.com/theapplewiki/mediawiki-extensions-Details
 Disambiguator:
   branch: _branch_
   path: extensions/Disambiguator
