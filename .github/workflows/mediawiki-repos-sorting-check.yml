@@ -30,6 +30,7 @@ jobs:
       - name: Run YAML Sorting Check
         run: |
           python3 -c '
+          import sys
           import yaml
 
           def check_alphabetical_order(data):
@@ -47,7 +48,7 @@ jobs:
               print("Top-level keys in mediawiki-repos.yaml are not sorted alphabetically:")
               for key in out_of_order:
                   print(key)
-              exit(1)
+              sys.exit(1)
           '
 
   notify-irc:
