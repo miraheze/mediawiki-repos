@@ -1220,7 +1220,7 @@ Theme:
   path: extensions/Theme
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Theme
 ThemeToggle:
-  branch: main
+  branch: REL1_43
   path: extensions/ThemeToggle
   repo_url: https://github.com/wiki-gg-oss/mediawiki-extensions-ThemeToggle
 Tilesheets:
