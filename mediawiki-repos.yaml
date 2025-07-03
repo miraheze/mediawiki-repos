@@ -670,10 +670,6 @@ MatomoAnalytics:
   branch: main
   path: extensions/MatomoAnalytics
   repo_url: https://github.com/miraheze/MatomoAnalytics
-MediaSearch:
-  branch: _branch_
-  path: extensions/MediaSearch
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-MediaSearch
 MediaSpoiler:
   branch: _branch_
   path: extensions/MediaSpoiler
