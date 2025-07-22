@@ -938,9 +938,9 @@ PortableInfobox:
   path: extensions/PortableInfobox
   repo_url: https://github.com/Universal-Omega/PortableInfobox
 Preloader:
-  branch: main
+  branch: master
   path: extensions/Preloader
-  repo_url: https://github.com/Universal-Omega/Preloader
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-Preloader
 ProofreadPage:
   branch: _branch_
   path: extensions/ProofreadPage
