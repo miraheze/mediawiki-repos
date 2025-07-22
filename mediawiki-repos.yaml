@@ -320,10 +320,12 @@ DynamicPageList3:
   branch: main
   path: extensions/DynamicPageList3
   repo_url: https://github.com/Universal-Omega/DynamicPageList3
+  versions: '1.43'
 DynamicPageList4:
   branch: pre-release
   path: extensions/DynamicPageList4
   repo_url: https://github.com/Universal-Omega/DynamicPageList3
+  versions: '1.44'
 DynamicSidebar:
   branch: _branch_
   path: extensions/DynamicSidebar
