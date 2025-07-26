@@ -680,10 +680,6 @@ MediaSpoiler:
   branch: _branch_
   path: extensions/MediaSpoiler
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MediaSpoiler
-MediaWikiChat:
-  branch: _branch_
-  path: extensions/MediaWikiChat
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-MediaWikiChat
 Medik:
   branch: master
   path: skins/Medik
