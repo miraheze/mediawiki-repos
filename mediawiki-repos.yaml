@@ -60,9 +60,9 @@ AutoCreateCategoryPages:
   path: extensions/AutoCreateCategoryPages
   repo_url: https://github.com/wikimedia/mediawiki-extensions-AutoCreateCategoryPages
 AutoCreatePage:
-  branch: main
+  branch: master
   path: extensions/AutoCreatePage
-  repo_url: https://github.com/Universal-Omega/AutoCreatePage
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-AutoCreatePage
 Babel:
   branch: _branch_
   path: extensions/Babel
@@ -358,7 +358,7 @@ Elastica:
 EmbedSpotify:
   branch: master
   path: extensions/EmbedSpotify
-  repo_url: https://github.com/NessunKim/mediawiki-embed-spotify
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-EmbedSpotify
 EmbedVideo:
   branch: master
   path: extensions/EmbedVideo
@@ -557,9 +557,9 @@ JSBreadCrumbs:
   path: extensions/JSBreadCrumbs
   repo_url: https://github.com/wikimedia/mediawiki-extensions-JSBreadCrumbs
 JavascriptSlideshow:
-  branch: main
+  branch: master
   path: extensions/JavascriptSlideshow
-  repo_url: https://github.com/miraheze/JavascriptSlideshow
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-JavascriptSlideshow
 Josa:
   branch: _branch_
   path: extensions/Josa
@@ -640,9 +640,9 @@ Loops:
   path: extensions/Loops
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Loops
 MachineTranslation:
-  branch: main
+  branch: master
   path: extensions/MachineTranslation
-  repo_url: https://github.com/miraheze/MachineTranslation
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-MachineTranslation
 MagicNoCache:
   branch: _branch_
   path: extensions/MagicNoCache
@@ -729,9 +729,9 @@ Modern:
   path: skins/Modern
   repo_url: https://github.com/wikimedia/mediawiki-skins-Modern
 Monaco:
-  branch: main
+  branch: master
   path: skins/Monaco
-  repo_url: https://github.com/Universal-Omega/Monaco
+  repo_url: https://github.com/wikimedia/mediawiki-skins-Monaco
 MonoBook:
   branch: _branch_
   path: skins/MonoBook
