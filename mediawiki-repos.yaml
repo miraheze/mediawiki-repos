@@ -40,7 +40,7 @@ ArticleCreationWorkflow:
   path: extensions/ArticleCreationWorkflow
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ArticleCreationWorkflow
 ArticleFeedbackv5:
-  branch: _branch_
+  branch: master
   path: extensions/ArticleFeedbackv5
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ArticleFeedbackv5
 ArticlePlaceholder:
