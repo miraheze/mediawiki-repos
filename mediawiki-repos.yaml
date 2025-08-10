@@ -1030,10 +1030,10 @@ ReportIncident:
   branch: _branch_
   path: extensions/ReportIncident
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ReportIncident
-RequestSSL:
+RequestCustomDomain:
   branch: main
-  path: extensions/RequestSSL
-  repo_url: https://github.com/miraheze/RequestSSL
+  path: extensions/RequestCustomDomain
+  repo_url: https://github.com/miraheze/RequestCustomDomain
 RevisionSlider:
   branch: _branch_
   path: extensions/RevisionSlider
