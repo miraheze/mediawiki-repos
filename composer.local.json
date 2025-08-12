@@ -1,6 +1,6 @@
 {
 	"require": {
-                "mediawiki/semantic-media-wiki": "5.x-dev",
+		"mediawiki/semantic-media-wiki": "6.x-dev",
 		"psy/psysh": "^0.11.1 || ^0.12.0"
 	},
 	"extra": {
