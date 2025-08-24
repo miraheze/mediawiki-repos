@@ -1070,6 +1070,10 @@ Scribunto:
   branch: _branch_
   path: extensions/Scribunto
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Scribunto
+SearchDigest:
+  branch: master
+  path: extensions/SearchDigest
+  repo_url: https://github.com/weirdgloop/mediawiki-extensions-SearchDigest
 SecureLinkFixer:
   branch: _branch_
   path: extensions/SecureLinkFixer
