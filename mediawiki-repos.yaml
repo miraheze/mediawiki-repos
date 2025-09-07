@@ -484,11 +484,6 @@ GroupsSidebar:
   branch: _branch_
   path: extensions/GroupsSidebar
   repo_url: https://github.com/wikimedia/mediawiki-extensions-GroupsSidebar
-GrowthExperiments:
-  branch: _branch_
-  path: extensions/GrowthExperiments
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-GrowthExperiments
-  versions: '1.43'
 GuidedTour:
   branch: _branch_
   path: extensions/GuidedTour
