@@ -1459,10 +1459,6 @@ WikimediaIncubator:
   branch: _branch_
   path: extensions/WikimediaIncubator
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikimediaIncubator
-YouTube:
-  branch: main
-  path: extensions/YouTube
-  repo_url: https://github.com/miraheze/YouTube
 apex:
   branch: _branch_
   path: skins/apex
