@@ -16,7 +16,7 @@ example_repo:
   removed: true
   recurse_submodules: false
   shallow_submodules: true
-  versions: '1.43, 1.44'
+  versions: '1.44, 1.45'
 ```
 
 ### Parameters
