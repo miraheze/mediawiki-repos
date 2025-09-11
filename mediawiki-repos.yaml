@@ -206,6 +206,10 @@ ContributionScores:
   branch: _branch_
   path: extensions/ContributionScores
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ContributionScores
+CookieConsent:
+  branch: master
+  path: extensions/CookieConsent
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-CookieConsent
 CookieWarning:
   branch: _branch_
   path: extensions/CookieWarning
