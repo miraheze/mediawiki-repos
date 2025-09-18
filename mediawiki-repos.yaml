@@ -397,6 +397,10 @@ FlexDiagrams:
   branch: master
   path: extensions/FlexDiagrams
   repo_url: https://github.com/wikimedia/mediawiki-extensions-FlexDiagrams
+FloatingUI:
+  branch: main
+  path: extensions/FloatingUI
+  repo_url: https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI
 Flow:
   branch: _branch_
   path: extensions/Flow
