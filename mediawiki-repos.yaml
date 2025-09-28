@@ -536,10 +536,9 @@ InputBox:
   path: extensions/InputBox
   repo_url: https://github.com/wikimedia/mediawiki-extensions-InputBox
 InterwikiDispatcher:
-  branch: REL1_39
+  branch: REL1_44
   path: extensions/InterwikiDispatcher
   repo_url: https://github.com/Markus-Rost/InterwikiDispatcher
-  alpha_branch: REL1_44
 InterwikiSorting:
   branch: _branch_
   path: extensions/InterwikiSorting
