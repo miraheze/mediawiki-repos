@@ -899,7 +899,7 @@ ParserMigration:
 ParserPower:
   branch: master
   path: extensions/ParserPower
-  repo_url: https://github.com/wiki-gg-oss/mediawiki-extensions-ParserPower.git
+  repo_url: https://github.com/wiki-gg-oss/mediawiki-extensions-ParserPower
 PdfHandler:
   branch: _branch_
   path: extensions/PdfHandler
