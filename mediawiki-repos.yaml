@@ -523,6 +523,10 @@ ImageRating:
   branch: _branch_
   path: extensions/ImageRating
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ImageRating
+ImgTag:
+  branch: master
+  path: extensions/ImgTag
+  repo_url: https://github.com/lihaohong6/ImgTag
 ImportDump:
   branch: main
   path: extensions/ImportDump
