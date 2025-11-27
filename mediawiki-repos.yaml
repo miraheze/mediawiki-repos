@@ -969,6 +969,10 @@ QuickInstantCommons:
   branch: _branch_
   path: extensions/QuickInstantCommons
   repo_url: https://github.com/wikimedia/mediawiki-extensions-QuickInstantCommons
+QuickSurveys:
+  branch: _branch_
+  path: extensions/QuickSurveys
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-QuickSurveys
 Quiz:
   branch: _branch_
   path: extensions/Quiz
