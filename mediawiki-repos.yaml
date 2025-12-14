@@ -1089,10 +1089,6 @@ SecurePoll:
   branch: _branch_
   path: extensions/SecurePoll
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SecurePoll
-SemanticDrilldown:
-  branch: master
-  path: extensions/SemanticDrilldown
-  repo_url: https://github.com/SemanticMediaWiki/SemanticDrilldown
 SemanticFormsSelect:
   branch: master
   path: extensions/SemanticFormsSelect
