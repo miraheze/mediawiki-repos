@@ -321,9 +321,9 @@ DynamicPageList:
   path: extensions/DynamicPageList
   repo_url: https://github.com/wikimedia/mediawiki-extensions-intersection
 DynamicPageList4:
-  branch: pre-release
+  branch: main
   path: extensions/DynamicPageList4
-  repo_url: https://github.com/Universal-Omega/DynamicPageList3
+  repo_url: https://github.com/Universal-Omega/DynamicPageList4
 DynamicSidebar:
   branch: _branch_
   path: extensions/DynamicSidebar
