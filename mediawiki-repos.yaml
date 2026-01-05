@@ -386,7 +386,7 @@ FeaturedFeeds:
   path: extensions/FeaturedFeeds
   repo_url: https://github.com/wikimedia/mediawiki-extensions-FeaturedFeeds
 Femiwiki:
-  branch: _branch_
+  branch: main
   commit: v5.1.2
   path: skins/Femiwiki
   repo_url: https://github.com/femiwiki/FemiwikiSkin
