@@ -591,9 +591,9 @@ LastModified:
   path: extensions/LastModified
   repo_url: https://github.com/wikimedia/mediawiki-extensions-LastModified
 LdapAuthentication:
-  branch: REL1_44
+  branch: main
   path: extensions/LdapAuthentication
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-LdapAuthentication
+  repo_url: https://github.com/miraheze/LdapAuthentication
 Lingo:
   branch: _branch_
   path: extensions/Lingo
