@@ -1022,6 +1022,10 @@ RemoveRedlinks:
   branch: master
   path: extensions/RemoveRedlinks
   repo_url: https://github.com/marohh/mediawikiRemoveRedlinks
+RenderBlocking:
+  branch: master
+  path: extensions/RenderBlocking
+  repo_url: https://github.com/lihaohong6/RenderBlocking
 ReplaceText:
   branch: _branch_
   path: extensions/ReplaceText
