@@ -687,7 +687,7 @@ MediaSpoiler:
 Medik:
   branch: master
   path: skins/Medik
-  repo_url: https://bitbucket.org/wikiskripta/medik
+  repo_url: https://github.com/wikiskripta/Medik
 Mermaid:
   branch: master
   path: extensions/Mermaid
