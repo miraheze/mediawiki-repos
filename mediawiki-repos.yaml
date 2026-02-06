@@ -137,6 +137,10 @@ CharInsert:
   branch: _branch_
   path: extensions/CharInsert
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CharInsert
+Chart:
+  branch: _branch_
+  path: extensions/Chart
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-Chart
 CheckUser:
   branch: _branch_
   path: extensions/CheckUser
