@@ -525,7 +525,7 @@ ImageMap:
   path: extensions/ImageMap
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Imagemap
 ImageRating:
-  branch: _branch_
+  branch: master
   path: extensions/ImageRating
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ImageRating
 ImgTag:
