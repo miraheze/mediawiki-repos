@@ -270,7 +270,7 @@ DataDump:
 DataMaps:
   branch: main
   path: extensions/DataMaps
-  repo_url: https://github.com/alex4401/mediawiki-extensions-DataMaps
+  repo_url: https://github.com/miraheze/DataMaps
 DataTransfer:
   branch: master
   path: extensions/DataTransfer
