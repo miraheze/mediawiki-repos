@@ -524,10 +524,6 @@ ImageMap:
   branch: _branch_
   path: extensions/ImageMap
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Imagemap
-ImageRating:
-  branch: master
-  path: extensions/ImageRating
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-ImageRating
 ImgTag:
   branch: master
   path: extensions/ImgTag
@@ -974,18 +970,10 @@ Quiz:
   branch: _branch_
   path: extensions/Quiz
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Quiz
-QuizGame:
-  branch: master
-  path: extensions/QuizGame
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-QuizGame
 RSS:
   branch: _branch_
   path: extensions/RSS
   repo_url: https://github.com/wikimedia/mediawiki-extensions-RSS
-RandomGameUnit:
-  branch: _branch_
-  path: extensions/RandomGameUnit
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-RandomGameUnit
 RandomImage:
   branch: master
   path: extensions/RandomImage
