@@ -821,10 +821,6 @@ NukeDPL:
   branch: _branch_
   path: extensions/NukeDPL
   repo_url: https://github.com/wikimedia/mediawiki-extensions-NukeDPL
-NumberHeadings:
-  branch: master
-  path: extensions/NumberHeadings
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-NumberHeadings
 OATHAuth:
   branch: _branch_
   path: extensions/OATHAuth
