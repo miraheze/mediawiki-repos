@@ -72,7 +72,7 @@ BetaFeatures:
   path: extensions/BetaFeatures
   repo_url: https://github.com/wikimedia/mediawiki-extensions-BetaFeatures
 BlogPage:
-  branch: master
+  branch: _branch_
   path: extensions/BlogPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-BlogPage
 BlueSky:
