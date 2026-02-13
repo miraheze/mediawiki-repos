@@ -1103,6 +1103,10 @@ SimpleBlogPage:
   branch: master
   path: extensions/SimpleBlogPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SimpleBlogPage
+SimpleCalendar:
+  branch: _branch_
+  path: extensions/SimpleCalendar
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-SimpleCalendar
 SimpleChanges:
   branch: _branch_
   path: extensions/SimpleChanges
