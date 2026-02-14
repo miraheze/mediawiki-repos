@@ -994,6 +994,10 @@ RealMe:
   branch: _branch_
   path: extensions/RealMe
   repo_url: https://github.com/wikimedia/mediawiki-extensions-RealMe
+RefreshSpecial:
+  branch: _branch_
+  path: extensions/RefreshSpecial
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-RefreshSpecial
 Refreshed:
   branch: _branch_
   path: skins/Refreshed
