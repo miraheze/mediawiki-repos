@@ -696,10 +696,6 @@ MinervaNeue:
   branch: _branch_
   path: skins/MinervaNeue
   repo_url: https://github.com/wikimedia/mediawiki-skins-MinervaNeue
-MintyDocs:
-  branch: master
-  path: extensions/MintyDocs
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-MintyDocs
 Mirage:
   branch: _branch_
   path: skins/Mirage
