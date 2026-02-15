@@ -406,11 +406,6 @@ FloatingUI:
   branch: main
   path: extensions/FloatingUI
   repo_url: https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI
-Flow:
-  branch: _branch_
-  path: extensions/Flow
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-Flow
-  composer: true
 FontAwesome:
   branch: master
   path: extensions/FontAwesome
