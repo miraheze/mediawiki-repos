@@ -573,7 +573,7 @@ LabeledSectionTransclusion:
   path: extensions/LabeledSectionTransclusion
   repo_url: https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion
 Lakeus:
-  branch: REL1_44
+  branch: master
   path: skins/Lakeus
   repo_url: https://github.com/lakejason0/mediawiki-skins-Lakeus
   composer: true
