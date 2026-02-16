@@ -79,11 +79,6 @@ BlueSky:
   branch: _branch_
   path: skins/BlueSky
   repo_url: https://github.com/wikimedia/mediawiki-skins-BlueSky
-Bootstrap:
-  branch: master
-  path: extensions/Bootstrap
-  repo_url: https://github.com/ProfessionalWiki/Bootstrap
-  composer: true
 BreadCrumbs2:
   branch: _branch_
   path: extensions/BreadCrumbs2

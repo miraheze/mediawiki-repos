@@ -1,5 +1,6 @@
 {
 	"require": {
+		"mediawiki/bootstrap": "5.0.0",
 		"mediawiki/chameleon-skin": "5.x-dev",
 		"mediawiki/maps": "dev-master",
 		"mediawiki/semantic-media-wiki": "6.x-dev",
