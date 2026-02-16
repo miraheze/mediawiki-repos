@@ -1,5 +1,6 @@
 {
 	"require": {
+		"mediawiki/chameleon-skin": "5.x-dev",
 		"mediawiki/maps": "dev-master",
 		"mediawiki/semantic-media-wiki": "6.x-dev",
 		"psy/psysh": "^0.11.1 || ^0.12.0"
