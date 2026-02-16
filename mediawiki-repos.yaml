@@ -1437,11 +1437,6 @@ apex:
   branch: _branch_
   path: skins/apex
   repo_url: https://github.com/wikimedia/mediawiki-skins-apex
-chameleon:
-  branch: master
-  path: skins/chameleon
-  repo_url: https://github.com/ProfessionalWiki/chameleon
-  composer: true
 cldr:
   branch: master
   path: extensions/cldr
