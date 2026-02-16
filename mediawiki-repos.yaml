@@ -642,11 +642,6 @@ ManageWiki:
   branch: main
   path: extensions/ManageWiki
   repo_url: https://github.com/miraheze/ManageWiki
-Maps:
-  branch: master
-  path: extensions/Maps
-  repo_url: https://github.com/ProfessionalWiki/Maps
-  composer: true
 Mask:
   branch: _branch_
   path: skins/Mask
