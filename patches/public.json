@@ -1,1 +1,9 @@
-[]
+[
+	{
+		"file": "shellbox-cgroup-v2.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "vendor",
+		"failureStrategy": "abort"
+	}
+]
