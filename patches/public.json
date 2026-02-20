@@ -5,5 +5,12 @@
 		"versions": [ "all" ],
 		"path": "vendor",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "commentstreams-T14969.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/CommentStreams",
+		"failureStrategy": "abort"
 	}
 ]
