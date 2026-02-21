@@ -12,5 +12,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/CommentStreams",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "globaluserpage-limit-jobs.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/GlobalUserPage",
+		"failureStrategy": "abort"
 	}
 ]

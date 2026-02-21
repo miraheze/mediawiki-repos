@@ -1,0 +1,46 @@
+From 5e8d6eda5d9cf97965202373014e3ab64e54eac3 Mon Sep 17 00:00:00 2001
+From: SomeRandomDeveloper <thisisnotmyname275@gmail.com>
+Date: Sat, 21 Feb 2026 01:46:17 +0100
+Subject: [PATCH] Only trigger LocalCacheUpdateJob on wikis the user has an
+ account on
+
+Change-Id: I4b92dd26c9426782985a35877ff0d58f46a52e65
+---
+ includes/LocalJobSubmitJob.php | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/includes/LocalJobSubmitJob.php b/includes/LocalJobSubmitJob.php
+index c9bb722..888a8dc 100644
+--- a/includes/LocalJobSubmitJob.php
++++ b/includes/LocalJobSubmitJob.php
+@@ -16,6 +16,7 @@
+ 
+ namespace MediaWiki\GlobalUserPage;
+ 
++use MediaWiki\Extension\CentralAuth\User\CentralAuthUser;
+ use MediaWiki\JobQueue\Job;
+ use MediaWiki\MediaWikiServices;
+ use MediaWiki\Title\Title;
+@@ -34,8 +35,17 @@ class LocalJobSubmitJob extends Job {
+ 			Title::newFromText( 'User:' . $this->params['username'] ),
+ 			$this->params
+ 		);
+-		$jobQueueGroupFactory = MediaWikiServices::getInstance()->getJobQueueGroupFactory();
+-		foreach ( GlobalUserPage::getEnabledWikis() as $wiki ) {
++		$services = MediaWikiServices::getInstance();
++		$jobQueueGroupFactory = $services->getJobQueueGroupFactory();
++		$wikis = GlobalUserPage::getEnabledWikis();
++		if ( $services->getExtensionRegistry()->isLoaded( 'CentralAuth' ) ) {
++			$user = $services->getUserFactory()->newFromName( $this->params['username'] );
++			if ( $user ) {
++				$localAccounts = CentralAuthUser::getInstance( $user )->queryAttachedBasic();
++				$wikis = array_intersect( $wikis, array_keys( $localAccounts ) );
++			}
++		}
++		foreach ( $wikis as $wiki ) {
+ 			$jobQueueGroupFactory->makeJobQueueGroup( $wiki )->push( $job );
+ 		}
+ 		return true;
+-- 
+2.53.0
+
