@@ -1,0 +1,47 @@
+From b59fb96825ffe9defb046b1ccc072a4421a8d38d Mon Sep 17 00:00:00 2001
+From: Universal Omega <redacted>
+Date: Mon, 23 Feb 2026 11:53:22 -0700
+Subject: [PATCH] Fix compatibility with PHP 8.4
+
+Bug: T417994
+Change-Id: I68e004bbc04046891a72d2d64120915b6ef1626d
+---
+
+diff --git a/includes/CommentFormatter.php b/includes/CommentFormatter.php
+index a885769..7364e1a 100644
+--- a/includes/CommentFormatter.php
++++ b/includes/CommentFormatter.php
+@@ -598,7 +598,7 @@
+ 							'discussiontools-topicsubscription-button-unsubscribe-tooltip' :
+ 							'discussiontools-topicsubscription-button-subscribe-tooltip'
+ 					] );
+-					$subscribeLink->nodeValue = $messages[
++					$subscribeLink->textContent = $messages[
+ 						$isSubscribed ?
+ 							'discussiontools-topicsubscription-button-unsubscribe' :
+ 							'discussiontools-topicsubscription-button-subscribe'
+@@ -611,9 +611,9 @@
+ 					$bracket = $doc->createElement( 'span' );
+ 					$bracket->setAttribute( 'class', 'ext-discussiontools-init-section-subscribe-bracket' );
+ 					$bracketOpen = $bracket->cloneNode( false );
+-					$bracketOpen->nodeValue = '[';
++					$bracketOpen->textContent = '[';
+ 					$bracketClose = $bracket->cloneNode( false );
+-					$bracketClose->nodeValue = ']';
++					$bracketClose->textContent = ']';
+ 
+ 					$subscribe->appendChild( $bracketOpen );
+ 					$subscribe->appendChild( $subscribeLink );
+diff --git a/tests/phpunit/CommentModifierTest.php b/tests/phpunit/CommentModifierTest.php
+index 2766228..78c20d9 100644
+--- a/tests/phpunit/CommentModifierTest.php
++++ b/tests/phpunit/CommentModifierTest.php
+@@ -87,7 +87,7 @@
+ 
+ 		foreach ( $comments as $comment ) {
+ 			$linkNode = $doc->createElement( 'a' );
+-			$linkNode->nodeValue = 'Reply';
++			$linkNode->textContent = 'Reply';
+ 			$linkNode->setAttribute( 'href', '#' );
+ 			CommentModifier::addReplyLink( $comment, $linkNode );
+ 		}
