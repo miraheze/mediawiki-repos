@@ -7,9 +7,9 @@ public.json entries should have the format of:
     // Determines if patch is located in public or private directory,
     "public": true, // OR false
     // Which mediawiki version to apply the patch to
-    "versions": ["1.42", "1.43"], // OR ["all"]
+    "versions": [ "1.xx", "1.xx" ], // OR [ "all" ]
     // Path relative to /srv/mediawiki-staging/$version to apply patch at
-    "path": "extensions/MirahezeMagic",
+    "path": "extensions/MirahezeMagic", // For mediawiki core, do "1.xx/" and use "all" for versions
     // Determines if mwdeploy will fail or discard patch and continue if patch does not apply properly
     "failureStrategy": "abort" // OR "discard"
 }
