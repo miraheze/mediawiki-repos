@@ -26,5 +26,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/DiscussionTools",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "maps-T14971.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/Maps",
+		"failureStrategy": "abort"
 	}
 ]
