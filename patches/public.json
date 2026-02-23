@@ -19,5 +19,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/GlobalUserPage",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "discussiontools-php8.4-fix.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/DiscussionTools",
+		"failureStrategy": "abort"
 	}
 ]
