@@ -1,0 +1,52 @@
+From a254ae574a4772abe1b98c71d1ca381ab489c6c2 Mon Sep 17 00:00:00 2001
+From: paladox <paladox@users.noreply.github.com>
+Date: Tue, 17 Feb 2026 00:33:10 +0000
+Subject: [PATCH] Fix "Call to undefined method
+ MediaWiki\Parser\ParserOutput::getText()"
+
+Copies something similar to https://github.com/SemanticMediaWiki/SemanticMediaWiki/blob/master/src/Utils/ParserOutputHelper.php#L29
+---
+ src/Presentation/WikitextParser.php | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/src/Presentation/WikitextParser.php b/src/Presentation/WikitextParser.php
+index 6b1a9ce8..410d8598 100644
+--- a/src/Presentation/WikitextParser.php
++++ b/src/Presentation/WikitextParser.php
+@@ -4,6 +4,7 @@
+ 
+ namespace Maps\Presentation;
+ 
++use LogicException;
+ use MediaWiki\Parser\Parser;
+ use ParserOptions;
+ 
+@@ -20,11 +21,26 @@ public function wikitextToHtml( string $text ): string {
+ 			return '';
+ 		}
+ 
+-		return $this->parser->parse(
++		$parserOutput = $this->parser->parse(
+ 			$text,
+ 			$this->parser->getTitle(),
+ 			new ParserOptions( $this->parser->getUserIdentity() )
+-		)->getText();
++		);
++
++		if ( method_exists( $parserOutput, 'getContentHolderText' ) ) {
++			try {
++				return $parserOutput->getContentHolderText();
++			} catch ( LogicException $e ) {
++				// Handle case where there is no body content
++				return '';
++			}
++		} elseif ( method_exists( $parserOutput, 'getRawText' ) ) {
++			return $parserOutput->getRawText();
++		} elseif ( method_exists( $parserOutput, 'getText' ) ) {
++			return $parserOutput->getText();
++		}
++
++		return '';
+ 	}
+ 
+ }
