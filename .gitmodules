@@ -1,0 +1,4 @@
+[submodule "private"]
+	path = patches/private
+	url = git@github.com:miraheze/mediawiki-patches-private
+	branch = main
