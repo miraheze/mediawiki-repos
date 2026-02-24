@@ -1157,6 +1157,10 @@ TabberNeue:
   branch: main
   path: extensions/TabberNeue
   repo_url: https://github.com/StarCitizenTools/mediawiki-extensions-TabberNeue
+TableProgressTracking:
+  branch: main
+  path: extensions/TableProgressTracking
+  repo_url: https://github.com/Telepedia/TableProgressTracking.git
 Tabs:
   branch: _branch_
   path: extensions/Tabs
