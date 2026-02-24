@@ -4,8 +4,7 @@ public.json entries should have the format of:
 ```json
 {
     "file": "patchname.patch",
-    // Determines if patch is located in public or private directory,
-    "public": true, // OR false
+    "public": true,
     // Which mediawiki version to apply the patch to
     "versions": [ "1.xx", "1.xx" ], // OR [ "all" ]
     // Path relative to /srv/mediawiki-staging/$version to apply patch at
