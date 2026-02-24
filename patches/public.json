@@ -21,13 +21,6 @@
 		"failureStrategy": "abort"
 	},
 	{
-		"file": "discussiontools-php8.4-fix.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/DiscussionTools",
-		"failureStrategy": "abort"
-	},
-	{
 		"file": "maps-T14971.patch",
 		"public": true,
 		"versions": [ "all" ],
