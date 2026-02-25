@@ -10,6 +10,6 @@ public.json entries should have the format of:
     // Path relative to /srv/mediawiki-staging/$version to apply patch at
     "path": "extensions/MirahezeMagic", // For mediawiki core, do "1.xx/" and use "all" for versions
     // Determines if mwdeploy will fail or discard patch and continue if patch does not apply properly
-    "failureStrategy": "abort" // OR "discard"
+    "failureStrategy": "abort" // OR "discard" NOTE: non-git repos must use "discard"
 }
 ```
