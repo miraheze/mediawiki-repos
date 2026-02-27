@@ -697,10 +697,6 @@ MobileFrontend:
   branch: _branch_
   path: extensions/MobileFrontend
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MobileFrontend
-MobileTabsPlugin:
-  branch: master
-  path: extensions/MobileTabsPlugin
-  repo_url: https://github.com/fuerthwiki/MobileTabsPlugin
 Moderation:
   branch: master
   path: extensions/Moderation
