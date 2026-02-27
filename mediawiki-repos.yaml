@@ -1080,6 +1080,7 @@ SimpleBlogPage:
   branch: master
   path: extensions/SimpleBlogPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SimpleBlogPage
+  composer: true
 SimpleChanges:
   branch: _branch_
   path: extensions/SimpleChanges
