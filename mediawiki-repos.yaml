@@ -1375,6 +1375,10 @@ WikiLove:
   branch: _branch_
   path: extensions/WikiLove
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiLove
+WikiPoints:
+  branch: main
+  path: extensions/WikiPoints
+  repo_url: https://github.com/Tali64/WikiPoints
 WikiSEO:
   branch: master
   path: extensions/WikiSEO
