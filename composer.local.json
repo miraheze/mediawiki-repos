@@ -13,6 +13,7 @@
 				"extensions/OOJSPlus/composer.json",
 				"extensions/TemplateStyles/composer.json",
 				"extensions/SemanticScribunto/composer.json",
+				"extensions/SimpleBlogPage/composer.json",
 				"extensions/Wikibase/composer.json",
 				"extensions/WikibaseEdtf/composer.json"
 			]
