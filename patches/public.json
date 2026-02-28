@@ -19,12 +19,5 @@
 		"versions": [ "all" ],
 		"path": "extensions/GlobalUserPage",
 		"failureStrategy": "abort"
-	},
-	{
-		"file": "maps-T14971.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/Maps",
-		"failureStrategy": "discard"
 	}
 ]
