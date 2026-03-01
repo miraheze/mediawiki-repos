@@ -1384,6 +1384,7 @@ WikiPoints:
   branch: main
   path: extensions/WikiPoints
   repo_url: https://github.com/Tali64/WikiPoints
+  commit: 9526b6d
 WikiSEO:
   branch: master
   path: extensions/WikiSEO
