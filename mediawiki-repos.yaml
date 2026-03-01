@@ -83,6 +83,10 @@ BreadCrumbs2:
   branch: _branch_
   path: extensions/BreadCrumbs2
   repo_url: https://github.com/wikimedia/mediawiki-extensions-BreadCrumbs2
+Bucket:
+  branch: _branch_
+  path: extensions/Bucket
+  repo_url: https://github.com/weirdgloop/mediawiki-extensions-Bucket.git
 CSS:
   branch: _branch_
   path: extensions/CSS
