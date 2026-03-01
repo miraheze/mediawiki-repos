@@ -1161,7 +1161,7 @@ TabberNeue:
 TableProgressTracking:
   branch: main
   path: extensions/TableProgressTracking
-  repo_url: https://github.com/Telepedia/TableProgressTracking.git
+  repo_url: https://github.com/Telepedia/TableProgressTracking
 Tabs:
   branch: _branch_
   path: extensions/Tabs
