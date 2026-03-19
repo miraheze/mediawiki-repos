@@ -19,5 +19,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/GlobalUserPage",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "themetoggle-T15052.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/ThemeToggle",
+		"failureStrategy": "abort"
 	}
 ]
