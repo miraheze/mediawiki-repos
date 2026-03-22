@@ -1,0 +1,30 @@
+From a2275bbe9f4517fef8b3554a8bbd190afb3ed5df Mon Sep 17 00:00:00 2001
+From: YTFGolf <77898443+YTFGolf@users.noreply.github.com>
+Date: Sun, 22 Mar 2026 21:02:19 +0000
+Subject: [PATCH] Improve transform command compatibility
+
+---
+ includes/PdfHandler.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/includes/PdfHandler.php b/includes/PdfHandler.php
+index 16fbc30..253dd7f 100644
+--- a/includes/PdfHandler.php
++++ b/includes/PdfHandler.php
+@@ -226,13 +226,13 @@ class PdfHandler extends ImageHandler {
+ 		);
+ 		$cmd .= " | " . wfEscapeShellArg(
+ 			$wgPdfPostProcessor,
++			"-",
+ 			"-depth",
+ 			"8",
+ 			"-quality",
+ 			$wgPdfHandlerJpegQuality,
+ 			"-resize",
+ 			(string)$width,
+-			"-",
+ 			$dstPath
+ 		);
+ 		$cmd .= ")";
+--
+2.43.0

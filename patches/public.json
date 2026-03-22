@@ -26,5 +26,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/ThemeToggle",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "pdfhandler-T15107.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/PdfHandler",
+		"failureStrategy": "abort"
 	}
 ]
