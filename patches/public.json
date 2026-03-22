@@ -16,7 +16,7 @@
 	{
 		"file": "globaluserpage-limit-jobs.patch",
 		"public": true,
-		"versions": [ "all" ],
+		"versions": [ "1.45" ],
 		"path": "extensions/GlobalUserPage",
 		"failureStrategy": "abort"
 	},
