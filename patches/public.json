@@ -33,5 +33,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/PdfHandler",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "bucket-migration-script-T14235.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/Bucket",
+		"failureStrategy": "abort"
 	}
 ]
