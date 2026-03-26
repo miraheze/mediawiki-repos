@@ -40,5 +40,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/Bucket",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "bucket-avoid-grantall-T14235.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/Bucket",
+		"failureStrategy": "abort"
 	}
 ]
