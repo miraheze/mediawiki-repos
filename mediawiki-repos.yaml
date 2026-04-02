@@ -1270,11 +1270,6 @@ Tweeki:
   branch: master
   path: skins/Tweeki
   repo_url: https://github.com/thaider/Tweeki
-TwitterTag:
-  branch: master
-  path: extensions/TwitterTag
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-TwitterTag
-  removed: true
 TwoColConflict:
   branch: _branch_
   path: extensions/TwoColConflict
