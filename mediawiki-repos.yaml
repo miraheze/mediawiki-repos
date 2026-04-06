@@ -606,10 +606,6 @@ LinkTarget:
   branch: _branch_
   path: extensions/LinkTarget
   repo_url: https://github.com/wikimedia/mediawiki-extensions-LinkTarget
-LinkTitles:
-  branch: main
-  path: extensions/LinkTitles
-  repo_url: https://github.com/bovender/LinkTitles
 Linter:
   branch: _branch_
   path: extensions/Linter
