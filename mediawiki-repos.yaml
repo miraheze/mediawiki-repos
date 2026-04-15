@@ -268,9 +268,9 @@ DataDump:
   path: extensions/DataDump
   repo_url: https://github.com/miraheze/DataDump
 DataMaps:
-  branch: main
+  branch: master
   path: extensions/DataMaps
-  repo_url: https://github.com/miraheze/DataMaps
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-DataMaps
 DataTransfer:
   branch: master
   path: extensions/DataTransfer
