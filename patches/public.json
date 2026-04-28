@@ -1,1 +1,44 @@
-[]
+[
+	{
+		"file": "shellbox-cgroup-v2.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "vendor",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "commentstreams-T14969.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/CommentStreams",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "globaluserpage-limit-jobs.patch",
+		"public": true,
+		"versions": [ "1.45" ],
+		"path": "extensions/GlobalUserPage",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "themetoggle-T15052.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/ThemeToggle",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "pdfhandler-T15107.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/PdfHandler",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "bucket-avoid-grantall-T14235.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/Bucket",
+		"failureStrategy": "abort"
+	}
+]

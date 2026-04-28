@@ -79,15 +79,14 @@ BlueSky:
   branch: _branch_
   path: skins/BlueSky
   repo_url: https://github.com/wikimedia/mediawiki-skins-BlueSky
-Bootstrap:
-  branch: master
-  path: extensions/Bootstrap
-  repo_url: https://github.com/ProfessionalWiki/Bootstrap
-  composer: true
 BreadCrumbs2:
   branch: _branch_
   path: extensions/BreadCrumbs2
   repo_url: https://github.com/wikimedia/mediawiki-extensions-BreadCrumbs2
+Bucket:
+  branch: _branch_
+  path: extensions/Bucket
+  repo_url: https://github.com/weirdgloop/mediawiki-extensions-Bucket
 CSS:
   branch: _branch_
   path: extensions/CSS
@@ -162,6 +161,7 @@ Citizen:
   branch: main
   path: skins/Citizen
   repo_url: https://github.com/StarCitizenTools/mediawiki-skins-Citizen
+  commit: 39bff472c34851738375bf9bcf67d39f352986cc
 CleanChanges:
   branch: _branch_
   path: extensions/CleanChanges
@@ -268,9 +268,9 @@ DataDump:
   path: extensions/DataDump
   repo_url: https://github.com/miraheze/DataDump
 DataMaps:
-  branch: main
+  branch: master
   path: extensions/DataMaps
-  repo_url: https://github.com/miraheze/DataMaps
+  repo_url: https://github.com/wikimedia/mediawiki-extensions-DataMaps
 DataTransfer:
   branch: master
   path: extensions/DataTransfer
@@ -406,11 +406,6 @@ FloatingUI:
   branch: main
   path: extensions/FloatingUI
   repo_url: https://github.com/StarCitizenTools/mediawiki-extensions-FloatingUI
-Flow:
-  branch: _branch_
-  path: extensions/Flow
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-Flow
-  composer: true
 FontAwesome:
   branch: master
   path: extensions/FontAwesome
@@ -578,7 +573,7 @@ LabeledSectionTransclusion:
   path: extensions/LabeledSectionTransclusion
   repo_url: https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion
 Lakeus:
-  branch: REL1_44
+  branch: REL1_45
   path: skins/Lakeus
   repo_url: https://github.com/lakejason0/mediawiki-skins-Lakeus
   composer: true
@@ -611,10 +606,6 @@ LinkTarget:
   branch: _branch_
   path: extensions/LinkTarget
   repo_url: https://github.com/wikimedia/mediawiki-extensions-LinkTarget
-LinkTitles:
-  branch: main
-  path: extensions/LinkTitles
-  repo_url: https://github.com/bovender/LinkTitles
 Linter:
   branch: _branch_
   path: extensions/Linter
@@ -647,11 +638,6 @@ ManageWiki:
   branch: main
   path: extensions/ManageWiki
   repo_url: https://github.com/miraheze/ManageWiki
-Maps:
-  branch: master
-  path: extensions/Maps
-  repo_url: https://github.com/ProfessionalWiki/Maps
-  composer: true
 Mask:
   branch: _branch_
   path: skins/Mask
@@ -696,10 +682,6 @@ MinervaNeue:
   branch: _branch_
   path: skins/MinervaNeue
   repo_url: https://github.com/wikimedia/mediawiki-skins-MinervaNeue
-MintyDocs:
-  branch: master
-  path: extensions/MintyDocs
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-MintyDocs
 Mirage:
   branch: _branch_
   path: skins/Mirage
@@ -716,10 +698,6 @@ MobileFrontend:
   branch: _branch_
   path: extensions/MobileFrontend
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MobileFrontend
-MobileTabsPlugin:
-  branch: master
-  path: extensions/MobileTabsPlugin
-  repo_url: https://github.com/fuerthwiki/MobileTabsPlugin
 Moderation:
   branch: master
   path: extensions/Moderation
@@ -905,6 +883,7 @@ PdfHandler:
   branch: _branch_
   path: extensions/PdfHandler
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PdfHandler
+  commit: c7be05d
 PerPageLanguage:
   branch: _branch_
   path: extensions/PerPageLanguage
@@ -1107,6 +1086,7 @@ SimpleBlogPage:
   branch: master
   path: extensions/SimpleBlogPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SimpleBlogPage
+  composer: true
 SimpleChanges:
   branch: _branch_
   path: extensions/SimpleChanges
@@ -1180,6 +1160,10 @@ TabberNeue:
   branch: main
   path: extensions/TabberNeue
   repo_url: https://github.com/StarCitizenTools/mediawiki-extensions-TabberNeue
+TableProgressTracking:
+  branch: main
+  path: extensions/TableProgressTracking
+  repo_url: https://github.com/Telepedia/TableProgressTracking
 Tabs:
   branch: _branch_
   path: extensions/Tabs
@@ -1287,11 +1271,6 @@ Tweeki:
   branch: master
   path: skins/Tweeki
   repo_url: https://github.com/thaider/Tweeki
-TwitterTag:
-  branch: master
-  path: extensions/TwitterTag
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-TwitterTag
-  removed: true
 TwoColConflict:
   branch: _branch_
   path: extensions/TwoColConflict
@@ -1398,6 +1377,11 @@ WikiLove:
   branch: _branch_
   path: extensions/WikiLove
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WikiLove
+WikiPoints:
+  branch: main
+  path: extensions/WikiPoints
+  repo_url: https://github.com/Tali64/WikiPoints
+  commit: 9526b6d
 WikiSEO:
   branch: master
   path: extensions/WikiSEO
@@ -1455,11 +1439,6 @@ apex:
   branch: _branch_
   path: skins/apex
   repo_url: https://github.com/wikimedia/mediawiki-skins-apex
-chameleon:
-  branch: master
-  path: skins/chameleon
-  repo_url: https://github.com/ProfessionalWiki/chameleon
-  composer: true
 cldr:
   branch: master
   path: extensions/cldr

@@ -1,0 +1,210 @@
+From fca9aab37083b2c3153ce08f0579c2af552d3982 Mon Sep 17 00:00:00 2001
+From: Universal Omega <redacted>
+Date: Thu, 19 Feb 2026 16:25:03 -0700
+Subject: [PATCH] limit.sh: support cgroup v2 with native systemd
+
+Debian Trixie (Systemd 257) does not support cgroups v1 properly anymore. The memory directory is empty even when you enable the legacy flag (SYSTEMD_CGROUP_ENABLE_LEGACY_FORCE). Systemd 258 removes support entirely [1] even though it mostly doesn't work at all in 257 anyway. This moves to systemd if on cgroups v2, while keeping current compatibility with v1 mostly unchanged.
+
+When using v2 with systemd, you also don't need to do much extra setup. You don't need to clean up or remove procs subtrees when done, it handles it automatically. Also don't need any extra grub flags like with v1. In order to let it run as a rootless container with www-data, what we do need is a polkit rule that is tightened to only allow the units provided by this script (mediawiki-shellbox-<proc>) to www-data. If cgroups v2 is installed and setup properly, it will automatically use it and does not necessarily require setting $wgShellCgroup to anything to make it work either.
+
+There is another option we could go with though, and that is rather than auto detecting v2, allow setting $wgShellCgroup, which would set SB_CGROUP in the script, to just "v2" as a flag to use v2, but it seems this method works also and follows what some other service do and auto use cgroups v2. It will automatically create and cleanup subtrees in the system.slice cgroup. There may also be a way to put it in user.slice and remove the need for a polkit rule altogether by using delegation but using `--user` does not work either unless there is a login session. This is the only way I could reliably get it working on Trixie as well.
+
+[1] https://github.com/systemd/systemd/releases/tag/v258
+
+Bug: T417502
+Change-Id: I68a9c8f8eedacb894f7bb84836eb30efbbe5f2ff
+---
+
+diff --git a/wikimedia/shellbox/src/Command/limit.sh b/wikimedia/shellbox/src/Command/limit.sh
+index 5c05e8b..5e32740 100644
+--- a/wikimedia/shellbox/src/Command/limit.sh
++++ b/wikimedia/shellbox/src/Command/limit.sh
+@@ -1,33 +1,5 @@
+ #!/bin/bash
+-#
+-# Resource limiting wrapper for command execution
+-
+-# Clean up cgroup
+-cleanup() {
+-	# First we have to move the current task into a "garbage" group, otherwise
+-	# the cgroup will not be empty, and attempting to remove it will fail with
+-	# "Device or resource busy"
+-	if [ -w "$SB_CGROUP"/tasks ]; then
+-		GARBAGE="$SB_CGROUP"
+-	else
+-		GARBAGE="$SB_CGROUP"/garbage-`id -un`
+-		if [ ! -e "$GARBAGE" ]; then
+-			mkdir -m 0700 "$GARBAGE"
+-		fi
+-	fi
+-	echo $BASHPID > "$GARBAGE"/tasks
+-
+-	# Suppress errors in case the cgroup has disappeared due to a release script
+-	rmdir "$SB_CGROUP"/$$ 2>/dev/null
+-}
+-
+-updateTaskCount() {
+-	# There are lots of ways to count lines in a file in shell script, but this
+-	# is one of the few that doesn't create another process, which would
+-	# increase the returned number of tasks.
+-	readarray < "$SB_CGROUP"/$$/tasks
+-	NUM_TASKS=${#MAPFILE[*]}
+-}
++set -euo pipefail
+ 
+ log() {
+ 	echo limit.sh: "$*" >&3
+@@ -37,10 +9,11 @@
+ SB_INCLUDE_STDERR=
+ SB_USE_LOG_PIPE=
+ SB_CPU_LIMIT=0
+-SB_CGROUP=
+ SB_MEM_LIMIT=0
+ SB_FILE_SIZE_LIMIT=0
+ SB_WALL_CLOCK_LIMIT=0
++SB_CGROUP=   # only used on v1
++SB_CGROUP_NOTIFY=   # only used on v1
+ 
+ # Override settings
+ eval "$2"
+@@ -49,68 +22,94 @@
+ 	exec 2>&1
+ fi
+ if [ -z "$SB_USE_LOG_PIPE" ]; then
+-	# Open a dummy log FD
+ 	exec 3>/dev/null
+ fi
+ 
++# Detect cgroup version
++CGROUP_VERSION=2
++if [ -f /sys/fs/cgroup/cgroup.controllers ]; then
++	CGROUP_VERSION=2
++else
++	CGROUP_VERSION=1
++fi
++
++# Apply simple ulimits
+ if [ "$SB_CPU_LIMIT" -gt 0 ]; then
+ 	ulimit -t "$SB_CPU_LIMIT"
+ fi
+-if [ "$SB_MEM_LIMIT" -gt 0 ]; then
+-	if [ -n "$SB_CGROUP" ]; then
+-		# Create cgroup
+-		if ! mkdir -m 0700 "$SB_CGROUP"/$$; then
+-			log "failed to create the cgroup."
+-			SB_CGROUP=""
+-		fi
+-	fi
+-	if [ -n "$SB_CGROUP" ]; then
+-		echo $$ > "$SB_CGROUP"/$$/tasks
+-		if [ -n "$SB_CGROUP_NOTIFY" ]; then
+-			echo "1" > "$SB_CGROUP"/$$/notify_on_release
+-		fi
+-		# Memory
+-		echo $SB_MEM_LIMIT > "$SB_CGROUP"/$$/memory.limit_in_bytes
+-		# Memory+swap
+-		# This will be missing if there is no swap
+-		if [ -e "$SB_CGROUP"/$$/memory.memsw.limit_in_bytes ]; then
+-			echo $SB_MEM_LIMIT > "$SB_CGROUP"/$$/memory.memsw.limit_in_bytes
+-		fi
+-	fi
+-else
+-	SB_CGROUP=""
+-fi
+ if [ "$SB_FILE_SIZE_LIMIT" -gt 0 ]; then
+ 	ulimit -f "$SB_FILE_SIZE_LIMIT"
+ fi
+-if [ "$SB_WALL_CLOCK_LIMIT" -gt 0 -a -x "/usr/bin/timeout" ]; then
+-	/usr/bin/timeout $SB_WALL_CLOCK_LIMIT /bin/bash -c "$1" 3>&-
++
++# Clean up cgroups v1
++cleanup_v1() {
++	if [ -w "$SB_CGROUP"/tasks ]; then
++		GARBAGE="$SB_CGROUP"
++	else
++		GARBAGE="$SB_CGROUP"/garbage-`id -un`
++		mkdir -m 0700 "$GARBAGE" 2>/dev/null || true
++	fi
++	echo $BASHPID > "$GARBAGE"/tasks
++	rmdir "$SB_CGROUP"/$$ 2>/dev/null || true
++}
++
++updateTaskCount_v1() {
++	readarray < "$SB_CGROUP"/$$/tasks
++	NUM_TASKS=${#MAPFILE[*]}
++}
++
++# cgroups v2
++if [ "$CGROUP_VERSION" -eq 2 ]; then
++	SYSTEMD_PROPS=()
++	[ "$SB_MEM_LIMIT" -gt 0 ] && SYSTEMD_PROPS+=(-p "MemoryMax=$SB_MEM_LIMIT" -p "MemorySwapMax=$SB_MEM_LIMIT")
++	[ "$SB_WALL_CLOCK_LIMIT" -gt 0 ] && SYSTEMD_PROPS+=(-p "RuntimeMaxSec=$SB_WALL_CLOCK_LIMIT")
++
++	UNIT_NAME="mediawiki-shellbox-$$"
++	set +e
++	systemd-run --quiet --scope --unit="$UNIT_NAME" "${SYSTEMD_PROPS[@]}" /bin/bash -c "$1" 3>&-
+ 	STATUS="$?"
+-	if [ "$STATUS" == 124 ]; then
++	set -e
++	if [ "$STATUS" = 124 ]; then
+ 		log "timed out executing command \"$1\""
+ 	fi
++
++# cgroups v1
+ else
+-	eval "$1" 3>&-
+-	STATUS="$?"
+-fi
++	if [ "$SB_MEM_LIMIT" -gt 0 ] && [ -n "$SB_CGROUP" ]; then
++		mkdir -m 0700 "$SB_CGROUP"/$$ 2>/dev/null || { log "failed to create the cgroup"; SB_CGROUP=""; }
++	fi
+ 
+-if [ -n "$SB_CGROUP" ]; then
+-	updateTaskCount
++	if [ -n "$SB_CGROUP" ]; then
++		echo $$ > "$SB_CGROUP"/$$/tasks
++		[ -n "$SB_CGROUP_NOTIFY" ] && echo "1" > "$SB_CGROUP"/$$/notify_on_release
++		[ -f "$SB_CGROUP"/$$/memory.limit_in_bytes ] && echo $SB_MEM_LIMIT > "$SB_CGROUP"/$$/memory.limit_in_bytes
++		[ -f "$SB_CGROUP"/$$/memory.memsw.limit_in_bytes ] && echo $SB_MEM_LIMIT > "$SB_CGROUP"/$$/memory.memsw.limit_in_bytes
++	fi
+ 
+-	if [ $NUM_TASKS -gt 1 ]; then
+-		# Spawn a monitor process which will continue to poll for completion
+-		# of all processes in the cgroup after termination of the parent shell
+-		(
+-			while [ $NUM_TASKS -gt 1 ]; do
+-				sleep 10
+-				updateTaskCount
+-			done
+-			cleanup
+-		) >&/dev/null < /dev/null 3>&- &
+-		disown -a
++	if [ "$SB_WALL_CLOCK_LIMIT" -gt 0 ] && command -v timeout >/dev/null; then
++		/usr/bin/timeout $SB_WALL_CLOCK_LIMIT /bin/bash -c "$1" 3>&-
++		STATUS="$?"
++		[ "$STATUS" = 124 ] && log "timed out executing command \"$1\""
+ 	else
+-		cleanup
++		eval "$1" 3>&-
++		STATUS="$?"
++	fi
++
++	if [ -n "$SB_CGROUP" ]; then
++		updateTaskCount_v1
++		if [ $NUM_TASKS -gt 1 ]; then
++			(
++				while [ $NUM_TASKS -gt 1 ]; do
++					sleep 10
++					updateTaskCount_v1
++				done
++				cleanup_v1
++			) >&/dev/null < /dev/null 3>&- &
++			disown -a
++		else
++			cleanup_v1
++		fi
+ 	fi
+ fi
+-exit "$STATUS"
+ 
++exit "$STATUS"

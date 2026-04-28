@@ -1,0 +1,48 @@
+From fefde07a98fb4de432a19c35796a9d04dc664971 Mon Sep 17 00:00:00 2001
+From: SomeRandomDeveloper <thisisnotmyname275@gmail.com>
+Date: Tue, 17 Feb 2026 22:22:20 +0100
+Subject: [PATCH] Fix error if comment author or last editor was revdeleted
+
+Fixes "Argument #5 ($author) must be of type
+MediaWiki\User\UserIdentity, null given".
+
+This is not an optimal solution, and CommentStreams should be able
+to handle null for the two fields properly, but this is better than
+breaking the entire page of the comment and the page displaying the
+comment.
+
+Change-Id: I76f22e104d0ae96030e1a59b71f8de86fb8762ee
+---
+ includes/Store/NamespacePageStore.php | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/includes/Store/NamespacePageStore.php b/includes/Store/NamespacePageStore.php
+index c018a58..1dc6c72 100644
+--- a/includes/Store/NamespacePageStore.php
++++ b/includes/Store/NamespacePageStore.php
+@@ -193,13 +193,20 @@ class NamespacePageStore implements ICommentStreamsStore {
+ 				return null;
+ 			}
+ 
++			$author = $firstRevision->getUser();
++			$lastEditor = $latestRevision->getUser();
++			if ( !$author || !$lastEditor ) {
++				// The author of one of the deletions was hidden.
++				return null;
++			}
++
+ 			return new Comment(
+ 				$id,
+ 				$result->cst_c_comment_title,
+ 				$result->cst_c_block_name,
+ 				$this->titleFactory->newFromID( $result->cst_c_assoc_page_id ),
+-				$firstRevision->getUser(),
+-				$latestRevision->getUser(),
++				$author,
++				$lastEditor,
+ 				MWTimestamp::getInstance( $firstRevision->getTimestamp() ),
+ 				MWTimestamp::getInstance( $latestRevision->getTimestamp() ),
+ 			);
+-- 
+2.53.0
+

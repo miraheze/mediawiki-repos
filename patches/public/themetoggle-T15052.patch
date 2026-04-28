@@ -1,0 +1,25 @@
+From ca95f9deaeb69f0024cb55fba75e9ad8d47ea4a0 Mon Sep 17 00:00:00 2001
+From: SomeRandomDeveloper <git@srd.dev>
+Date: Thu, 19 Mar 2026 23:31:13 +0100
+Subject: [PATCH] Fix 1.45 compatibility
+
+---
+ includes/Hooks/ThemeLinksHooks.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/includes/Hooks/ThemeLinksHooks.php b/includes/Hooks/ThemeLinksHooks.php
+index d3c5ce2..0993ce9 100644
+--- a/includes/Hooks/ThemeLinksHooks.php
++++ b/includes/Hooks/ThemeLinksHooks.php
+@@ -52,7 +52,7 @@ final class ThemeLinksHooks implements
+ 
+ 		$html .= Html::element( 'hr' );
+ 
+-		$parserOutput->setText( $html . $parserOutput->getText() );
++		$parserOutput->setContentHolderText( $html . $parserOutput->getContentHolderText() );
+ 	}
+ 
+ 	private function makeThemeListItem( $theme ): string {
+-- 
+2.53.0
+
