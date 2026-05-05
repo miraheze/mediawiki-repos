@@ -1349,6 +1349,7 @@ WebAuthn:
   path: extensions/WebAuthn
   repo_url: https://github.com/wikimedia/mediawiki-extensions-WebAuthn
   composer: true
+  versions: '1.45'
 WebChat:
   branch: _branch_
   path: extensions/WebChat
