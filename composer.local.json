@@ -1,7 +1,7 @@
 {
 	"require": {
 		"mediawiki/bootstrap": "5.0.0",
-		"mediawiki/chameleon-skin": "5.x-dev",
+		"mediawiki/chameleon-skin": "5.0.2",
 		"mediawiki/maps": "dev-master",
 		"mediawiki/semantic-media-wiki": "7.x-dev",
 		"psy/psysh": "^0.11.1 || ^0.12.0"
