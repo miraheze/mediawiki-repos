@@ -47,5 +47,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/Maps",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "CommentStreams-DontDisableParserCache.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/CommentStreams",
+		"failureStrategy": "abort"
 	}
 ]
