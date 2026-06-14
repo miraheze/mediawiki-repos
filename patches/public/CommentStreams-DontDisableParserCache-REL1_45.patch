@@ -1,0 +1,226 @@
+From e2ed054c082a77d7b2685ceaebfd8e21b84ca990 Mon Sep 17 00:00:00 2001
+From: SomeRandomDeveloper <git@srd.dev>
+Date: Mon, 6 Apr 2026 00:19:26 +0200
+Subject: [PATCH] Don't disable the parser cache when using one of the parser
+ tags
+
+Store state in the extension data instead of class properties, and
+switch from BeforePageDisplay to OutputPageParserOutput so we're able
+to read the extension data.
+This significantly improves performance when visiting a page that's
+using one of the parser tags.
+
+Bug: T422331
+Change-Id: I5bd2c51494669787d60b9f1a4e86eeb080fc345f
+---
+ extension.json                     |  2 +-
+ includes/CommentStreamsHandler.php | 54 +++++++++++-------------------
+ includes/MainHooks.php             | 13 +++----
+ 3 files changed, 26 insertions(+), 43 deletions(-)
+
+diff --git a/extension.json b/extension.json
+index 3db6922..3e988e9 100644
+--- a/extension.json
++++ b/extension.json
+@@ -320,7 +320,7 @@
+ 		"MediaWikiPerformAction": "main",
+ 		"MovePageIsValidMove": "main",
+ 		"GetUserPermissionsErrors": "main",
+-		"BeforePageDisplay": "main",
++		"OutputPageParserOutput": "main",
+ 		"ShowSearchHitTitle": "main",
+ 		"ParserFirstCallInit": "main",
+ 		"SpecialExportGetExtraPages": "main",
+diff --git a/includes/CommentStreamsHandler.php b/includes/CommentStreamsHandler.php
+index bd5a200..208cb1b 100644
+--- a/includes/CommentStreamsHandler.php
++++ b/includes/CommentStreamsHandler.php
+@@ -30,6 +30,7 @@ use MediaWiki\Html\Html;
+ use MediaWiki\Output\OutputPage;
+ use MediaWiki\Page\PageReference;
+ use MediaWiki\Parser\Parser;
++use MediaWiki\Parser\ParserOutput;
+ use MediaWiki\Parser\PPFrame;
+ use MediaWiki\Permissions\PermissionManager;
+ use MediaWiki\Registration\ExtensionRegistry;
+@@ -42,28 +43,16 @@ class CommentStreamsHandler {
+ 		'CommentStreamsExportCommentsAutomatically'
+ 	];
+ 
+-	public const COMMENTS_ENABLED = 1;
+-	public const COMMENTS_DISABLED = -1;
+-	public const COMMENTS_INHERITED = 0;
++	public const COMMENTS_ENABLED = 'enabled';
++	public const COMMENTS_DISABLED = 'disabled';
+ 
+-	/**
+-	 * @var bool
+-	 */
+-	private $exportCommentsAutomatically;
++	public const COMMENTS_DATA_KEY = 'commentstreams';
++	public const COLLAPSE_INITIALLY_DATA_KEY = 'commentstreams-collapse-initially';
+ 
+ 	/**
+-	 * no CommentStreams flag
+-	 *
+-	 * @var int
+-	 */
+-	private $areCommentsEnabled = self::COMMENTS_INHERITED;
+-
+-	/**
+-	 * initially collapse CommentStreams flag
+-	 *
+ 	 * @var bool
+ 	 */
+-	private $initiallyCollapseCommentStreams = false;
++	private $exportCommentsAutomatically;
+ 
+ 	/**
+ 	 * @var ICommentStreamsStore
+@@ -132,8 +121,7 @@ class CommentStreamsHandler {
+ 		Parser $parser,
+ 		PPFrame $frame
+ 	): string {
+-		$parser->getOutput()->updateCacheExpiry( 0 );
+-		$this->areCommentsEnabled = self::COMMENTS_ENABLED;
++		$parser->getOutput()->setExtensionData( self::COMMENTS_DATA_KEY, self::COMMENTS_ENABLED );
+ 		if ( isset( $args['id'] ) ) {
+ 			$ret = '<div class="cs-comments" data-id="' . htmlspecialchars( $args['id'] ) . '"></div>';
+ 		} else {
+@@ -159,8 +147,7 @@ class CommentStreamsHandler {
+ 		Parser $parser,
+ 		PPFrame $frame
+ 	): string {
+-		$parser->getOutput()->updateCacheExpiry( 0 );
+-		$this->areCommentsEnabled = self::COMMENTS_DISABLED;
++		$parser->getOutput()->setExtensionData( self::COMMENTS_DATA_KEY, self::COMMENTS_DISABLED );
+ 		return '';
+ 	}
+ 
+@@ -181,34 +168,32 @@ class CommentStreamsHandler {
+ 		Parser $parser,
+ 		PPFrame $frame
+ 	): string {
+-		$parser->getOutput()->updateCacheExpiry( 0 );
+-		$this->initiallyCollapseCommentStreams = true;
++		$parser->getOutput()->setExtensionData( self::COLLAPSE_INITIALLY_DATA_KEY, true );
+ 		return '';
+ 	}
+ 
+ 	/**
+ 	 * initializes the display of comments
+ 	 *
+-	 * @param OutputPage $output OutputPage object
+ 	 * @throws ConfigException
+ 	 */
+-	public function init( OutputPage $output ) {
+-		$showFor = $this->getTitleToShowCommentsFor( $output );
++	public function init( OutputPage $output, ParserOutput $parserOutput ) {
++		$showFor = $this->getTitleToShowCommentsFor( $output, $parserOutput );
+ 		if ( $showFor ) {
+ 			$comments = $this->getComments( $showFor, $output );
+-			$this->initJS( $output, $comments, $showFor );
++			$this->initJS( $output, $parserOutput, $comments, $showFor );
+ 		}
+ 	}
+ 
+ 	/**
+ 	 * checks to see if comments should be displayed on this page
+ 	 *
+-	 * @param OutputPage $output the OutputPage object
+ 	 * @return Title|null Title object to show comments for, or null if no comments should be shown
+ 	 */
+-	private function getTitleToShowCommentsFor( OutputPage $output ): ?Title {
++	private function getTitleToShowCommentsFor( OutputPage $output, ParserOutput $parserOutput ): ?Title {
++		$commentsEnabled = $parserOutput->getExtensionData( self::COMMENTS_DATA_KEY );
+ 		// don't display comments on this page if they are explicitly disabled
+-		if ( $this->areCommentsEnabled === self::COMMENTS_DISABLED ) {
++		if ( $commentsEnabled === self::COMMENTS_DISABLED ) {
+ 			return null;
+ 		}
+ 
+@@ -225,7 +210,7 @@ class CommentStreamsHandler {
+ 		if ( $csAllowedNamespaces === null ) {
+ 			$csAllowedNamespaces = $config->get( 'ContentNamespaces' );
+ 		} elseif (
+-			$csAllowedNamespaces === self::COMMENTS_DISABLED && $this->areCommentsEnabled != self::COMMENTS_ENABLED
++			$csAllowedNamespaces === self::COMMENTS_DISABLED && $commentsEnabled !== self::COMMENTS_ENABLED
+ 		) {
+ 			return null;
+ 		} elseif ( !is_array( $csAllowedNamespaces ) ) {
+@@ -252,7 +237,7 @@ class CommentStreamsHandler {
+ 
+ 		// display comments on this page if it contains the <comment-streams/> tag function and the
+ 		// user can read the page
+-		if ( $this->areCommentsEnabled === self::COMMENTS_ENABLED &&
++		if ( $commentsEnabled === self::COMMENTS_ENABLED &&
+ 			$output->getUser()->probablyCan( 'read', $title ) ) {
+ 			return $title;
+ 		}
+@@ -313,14 +298,15 @@ class CommentStreamsHandler {
+ 	 * initialize JavaScript
+ 	 *
+ 	 * @param OutputPage $output the OutputPage object
++	 * @param ParserOutput $parserOutput
+ 	 * @param Comment[] $comments array of comments on the current page
+ 	 * @param Title $showFor Title object to show comments for
+ 	 * @throws ConfigException
+ 	 */
+-	private function initJS( OutputPage $output, array $comments, Title $showFor ) {
++	private function initJS( OutputPage $output, ParserOutput $parserOutput, array $comments, Title $showFor ) {
+ 		$config = $output->getConfig();
+ 
+-		if ( $this->initiallyCollapseCommentStreams ) {
++		if ( $parserOutput->getExtensionData( self::COLLAPSE_INITIALLY_DATA_KEY ) ) {
+ 			$initiallyCollapsed = true;
+ 		} else {
+ 			$initiallyCollapsedNamespaces = $config->get( 'CommentStreamsInitiallyCollapsedNamespaces' );
+diff --git a/includes/MainHooks.php b/includes/MainHooks.php
+index 8863d97..0a7f3e8 100644
+--- a/includes/MainHooks.php
++++ b/includes/MainHooks.php
+@@ -34,7 +34,7 @@ use MediaWiki\Hook\ParserFirstCallInitHook;
+ use MediaWiki\Hook\SpecialExportGetExtraPagesHook;
+ use MediaWiki\Hook\XmlDumpWriterOpenPageHook;
+ use MediaWiki\Linker\LinkRenderer;
+-use MediaWiki\Output\Hook\BeforePageDisplayHook;
++use MediaWiki\Output\Hook\OutputPageParserOutputHook;
+ use MediaWiki\Output\OutputPage;
+ use MediaWiki\Page\PageProps;
+ use MediaWiki\Page\PageReference;
+@@ -54,7 +54,6 @@ use MediaWiki\User\User;
+ use MediaWiki\Xml\Xml;
+ use MWException;
+ use SearchResult;
+-use Skin;
+ use stdClass;
+ use WikiImporter;
+ use XmlDumpWriter;
+@@ -64,7 +63,7 @@ class MainHooks implements
+ 	MediaWikiPerformActionHook,
+ 	MovePageIsValidMoveHook,
+ 	GetUserPermissionsErrorsHook,
+-	BeforePageDisplayHook,
++	OutputPageParserOutputHook,
+ 	ShowSearchHitTitleHook,
+ 	ParserFirstCallInitHook,
+ 	SpecialExportGetExtraPagesHook,
+@@ -262,12 +261,10 @@ class MainHooks implements
+ 
+ 	/**
+ 	 * Gets comments for page and initializes variables to be passed to JavaScript.
+-	 *
+-	 * @param OutputPage $out
+-	 * @param Skin $skin
++	 * @inheritDoc
+ 	 */
+-	public function onBeforePageDisplay( $out, $skin ): void {
+-		$this->commentStreamsHandler->init( $out );
++	public function onOutputPageParserOutput( $outputPage, $parserOutput ): void {
++		$this->commentStreamsHandler->init( $outputPage, $parserOutput );
+ 	}
+ 
+ 	/**
+-- 
+2.54.0
+
