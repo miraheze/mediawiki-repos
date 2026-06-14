@@ -51,7 +51,14 @@
 	{
 		"file": "CommentStreams-DontDisableParserCache.patch",
 		"public": true,
-		"versions": [ "all" ],
+		"versions": [ "1.46" ],
+		"path": "extensions/CommentStreams",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "CommentStreams-DontDisableParserCache-REL1_45.patch",
+		"public": true,
+		"versions": [ "1.45" ],
 		"path": "extensions/CommentStreams",
 		"failureStrategy": "abort"
 	}
