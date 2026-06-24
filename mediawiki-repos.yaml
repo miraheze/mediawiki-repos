@@ -1071,7 +1071,7 @@ SimpleBatchUpload:
   path: extensions/SimpleBatchUpload
   repo_url: https://github.com/ProfessionalWiki/SimpleBatchUpload
 SimpleBlogPage:
-  branch: master
+  branch: _branch_
   path: extensions/SimpleBlogPage
   repo_url: https://github.com/wikimedia/mediawiki-extensions-SimpleBlogPage
   composer: true
