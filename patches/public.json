@@ -7,13 +7,6 @@
 		"failureStrategy": "abort"
 	},
 	{
-		"file": "commentstreams-T14969.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/CommentStreams",
-		"failureStrategy": "abort"
-	},
-	{
 		"file": "globaluserpage-limit-jobs.patch",
 		"public": true,
 		"versions": [ "1.45" ],
