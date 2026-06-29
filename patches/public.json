@@ -33,12 +33,5 @@
 		"versions": [ "all" ],
 		"path": "extensions/Bucket",
 		"failureStrategy": "abort"
-	},
-	{
-		"file": "maps-fix-smw-compat-T15344.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/Maps",
-		"failureStrategy": "abort"
 	}
 ]
