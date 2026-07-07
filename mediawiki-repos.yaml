@@ -1269,7 +1269,7 @@ UniversalLanguageSelector:
   path: extensions/UniversalLanguageSelector
   repo_url: https://github.com/wikimedia/mediawiki-extensions-UniversalLanguageSelector
 UnlinkedWikibase:
-  branch: _branch_
+  branch: master
   path: extensions/UnlinkedWikibase
   repo_url: https://github.com/wikimedia/mediawiki-extensions-UnlinkedWikibase
 UnusedRedirects:
