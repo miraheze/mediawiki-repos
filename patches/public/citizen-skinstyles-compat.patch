@@ -1,0 +1,797 @@
+From 01a960744522e570e3c85daf9422ffe0a5f03c8c Mon Sep 17 00:00:00 2001
+From: Peter Li <lihaohong6@gmail.com>
+Date: Thu, 30 Jul 2026 12:14:20 -0400
+Subject: [PATCH] =?UTF-8?q?fix(skinStyles):=20=F0=9F=90=9B=20compatibility?=
+ =?UTF-8?q?=20for=20upgrade=20from=20v3.13.0=20to=20v3.19.0?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Mostly written by an LLM.
+---
+ resources/skins.citizen.scripts/sections.js   |  17 +-
+ .../skins.citizen.styles/compat-3140.less     | 603 ++++++++++++++++++
+ .../skins.citizen.styles/compat-3160.less     |  61 ++
+ .../skins.citizen.tokens/tokens-codex.less    |   6 +-
+ skin.json                                     |   4 +-
+ .../skins.citizen.scripts/sections.test.js    |   9 +-
+ 6 files changed, 691 insertions(+), 9 deletions(-)
+ create mode 100644 resources/skins.citizen.styles/compat-3140.less
+ create mode 100644 resources/skins.citizen.styles/compat-3160.less
+
+diff --git a/resources/skins.citizen.scripts/sections.js b/resources/skins.citizen.scripts/sections.js
+index c5c64f9d..06b1f701 100644
+--- a/resources/skins.citizen.scripts/sections.js
++++ b/resources/skins.citizen.scripts/sections.js
+@@ -206,11 +206,24 @@ function createSections( { document, bodyContent } ) {
+ 					section,
+ 					!section.classList.contains( COLLAPSED_CLASS )
+ 				);
++				return;
++			}
++
++			// Compat: cached pre-convergence markup, where the heading
++			// precedes a sibling <section class="citizen-section"> instead
++			// of containing it (see getSectionFromHeading above).
++			// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/bdf3af8b
++			// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/8e1fe5fa
++			if ( heading.nextElementSibling && heading.nextElementSibling.classList.contains( 'citizen-section' ) ) {
++				const sibling = heading.nextElementSibling;
++				sibling.hidden = sibling.hidden ? false : 'until-found';
+ 			}
+ 		};
+ 
+-		// Sections hide individual children, so expand the whole chain of
+-		// collapsed ancestors on a find-in-page match.
++		// Pre-convergence cached sections self-heal on find-in-page: the
++		// browser clears the wrapper's own `hidden`. Converged and Parsoid
++		// sections hide individual children, so expand the whole chain of
++		// collapsed ancestors on a match.
+ 		const handleBeforeMatch = ( e ) => {
+ 			let section = e.target instanceof Element ?
+ 				e.target.closest( COLLAPSED_SECTION_SELECTOR ) :
+diff --git a/resources/skins.citizen.styles/compat-3140.less b/resources/skins.citizen.styles/compat-3140.less
+new file mode 100644
+index 00000000..4ffe84a5
+--- /dev/null
++++ b/resources/skins.citizen.styles/compat-3140.less
+@@ -0,0 +1,603 @@
++// Transitional compat styles for cached HTML after the Citizen v3.14.0 class
++// overhaul, plus a v3.16.0 rule that collides with pre-v3.14.0 cached HTML
++// (see "Preferences skeleton min-width leak" below), a v3.17.0 removal of
++// custom properties some of these rules depend on (see the inlined-value
++// deviations below), and a pre-v3.19.0 removal of the server-rendered
++// section-collapse indicator (see "Section-collapse indicator hide" below).
++// Every rule targets the OLD class names only, so this file is inert against
++// new HTML. Safe to delete after one full cache cycle past v3.19.0.
++//
++// Each section links to:
++//   1. the commit diff that changed/removed/added the original rules, and
++//   2. the source blob prior to that diff, showing the exact lines copied here
++// Deviations from the original (excluding comments) are noted inline.
++
++@import '../variables.less';
++@import '../mixins.less';
++@import ( reference ) '../../skinStyles/mediawiki/debug/mediawiki.debug.less';
++
++@media screen {
++	// Page-actions container from Pagetools.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-466ebaa8b2cce04647db2992b905d912abb1e821869a9e726b396f9b7ffb122dL1
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/resources/skins.citizen.styles/components/Pagetools.less#L1-L62
++	.page-actions {
++		display: flex;
++		gap: var( --space-xxs );
++		align-items: center;
++		margin-inline-start: auto;
++
++		&__item {
++			display: flex;
++		}
++
++		.citizen-menu {
++			&__card {
++				right: ~'calc( var( --space-xs ) * -1 )';
++				display: grid;
++				gap: var( --space-xs );
++				max-height: 60vh;
++				// `--transform-origin-offset-end/-start` were local custom
++				// properties set by `.citizen-menu__card` itself (Menu.less);
++				// beffc930 replaced that whole mechanism with a clip-path/
++				// translate cascade, so their known values (`calc( 100% -
++				// var( --space-xs ) )` and `var( --space-xs )`) are inlined here.
++				transform-origin: ~'calc( 100% - var( --space-xs ) )' ~'calc( 100% - var( --space-xs ) )';
++
++				@media ( min-width: @min-width-breakpoint-desktop ) {
++					top: 100%;
++					transform-origin: ~'calc( 100% - var( --space-xs ) )' var( --space-xs );
++				}
++
++				&-content {
++					padding-block: var( --space-xs );
++				}
++			}
++		}
++
++		.citizen-dropdown {
++			@media ( min-width: @min-width-breakpoint-desktop ) {
++				position: relative;
++			}
++		}
++
++		> .mw-portlet {
++			ul {
++				display: flex;
++				gap: var( --space-xxs );
++			}
++
++			li > a {
++				gap: 0;
++				padding-right: var( --space-sm );
++				padding-left: var( --space-sm );
++				font-size: 0;
++				border-radius: var( --border-radius-medium );
++			}
++		}
++
++		li {
++			margin: 0;
++		}
++
++		> .citizen-menu > .citizen-menu__heading {
++			.mixin-citizen-screen-reader-only;
++		}
++	}
++
++	// Page-actions list-item text-wrap from layout.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-37c13563a8a3f1c1b63f7292dce09f0e148a1a5c1758e7be2e31bfb5e7643d00L73
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/resources/skins.citizen.styles/layout.less#L73-L77
++	.page-actions .mw-list-item {
++		text-wrap: nowrap;
++	}
++
++	// Main-page margin override from content.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-d5e5f7e6caabfc97dd499fb9b9977f1a5e92420f0dd886c5a2ea29760564e641L59
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/resources/skins.citizen.styles/common/content.less#L59-L61
++	.page-Main_Page.action-view .page-actions {
++		margin-inline-start: 0;
++	}
++
++	// Mobile bottom toolbar from Pagetools.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-466ebaa8b2cce04647db2992b905d912abb1e821869a9e726b396f9b7ffb122dL125
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/resources/skins.citizen.styles/components/Pagetools.less#L124-L152
++	@media ( max-width: @max-width-breakpoint-tablet ) {
++		.page-actions {
++			position: fixed;
++			right: 0;
++			bottom: ~'calc( var( --header-size-block-end ) + max( env( safe-area-inset-bottom ), var( --space-xs ) ) )';
++			height: var( --toolbar-size );
++			margin: var( --space-xs );
++			background: var( --color-surface-1 );
++			border: 1px solid var( --border-color-base );
++			border-radius: var( --border-radius-medium );
++			box-shadow: var( --box-shadow-large );
++
++			:not( .citizen-menu__card ) .mw-list-item {
++				--size-icon: 1rem;
++			}
++
++			> .mw-portlet li > a {
++				height: var( --toolbar-size );
++			}
++
++			&__item {
++				position: unset;
++			}
++
++			.citizen-menu__card {
++				bottom: 100%;
++				width: max-content;
++			}
++		}
++	}
++
++	// Desktop card nowrap from Pagetools.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-466ebaa8b2cce04647db2992b905d912abb1e821869a9e726b396f9b7ffb122dL160
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/resources/skins.citizen.styles/components/Pagetools.less#L159-L171
++	@media ( min-width: @min-width-breakpoint-desktop ) {
++		.page-actions {
++			> .mw-portlet li > a {
++				gap: var( --space-xs );
++				font-size: inherit;
++			}
++
++			.citizen-menu__card {
++				white-space: nowrap;
++			}
++		}
++	}
++
++	// Page-action dropdown-summary sizing from Pagetools.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/80c44513e#diff-466ebaa8b2cce04647db2992b905d912abb1e821869a9e726b396f9b7ffb122dL36-L43
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/f2df13a02d19cdda34f5c0cf245f82353e7ef3bb/resources/skins.citizen.styles/components/Pagetools.less#L37-L43
++	.page-actions .citizen-dropdown-summary {
++		display: grid;
++		place-items: center;
++		width: 2.5rem;
++		height: 2.25rem;
++		border-radius: var( --border-radius-medium );
++	}
++
++	// Page-action link hover/active from Pagetools.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/80c44513e#diff-466ebaa8b2cce04647db2992b905d912abb1e821869a9e726b396f9b7ffb122dL60-L66
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/f2df13a02d19cdda34f5c0cf245f82353e7ef3bb/resources/skins.citizen.styles/components/Pagetools.less#L53-L67
++	// Deviation: extracted from the nested `li > a` block into a separate rule.
++	.page-actions > .mw-portlet li > a {
++		&:hover {
++			background-color: var( --background-color-button-quiet--hover );
++		}
++
++		&:active {
++			background-color: var( --background-color-button-quiet--active );
++		}
++	}
++
++	// Edit buttons from Pagetools.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/80c44513e#diff-466ebaa8b2cce04647db2992b905d912abb1e821869a9e726b396f9b7ffb122dL99-L114
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/f2df13a02d19cdda34f5c0cf245f82353e7ef3bb/resources/skins.citizen.styles/components/Pagetools.less#L99-L114
++	// Deviation: `:not( .cdx-button )` added to `> a` (new HTML injects
++	// cdx-button via SkinHooks; old cached HTML does not have it).
++	#ca-edit > a:not( .cdx-button ),
++	#ca-ve-edit > a:not( .cdx-button ) {
++		color: var( --color-inverted-primary );
++		background-color: var( --background-color-progressive );
++
++		&:hover {
++			background-color: var( --background-color-progressive--hover );
++		}
++
++		&:active {
++			background-color: var( --background-color-progressive--active );
++		}
++	}
++
++	// Header dropdown-summary sizing from Header.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/80c44513e#diff-432baa1ad820b33bac72cfc7c5cf9c4b2e366fecb088ca85a2f39c0ebd7191dfL121-L126
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/f2df13a02d19cdda34f5c0cf245f82353e7ef3bb/resources/skins.citizen.styles/components/Header.less#L119-L128
++	// Deviation: `:not( .cdx-button )` added (`.citizen-header` is present in
++	// both old and new HTML; the gate restricts to cached summaries).
++	// `--header-button-size` was removed by ac4d4f2a with no
++	// replacement, so its definition is inlined here
++	// instead of read from a var that no longer exists.
++	.citizen-header .citizen-dropdown-summary:not( .cdx-button ) {
++		display: grid;
++		place-items: center;
++		width: ~'calc( var( --header-size ) - var( --space-xs ) * 2 )';
++		height: ~'calc( var( --header-size ) - var( --space-xs ) * 2 )';
++		contain: strict;
++		border-radius: var( --border-radius-base );
++	}
++
++	// Header button base from Header.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/ac4d4f2a#diff-432baa1ad820b33bac72cfc7c5cf9c4b2e366fecb088ca85a2f39c0ebd7191dfL9-L60
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/59b0f9bf35dc1dde7104e5e385b2324094bbe5c7/resources/skins.citizen.styles/components/Header.less#L27-L74
++	// f61e4f8d moved the logo to Codex button classes, but ac4d4f2a then
++	// deleted `.citizen-header__button`/`&Icon` outright rather than gating
++	// it, leaving cached HTML with no styling for: the site logo link
++	// (templates/Header__logo.mustache, pre-f61e4f8d) and, via
++	// SkinHooks::updateNotificationsMenu, the Echo notification badge link
++	// (pre-cdx-button migration).
++	// Deviation: `&Icon` (`.citizen-header__buttonIcon`) omitted. It was
++	// dead code even at v3.13.0 (no template or script ever applied that
++	// class to an element).
++	// Deviation: `--header-button-size` inlined, see note above.
++	.citizen-header__button {
++		display: grid;
++		place-items: center;
++		width: ~'calc( var( --header-size ) - var( --space-xs ) * 2 )';
++		height: ~'calc( var( --header-size ) - var( --space-xs ) * 2 )';
++		contain: strict;
++		border-radius: var( --border-radius-base );
++
++		&:hover {
++			background-color: var( --background-color-button-quiet--hover );
++		}
++
++		&:active {
++			background-color: var( --background-color-button-quiet--active );
++		}
++
++		// Disable default padding when menu item is used as header button
++		.citizen-menu .mw-list-item & {
++			padding: 0;
++		}
++	}
++
++	// Reset hover styles if it is a touch device
++	// This is dumb but hover:hover overrides active states
++	@media ( hover: none ) {
++		.citizen-header__button:hover {
++			background-color: transparent;
++		}
++	}
++
++	// Logo icon-hide/reveal-on-hover from IconAnimation.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/f61e4f8d#diff-80f61e39L74-L100
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/f61e4f8ded77c3eb4d3bb41945cb38a7c28dac75~1/resources/skins.citizen.styles/components/IconAnimation.less#L75-L92
++	// f61e4f8d retargeted this from `.citizen-header__button` to `.cdx-button`,
++	// which cached HTML's logo link (pre-f61e4f8d) never had -- the home icon
++	// overlay never gets hidden or animated for those cached pages.
++	.citizen-header__logo .citizen-header__button {
++		color: transparent;
++
++		&:hover {
++			color: var( --color-base );
++
++			.mw-logo-icon {
++				opacity: 0;
++			}
++
++			.mw-logo-icon,
++			.citizen-ui-icon {
++				transform: rotate( 360deg );
++				transition-duration: var( --transition-duration-medium );
++			}
++		}
++	}
++
++	// Dropdown open-state active from Dropdown.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/80c44513e#diff-fcda7604d323aa1f65bea08a38cfebd01d7630bf2397d8988acb42316aad684dL74-L79
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/f2df13a02d19cdda34f5c0cf245f82353e7ef3bb/resources/skins.citizen.styles/components/Dropdown.less#L74-L80
++	// Deviation: `:not( .cdx-button )` added (selector is not scoped under
++	// `.page-actions`, so the gate is needed to avoid matching new HTML).
++	.citizen-dropdown-details[ open ] > .citizen-dropdown-summary:not( .cdx-button ) {
++		background-color: var( --background-color-button-quiet--active );
++
++		&:hover {
++			background-color: var( --background-color-button-quiet--hover );
++		}
++	}
++
++	// Auto-hide-navigation transitions from features.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-7621f03f71303d07a3736bbdf902e95226ff3289d52d839e143635488119e681L108
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/resources/skins.citizen.styles/common/features.less#L102-L162
++	.citizen-feature-autohide-navigation-clientpref-1 {
++		@media ( max-width: @max-width-breakpoint-tablet ) {
++			.citizen-header,
++			.citizen-page-header,
++			.citizen-page-heading,
++			.citizen-toc,
++			.page-actions {
++				transition-timing-function: var( --transition-timing-function-ease-out );
++				transition-duration: var( --transition-duration-medium );
++			}
++
++			.citizen-header {
++				transition-property: transform;
++			}
++
++			.citizen-page-header,
++			.citizen-toc,
++			.page-actions {
++				transition-property: transform, opacity;
++			}
++
++			.citizen-page-heading {
++				transition-property: opacity;
++			}
++
++			.citizen-scroll--down {
++				// stylelint-disable-next-line length-zero-no-unit
++				--height-sticky-header: 0px !important;
++
++				.citizen-sticky-header-container,
++				.citizen-header,
++				.citizen-toc,
++				.page-actions {
++					transition-timing-function: var( --transition-timing-function-ease-in );
++				}
++
++				.citizen-header {
++					transform: translate3d( 0, 100%, 0 );
++				}
++
++				.citizen-toc,
++				.page-actions {
++					pointer-events: none;
++					opacity: 0;
++					transform: translate3d( 0, var( --header-offset-block-end ), 0 );
++				}
++
++				&.citizen-sticky-header-visible {
++					.citizen-sticky-header-container {
++						transform: translate3d( 0, -100%, 0 );
++					}
++				}
++			}
++		}
++	}
++
++	// Debug-toolbar offset from mediawiki.debug.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-3e23db122bd5f541d57c7257792c08001291b42ffa689b1606f2637007f3b6acL154-L167
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/skinStyles/mediawiki/debug/mediawiki.debug.less#L152-L168
++	html:has( #mw-debug-toolbar ) {
++		.citizen-toc,
++		.page-actions {
++			@media ( max-width: @max-width-breakpoint-tablet ) {
++				margin-block-end: @height-debug-toolbar;
++			}
++		}
++	}
++
++	.citizen-header-position-bottom:has( #mw-debug-toolbar ) {
++		.citizen-toc,
++		.page-actions {
++			margin-block-end: @height-debug-toolbar;
++		}
++	}
++
++	// Preferences no-js hide from Header.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/af057a7fc#diff-432baa1ad820b33bac72cfc7c5cf9c4b2e366fecb088ca85a2f39c0ebd7191dfL153
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/6a71c67688dec7f638a12ec8152a6a34e967799e/resources/skins.citizen.styles/components/Header.less#L150-L156
++	// Deviation: `.citizen-header__item` added to scope to old HTML only (new
++	// HTML repurposes `.citizen-preferences` for the inner Vue mount).
++	.client-nojs .citizen-preferences.citizen-header__item {
++		display: none;
++	}
++
++	// Preferences skeleton min-width leak from Preferences.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/9384172d#diff-9398e164c968408330a1a00ff171020b6f497c81a025356b8b18cc15d4c18749R5-R7
++	// The v3.16.0 skeleton feature added an
++	// unscoped `.citizen-preferences { min-width: 20rem; }` for the new Vue
++	// mount target, but cached HTML from before the v3.14.0 rename
++	// (af057a7fc) still has an outer dropdown wrapper carrying that same
++	// class name, which unintentionally inherits the 20rem min-width and
++	// distorts the header row. Reset it back to the default for old HTML.
++	.citizen-preferences.citizen-header__item {
++		min-width: auto;
++	}
++
++	// ToC link box styling from TableOfContents.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/621193e6
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/621193e6eb1a41ea9f8c3ff67ca79677dc8ff878~1/resources/skins.citizen.styles/components/TableOfContents.less
++	// The ToC redesign moved this box model onto Codex's own `.cdx-button`
++	// classes, added to the `<a>` alongside `.citizen-toc-link`. Cached ToC
++	// links predate that markup change, so they carry none of Codex's base
++	// button styling and render with no padding, no color, and an
++	// underlined link.
++	.citizen-toc-link:not( .cdx-button ) {
++		padding: var( --space-xs );
++		color: var( --color-base );
++		text-decoration: none;
++		border-radius: var( --border-radius-base );
++
++		&:hover {
++			background-color: var( --background-color-button-quiet--hover );
++		}
++
++		&:active {
++			background-color: var( --background-color-button-quiet--active );
++		}
++
++		&:hover,
++		&:focus {
++			text-decoration: none;
++		}
++	}
++
++	// Drawer/search toggle CSS icon from Drawer__button.less, Search__button.less,
++	// and CdxButton.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/2813dc8d
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/2813dc8dd3758c77accd6184a0ee514fe11ad3ba~1/resources/skins.citizen.styles/components/Drawer__button.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/2813dc8dd3758c77accd6184a0ee514fe11ad3ba~1/resources/skins.citizen.styles/components/Search__button.less
++	// That commit replaced the hamburger/magnifier built from bare `<span>`
++	// bars with an inline SVG, and dropped the CSS that drew the bars. Cached
++	// drawer/search buttons -- from any era before that commit, not just the
++	// intermediate `.citizen-cdx-button--css-icon` markup -- still carry the
++	// old three-empty-`<span>` structure inside `.citizen-ui-icon`, which the
++	// current CSS no longer styles at all. Worse, Menu.less's generic
++	// `.citizen-ui-icon::before` rule (a later, unrelated mask-icon system)
++	// now fires unconditionally on that same container with no mask set,
++	// painting a solid `currentcolor` block that also clips the `<span>`
++	// bars out of view via `.citizen-ui-icon`'s `contain: strict`. Both the
++	// `::before` suppression and the span drawing are needed to get a real
++	// icon back instead of a solid blob.
++	// Deviation: hover/open-state animation omitted; only the static icon
++	// shape (readability) is restored.
++	// Deviation: button-box sizing (width/height/border-radius) not
++	// repeated here -- for markup old enough to lack `.cdx-button` entirely,
++	// it's already covered by the `:not( .cdx-button )` rule above; for the
++	// intermediate `.citizen-cdx-button--css-icon` markup, by this rule.
++	// Deviation: both icons' container `display` override (below) is also
++	// restored from the original, since without it Menu.less's `display:
++	// block` on `.citizen-ui-icon` breaks the layout the bars/spans were
++	// written against. For the drawer, block-level siblings collapse their
++	// vertical margins against each other, compressing the three bars
++	// closer together than intended. For the search icon, its spans are
++	// left as unblockified inline boxes, so their explicit width/height/
++	// position offsets do nothing at all.
++	.citizen-cdx-button--css-icon {
++		display: grid;
++		place-items: center;
++		padding: 0;
++	}
++
++	.citizen-drawer .citizen-dropdown-summary > .citizen-ui-icon {
++		display: grid;
++		place-content: center;
++
++		&::before {
++			content: none;
++		}
++	}
++
++	.citizen-search .citizen-dropdown-summary > .citizen-ui-icon {
++		box-sizing: content-box;
++		display: flex;
++		align-items: center;
++		justify-content: center;
++
++		&::before {
++			content: none;
++		}
++	}
++
++	.citizen-drawer .citizen-dropdown-summary > .citizen-ui-icon > span {
++		display: block;
++		width: 1.125rem;
++		height: 0.125rem;
++		margin: 0.09375rem 0;
++		background-color: currentcolor;
++		border-radius: var( --border-radius-large );
++	}
++
++	.citizen-search .citizen-dropdown-summary > .citizen-ui-icon > span {
++		position: relative;
++		border-radius: var( --border-radius-base );
++
++		&:first-child {
++			top: 0.3125rem;
++			/* @noflip */
++			left: 0.75rem;
++			height: 0.5rem;
++			transform: rotate( -45deg );
++		}
++
++		&:nth-child( 2 ) {
++			width: 0.625rem;
++			height: 0.625rem;
++			margin-top: -0.3125rem;
++			/* @noflip */
++			margin-left: -0.125rem;
++			border: 0.125rem solid currentcolor;
++			border-radius: 100%;
++			transform: rotate( -45deg );
++		}
++
++		&:last-child {
++			left: -0.4375rem;
++			height: 1rem;
++			opacity: 0;
++			transform: rotate( -135deg );
++		}
++
++		&:first-child,
++		&:last-child {
++			width: 0.125rem;
++			background-color: currentcolor;
++		}
++	}
++
++	// Pre-convergence section-collapse affordance from Sections.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/bdf3af8b
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/8e1fe5fa
++	// bdf3af8b nested legacy-transform headings inside their own <section>,
++	// matching Parsoid's shape, and kept a fallback for cached HTML from
++	// before the nesting (heading as a sibling immediately preceding an
++	// otherwise-bare <section class="citizen-section">). 8e1fe5fa dropped
++	// that fallback -- both this CSS affordance and the sibling-toggle
++	// branch in sections.js's handleClick -- before caches had actually
++	// rolled over, leaving stale sections with no collapse indicator and no
++	// click handler. `--size-icon` is not redeclared here: Sections.less's
++	// unconditional top-of-file rule setting it on `.citizen-section-heading`
++	// already covers both eras.
++	// Deviation: gated on `.mw-parser-output > .citizen-section-heading`
++	// (the exact shape of the legacy pre-convergence transform's output)
++	// instead of the bare `.citizen-section-heading` bdf3af8b used, so this
++	// never double-fires on converged/new HTML, which reuses the same class
++	// name nested inside a `.citizen-section`.
++	// Deviation: the hover/active opacity-dimming micro-interaction on the
++	// heading text is omitted; only the clickable caret and its
++	// collapsed-state rotation (the functional parts) are restored.
++	.mw-parser-output > .citizen-section-heading {
++		cursor: pointer;
++		-webkit-user-select: none;
++		user-select: none;
++
++		&::before {
++			flex-shrink: 0;
++			order: -2;
++			width: var( --size-icon );
++			height: var( --size-icon );
++			margin-inline-end: var( --space-sm );
++			content: '';
++			background-color: currentcolor;
++			-webkit-mask-image: url( assets/images/cdxIconCollapse.svg );
++			mask-image: url( assets/images/cdxIconCollapse.svg );
++			-webkit-mask-repeat: no-repeat;
++			mask-repeat: no-repeat;
++			-webkit-mask-position: center;
++			mask-position: center;
++			-webkit-mask-size: contain;
++			mask-size: contain;
++			transition: var( --transition-hover );
++			transition-property: transform;
++		}
++
++		&:has( + .citizen-section[ hidden ] ) {
++			&::before {
++				transform: rotate3d( 1, 0, 0, 180deg );
++			}
++
++			:is( .mw-headline, h1, h2, h3, h4, h5, h6 ) {
++				color: var( --color-subtle );
++			}
++		}
++	}
++
++	// Section-collapse indicator hide from Sections.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/88492d38
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/6f59d3e2
++	// 88492d38 moved the section-collapse indicator from a server-injected
++	// `<span class="citizen-section-indicator">` (first child of the heading)
++	// to a pure-CSS `::before` on the heading itself, and added this rule to
++	// keep the orphaned span inert on cached HTML. 6f59d3e2 then dropped the
++	// rule outright, on the assumption caches would have rolled over by
++	// deploy time; they had not, so cached headings render both the leftover
++	// span AND the new `::before` -- two collapse carets side by side.
++	.citizen-section-indicator {
++		display: none !important;
++	}
++}
++
++@media print {
++	// Print hide from print.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/5663961aa#diff-2415719caf1918fa47b03f9364b1397479fbc3c29acdb2f73d1d6d89c75c5e88L15
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/4b1a321bd110c12dee429cf21afbb85661ed2db4/resources/skins.citizen.styles/common/print.less#L12-L24
++	// Deviation: extracted `.page-actions` from the shared selector list into a
++	// standalone rule (the remaining selectors are unchanged in current CSS).
++	.page-actions {
++		display: none !important;
++	}
++}
+diff --git a/resources/skins.citizen.styles/compat-3160.less b/resources/skins.citizen.styles/compat-3160.less
+new file mode 100644
+index 00000000..ce61bbe5
+--- /dev/null
++++ b/resources/skins.citizen.styles/compat-3160.less
+@@ -0,0 +1,61 @@
++// Transitional compat styles for cached HTML predating the v3.16.0 color-token
++// module split.
++//
++// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/2f39de78
++//
++// Before that commit, Codex-derived custom properties (--color-base,
++// --color-progressive, --color-neutral, ...) were inline in the always-loaded
++// skins.citizen.styles bundle. The commit moved them into skins.citizen.tokens,
++// attached per-request by SkinHooks::applyPreviewChannel() via
++// OutputPage::addModuleStyles() — a reference that only exists in HTML
++// rendered *after* the split. HTML cached before it carries no reference to
++// that module at all, so upgrading CSS past v3.16.0 drops every token in that
++// family for those pages, not just one.
++//
++// Re-emit tokens here so they ship unconditionally as part of the static
++// bundle, independent of whichever module(s) a given request's cached HTML
++// happens to reference. Pulls from the LEGACY pipeline: that's what
++// pre-3.16.0 HTML's CSS was actually written against, and the legacy
++// snapshot's missing --color-neutral (#1690) is fixed now, so there's no
++// remaining reason to prefer the new (v4) pipeline's tokens instead.
++//
++// Gated to :not( .citizen-v4 ) so it never fights the real legacy-pipeline
++// module. Safe to delete once caches are known to have rolled past a
++// v3.16.0+ deploy.
++
++@import '../variables.less';
++@import ( reference ) '../skins.citizen.tokens/tokens-codex.less';
++@import ( reference ) '../skins.citizen.tokens/tokens-theme-base.less';
++@import ( reference ) '../skins.citizen.tokens/tokens-theme-dark.less';
++// .feature-pure-black() for the Black-theme alias below — see
++// skins.citizen.tokens/tokens.less's own comment on the same construct.
++@import ( reference ) 'common/features.less';
++
++@layer citizen-tokens {
++	.tokens-codex-legacy( ~':root:not( .citizen-v4 )' );
++
++	:root:not( .citizen-v4 ) {
++		.theme-base-legacy();
++	}
++
++	.skin-theme-clientpref-night {
++		:root:not( .citizen-v4 )& {
++			.theme-dark-legacy();
++		}
++	}
++
++	.skin-theme-clientpref-os {
++		@media ( prefers-color-scheme: dark ) {
++			:root:not( .citizen-v4 )& {
++				.theme-dark-legacy();
++			}
++		}
++	}
++
++	.skin-theme-clientpref-black {
++		:root:not( .citizen-v4 )& {
++			.theme-dark-legacy();
++			.feature-pure-black();
++		}
++	}
++}
+diff --git a/resources/skins.citizen.tokens/tokens-codex.less b/resources/skins.citizen.tokens/tokens-codex.less
+index c79fd318..a68559f8 100644
+--- a/resources/skins.citizen.tokens/tokens-codex.less
++++ b/resources/skins.citizen.tokens/tokens-codex.less
+@@ -11,8 +11,10 @@
+  *
+  * Changelog: https://github.com/wikimedia/design-codex/blob/main/CHANGELOG.md
+  */
+-.tokens-codex-legacy() {
+-	:root {
++// @selector lets compat-3160.less gate this to :not( .citizen-v4 ) instead
++// of always landing on a bare :root.
++.tokens-codex-legacy( @selector: ~':root' ) {
++	@{selector} {
+ 		// @since Codex Design Tokens v1.14.0 (MediaWiki 1.43)
+ 		--color-base: ~'oklch( var( --color-base-oklch__l ) var( --color-base-oklch__c ) var( --color-progressive-oklch__h ) )';
+ 		--color-base-fixed: #202122;
+diff --git a/skin.json b/skin.json
+index 80503678..0936fcc3 100644
+--- a/skin.json
++++ b/skin.json
+@@ -160,7 +160,9 @@
+ 				"toc": false
+ 			},
+ 			"styles": [
+-				"resources/skins.citizen.styles/skin.less"
++				"resources/skins.citizen.styles/skin.less",
++				"resources/skins.citizen.styles/compat-3140.less",
++				"resources/skins.citizen.styles/compat-3160.less"
+ 			]
+ 		},
+ 		"skins.citizen.codex.styles": {
+diff --git a/tests/vitest/skins.citizen.scripts/sections.test.js b/tests/vitest/skins.citizen.scripts/sections.test.js
+index 313244a5..1f664869 100644
+--- a/tests/vitest/skins.citizen.scripts/sections.test.js
++++ b/tests/vitest/skins.citizen.scripts/sections.test.js
+@@ -200,8 +200,7 @@ describe( 'createSections', () => {
+ 
+ 	describe( 'stale pre-convergence markup (heading outside section)', () => {
+ 		// Cached pages from before the sections were converged: the heading
+-		// precedes a sibling section that wraps only the body. Collapsing is
+-		// unsupported — clicking the heading must be a harmless no-op.
++		// precedes a sibling section that wraps only the body.
+ 		const STALE = `
+ 			<div class="mw-parser-output">
+ 				<h2 class="citizen-section-heading" id="Old">Old</h2>
+@@ -209,15 +208,17 @@ describe( 'createSections', () => {
+ 			</div>
+ 		`;
+ 
+-		it( 'should leave cached pre-convergence sections inert', () => {
++		it( 'should toggle the sibling section on heading click', () => {
+ 			const bodyContent = createBodyContent( STALE );
+ 			const heading = bodyContent.querySelector( '.citizen-section-heading' );
+ 			const section = bodyContent.querySelector( '#citizen-section-1' );
+ 
+ 			click( heading );
++			expect( section.hidden ).toBeTruthy();
++			expect( section.classList.contains( 'citizen-section--collapsed' ) ).toBe( false );
+ 
++			click( heading );
+ 			expect( section.hidden ).toBeFalsy();
+-			expect( section.classList.contains( 'citizen-section--collapsed' ) ).toBe( false );
+ 		} );
+ 	} );
+ 
+-- 
+2.54.0
+

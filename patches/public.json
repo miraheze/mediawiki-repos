@@ -26,5 +26,12 @@
 		"versions": [ "all" ],
 		"path": "extensions/Bucket",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "citizen-skinstyles-compat.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "skins/Citizen",
+		"failureStrategy": "abort"
 	}
 ]
