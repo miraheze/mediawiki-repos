@@ -1,4 +1,4 @@
-From 01a960744522e570e3c85daf9422ffe0a5f03c8c Mon Sep 17 00:00:00 2001
+From 0eec5eee0794762c76c94fa94d863f2efc40f0d0 Mon Sep 17 00:00:00 2001
 From: Peter Li <lihaohong6@gmail.com>
 Date: Thu, 30 Jul 2026 12:14:20 -0400
 Subject: [PATCH] =?UTF-8?q?fix(skinStyles):=20=F0=9F=90=9B=20compatibility?=
@@ -10,14 +10,24 @@ Content-Transfer-Encoding: 8bit
 Mostly written by an LLM.
 ---
  resources/skins.citizen.scripts/sections.js   |  17 +-
- .../skins.citizen.styles/compat-3140.less     | 603 ++++++++++++++++++
+ .../skins.citizen.styles/compat-3140.less     | 617 ++++++++++++++++++
  .../skins.citizen.styles/compat-3160.less     |  61 ++
+ .../skins.citizen.styles/compat-3170.less     |  42 ++
  .../skins.citizen.tokens/tokens-codex.less    |   6 +-
- skin.json                                     |   4 +-
+ skin.json                                     |   9 +-
+ .../Echo/ext.echo.styles.alert.less           |  43 ++
+ .../Echo/ext.echo.styles.badge.less           |  88 +++
+ .../extensions/Echo/ext.echo.ui.desktop.less  |  20 +
+ skinStyles/extensions/Echo/ext.echo.ui.less   | 232 +++++++
  .../skins.citizen.scripts/sections.test.js    |   9 +-
- 6 files changed, 691 insertions(+), 9 deletions(-)
+ 11 files changed, 1135 insertions(+), 9 deletions(-)
  create mode 100644 resources/skins.citizen.styles/compat-3140.less
  create mode 100644 resources/skins.citizen.styles/compat-3160.less
+ create mode 100644 resources/skins.citizen.styles/compat-3170.less
+ create mode 100644 skinStyles/extensions/Echo/ext.echo.styles.alert.less
+ create mode 100644 skinStyles/extensions/Echo/ext.echo.styles.badge.less
+ create mode 100644 skinStyles/extensions/Echo/ext.echo.ui.desktop.less
+ create mode 100644 skinStyles/extensions/Echo/ext.echo.ui.less
 
 diff --git a/resources/skins.citizen.scripts/sections.js b/resources/skins.citizen.scripts/sections.js
 index c5c64f9d..06b1f701 100644
@@ -52,10 +62,10 @@ index c5c64f9d..06b1f701 100644
  				e.target.closest( COLLAPSED_SECTION_SELECTOR ) :
 diff --git a/resources/skins.citizen.styles/compat-3140.less b/resources/skins.citizen.styles/compat-3140.less
 new file mode 100644
-index 00000000..4ffe84a5
+index 00000000..6032c740
 --- /dev/null
 +++ b/resources/skins.citizen.styles/compat-3140.less
-@@ -0,0 +1,603 @@
+@@ -0,0 +1,617 @@
 +// Transitional compat styles for cached HTML after the Citizen v3.14.0 class
 +// overhaul, plus a v3.16.0 rule that collides with pre-v3.14.0 cached HTML
 +// (see "Preferences skeleton min-width leak" below), a v3.17.0 removal of
@@ -276,9 +286,13 @@ index 00000000..4ffe84a5
 +	// (templates/Header__logo.mustache, pre-f61e4f8d) and, via
 +	// SkinHooks::updateNotificationsMenu, the Echo notification badge link
 +	// (pre-cdx-button migration).
-+	// Deviation: `&Icon` (`.citizen-header__buttonIcon`) omitted. It was
-+	// dead code even at v3.13.0 (no template or script ever applied that
-+	// class to an element).
++	// Deviation: the `&Icon` sizing block and the two
++	// `&:hover/&:active .citizen-header__buttonIcon` opacity rules are
++	// omitted. `.citizen-header__buttonIcon` was dead code even at v3.13.0
++	// (no template or script ever applied that class to an element).
++	// The `margin: auto` below is NOT part of that omission: the original
++	// declared it as `&Icon, .citizen-ui-icon { margin: auto; }`, and only
++	// the first half of that selector list was dead.
 +	// Deviation: `--header-button-size` inlined, see note above.
 +	.citizen-header__button {
 +		display: grid;
@@ -287,6 +301,16 @@ index 00000000..4ffe84a5
 +		height: ~'calc( var( --header-size ) - var( --space-xs ) * 2 )';
 +		contain: strict;
 +		border-radius: var( --border-radius-base );
++
++		// Centres the icon. `place-items: center` above cannot do it alone:
++		// `.citizen-menu .mw-list-item a` (Menu.less, still live) is more
++		// specific and forces `display: flex`, where `justify-items` does not
++		// apply -- so without this the icon sits at the flex start, 10px left
++		// of centre. Visible on cached Echo badges, whose anchors carry
++		// `.citizen-header__button` inside the notifications portlet.
++		.citizen-ui-icon {
++			margin: auto;
++		}
 +
 +		&:hover {
 +			background-color: var( --background-color-button-quiet--hover );
@@ -726,6 +750,54 @@ index 00000000..ce61bbe5
 +		}
 +	}
 +}
+diff --git a/resources/skins.citizen.styles/compat-3170.less b/resources/skins.citizen.styles/compat-3170.less
+new file mode 100644
+index 00000000..313dcb8c
+--- /dev/null
++++ b/resources/skins.citizen.styles/compat-3170.less
+@@ -0,0 +1,42 @@
++// Transitional compat styles for cached HTML predating the v3.17.0
++// notifications overhaul.
++//
++// v3.17.0 replaced Echo's two badges (a `#p-notifications` portlet rendered
++// through Menu.mustache) with Citizen's own single bell dropdown
++// (Notifications.mustache), and rewrote the header rules that positioned the
++// old portlet. Cached HTML rendered before the upgrade still carries the
++// portlet, so those rules have to come back for it.
++//
++// The badge anchors themselves are covered by the Echo skinStyles
++// (skinStyles/extensions/Echo/), which are module-scoped and therefore only
++// reach pages that load Echo's modules. This file holds the one rule that
++// lived in skins.citizen.styles instead.
++//
++// Every rule targets the OLD markup only (`#p-notifications`, which v3.17.0
++// stopped emitting), so this file is inert against new HTML. Safe to delete
++// after one full cache cycle past v3.17.0.
++//
++// Each section links to:
++//   1. the commit diff that changed/removed the original rules, and
++//   2. the source blob prior to that diff, showing the exact lines copied here
++// Deviations from the original (excluding comments) are noted inline.
++
++@import '../variables.less';
++
++@media screen {
++	// Notifications portlet layout from Header.less
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/commit/9009de10#diff-432baa1ad820b33bac72cfc7c5cf9c4b2e366fecb088ca85a2f39c0ebd7191dfL140-L149
++	// https://github.com/StarCitizenTools/mediawiki-skins-Citizen/blob/9009de101a900cc3372f094f3d8f8a699e4c7648~1/resources/skins.citizen.styles/components/Header.less#L140-L149
++	// Without this the two badges are laid out by `.citizen-menu__content-list`
++	// alone (`margin: 0; list-style: none`), i.e. as block-level list items --
++	// they stack vertically and overflow the header instead of sitting side by
++	// side along the header axis.
++	#p-notifications {
++		ul {
++			display: flex;
++			flex-direction: var( --header-direction );
++			gap: var( --space-xxs );
++			align-items: center;
++		}
++	}
++}
 diff --git a/resources/skins.citizen.tokens/tokens-codex.less b/resources/skins.citizen.tokens/tokens-codex.less
 index c79fd318..a68559f8 100644
 --- a/resources/skins.citizen.tokens/tokens-codex.less
@@ -744,20 +816,439 @@ index c79fd318..a68559f8 100644
  		--color-base: ~'oklch( var( --color-base-oklch__l ) var( --color-base-oklch__c ) var( --color-progressive-oklch__h ) )';
  		--color-base-fixed: #202122;
 diff --git a/skin.json b/skin.json
-index 80503678..0936fcc3 100644
+index 80503678..ed537ac7 100644
 --- a/skin.json
 +++ b/skin.json
-@@ -160,7 +160,9 @@
+@@ -160,7 +160,10 @@
  				"toc": false
  			},
  			"styles": [
 -				"resources/skins.citizen.styles/skin.less"
 +				"resources/skins.citizen.styles/skin.less",
 +				"resources/skins.citizen.styles/compat-3140.less",
-+				"resources/skins.citizen.styles/compat-3160.less"
++				"resources/skins.citizen.styles/compat-3160.less",
++				"resources/skins.citizen.styles/compat-3170.less"
  			]
  		},
  		"skins.citizen.codex.styles": {
+@@ -813,6 +816,10 @@
+ 			"+ext.discussionTools.init.styles": "skinStyles/extensions/DiscussionTools/ext.discussionTools.init.styles.less",
+ 			"+ext.discussionTools.ReplyWidget": "skinStyles/extensions/DiscussionTools/ext.discussionTools.ReplyWidget.less",
+ 			"+ext.dismissableSiteNotice.styles": "skinStyles/extensions/DismissableSiteNotice/ext.dismissableSiteNotice.less",
++			"+ext.echo.ui.desktop": "skinStyles/extensions/Echo/ext.echo.ui.desktop.less",
++			"+ext.echo.ui": "skinStyles/extensions/Echo/ext.echo.ui.less",
++			"+ext.echo.styles.badge": "skinStyles/extensions/Echo/ext.echo.styles.badge.less",
++			"+ext.echo.styles.alert": "skinStyles/extensions/Echo/ext.echo.styles.alert.less",
+ 			"+ext.echo.special": "skinStyles/extensions/Echo/ext.echo.special.less",
+ 			"+ext.floatingUI": "skinStyles/extensions/FloatingUI/ext.floatingUI.less",
+ 			"+ext.flow.mediawiki.ui.form": "skinStyles/extensions/Flow/ext.flow.mediawiki.ui.form.less",
+diff --git a/skinStyles/extensions/Echo/ext.echo.styles.alert.less b/skinStyles/extensions/Echo/ext.echo.styles.alert.less
+new file mode 100644
+index 00000000..03fc24f3
+--- /dev/null
++++ b/skinStyles/extensions/Echo/ext.echo.styles.alert.less
+@@ -0,0 +1,43 @@
++/*
++ * Citizen
++ *
++ * SkinStyles for Extension:Echo
++ * Module: ext.echo.styles.alert
++ * Version: REL1_43
++ *
++ * Date: 2025-01-04
++ *
++ * COMPAT (pre-v3.17.0 cached HTML only).
++ * Deleted by v3.17.0 (9009de10) with the rest of the Echo skinStyles.
++ * `.mw-echo-alert` is the new-messages bar, and Echo hangs it off the
++ * notifications portlet (`$links['notifications']['talk-alert']` in Echo's
++ * Hooks.php) -- so v3.17.0's `unset( $links['notifications'] )` drops it from
++ * new HTML along with the badges. Needs no gate: the element cannot exist on a
++ * post-v3.17.0 page.
++*/
++
++@import '../../../resources/variables.less';
++
++/* Sync styles with mw.notifications */
++.mw-echo-alert {
++	position: fixed;
++	top: 0;
++	right: 0;
++	z-index: @z-index-overlay;
++	max-width: 80vw;
++	padding: 0;
++	margin: var( --space-xs );
++	font-size: var( --font-size-small );
++	line-height: var( --line-height-small );
++	color: var( --color-base );
++	background-color: var( --background-color-warning-subtle );
++	border: var( --border-width-base ) solid var( --border-color-base );
++	border-radius: var( --border-radius-medium );
++	box-shadow: var( --box-shadow-large );
++
++	// Needed additional specificity
++	.citizen-menu &.mw-list-item > a {
++		padding: var( --space-sm ) var( --space-md );
++		border-radius: var( --border-radius-large );
++	}
++}
+diff --git a/skinStyles/extensions/Echo/ext.echo.styles.badge.less b/skinStyles/extensions/Echo/ext.echo.styles.badge.less
+new file mode 100644
+index 00000000..12fb2dad
+--- /dev/null
++++ b/skinStyles/extensions/Echo/ext.echo.styles.badge.less
+@@ -0,0 +1,88 @@
++/*
++ * Citizen
++ *
++ * SkinStyles for Extension:Echo
++ * Module: ext.echo.styles.badge
++ * Version: REL1_43
++ *
++ * Date: 2025-01-04
++ *
++ * COMPAT (pre-v3.17.0 cached HTML only).
++ * v3.17.0 (9009de10) replaced Echo's two badges with Citizen's own bell
++ * dropdown and deleted this file. Cached HTML rendered before that upgrade
++ * still carries Echo's portlet, whose anchors Citizen's old
++ * SkinHooks::updateNotificationsMenu stamped with
++ * `citizen-echo-notification-badge` *instead of* Echo's own
++ * `mw-echo-notifications-badge` -- so neither this file nor Echo's own
++ * nojs/mw.echo.badge.less styles them once this is gone, and the label
++ * ("Alerts (0)") renders as plain text. On MW 1.45+ Echo's
++ * BadgeLinkController enhances that anchor in place rather than rebuilding
++ * it, so the old classes -- and the breakage -- survive the JS upgrade.
++ * Inert against post-v3.17.0 HTML, which has no `.citizen-echo-notification-badge`.
++ * Delete once no cache can still hold pre-v3.17.0 HTML.
++ *
++ * Deviation from the original: registered in skin.json as `+ext.echo.styles.badge`
++ * (additive) rather than a wholesale replacement. The replacement was safe only
++ * while skins.citizen.scripts/echo.js re-applied Citizen's classes after Echo
++ * rebuilt the badge; that file went with the same commit. On MW 1.43/1.44, where
++ * Echo still rebuilds the anchor with its own classes, keeping Echo's base badge
++ * styles is what stops the rebuilt badge from falling back to bare text.
++*/
++
++@import '../../../resources/mixins.less';
++
++.citizen-echo-notification-badge {
++	position: relative;
++
++	&.cdx-button.cdx-button--icon-only {
++		gap: 0;
++		min-height: 40px;
++		padding-inline: 0;
++	}
++
++	// Icon rendering via CSS-only approach, activated after echo.js adds the
++	// icon class (mw-ui-icon-wikimedia-*) to the anchor.
++	// Echo replaces anchor children on every update, so icon spans cannot persist.
++	// The mask-image is provided by skins.citizen.icons (OOUIIconPackModule).
++	&[ class*='mw-ui-icon-wikimedia-' ] {
++		// Hide Echo's text content — only the icon (::before) should be visible
++		font-size: 0;
++
++		&::before {
++			display: block;
++			width: var( --size-icon );
++			height: var( --size-icon );
++			content: '';
++			background-color: currentcolor;
++			-webkit-mask-repeat: no-repeat;
++			mask-repeat: no-repeat;
++			-webkit-mask-position: center;
++			mask-position: center;
++			-webkit-mask-size: contain;
++			mask-size: contain;
++		}
++	}
++
++	// Badge dot for unread notifications
++	&:not( [ data-counter-text='0' ] )::after {
++		position: absolute;
++		top: var( --space-xxs );
++		right: var( --space-xxs );
++		box-sizing: content-box;
++		width: 0.5rem;
++		height: 0.5rem;
++		content: '';
++		background: var( --color-progressive );
++		border: 4px solid var( --color-surface-0 );
++		border-radius: var( --border-radius-circle );
++
++		#pt-notifications-alert & {
++			background: var( --color-destructive );
++		}
++	}
++
++	// Hide text label — screen-reader only in both JS and no-JS modes
++	> span:last-child {
++		.mixin-citizen-screen-reader-only;
++	}
++}
+diff --git a/skinStyles/extensions/Echo/ext.echo.ui.desktop.less b/skinStyles/extensions/Echo/ext.echo.ui.desktop.less
+new file mode 100644
+index 00000000..47b125c8
+--- /dev/null
++++ b/skinStyles/extensions/Echo/ext.echo.ui.desktop.less
+@@ -0,0 +1,20 @@
++/*
++ * Citizen
++ *
++ * SkinStyles for Extension:Echo
++ * Module: ext.echo.ui.desktop
++ * Version: REL1_43 / REL1_45
++ *
++ * Date: 2025-12-23
++ *
++ * COMPAT (pre-v3.17.0 cached HTML only). See ext.echo.ui.less.
++ * Needs no gate: the selector requires a badge popup element, which only
++ * Echo's badge JS creates and only the cached portlet boots.
++*/
++
++.mw-echo-ui-notificationBadgeButtonPopupWidget-popup,
++.mw-echo-ui-notificationBadgeController-popup {
++	> .oo-ui-popupWidget-anchor {
++		display: none; // the anchor overflow the viewport
++	}
++}
+diff --git a/skinStyles/extensions/Echo/ext.echo.ui.less b/skinStyles/extensions/Echo/ext.echo.ui.less
+new file mode 100644
+index 00000000..3d59c13d
+--- /dev/null
++++ b/skinStyles/extensions/Echo/ext.echo.ui.less
+@@ -0,0 +1,232 @@
++/*
++ * Citizen
++ *
++ * SkinStyles for Extension:Echo
++ * Module: ext.echo.ui
++ * Version: REL1_43 / REL1_45
++ *
++ * Date: 2025-12-23
++ *
++ * COMPAT (pre-v3.17.0 cached HTML only).
++ * Deleted by v3.17.0 (9009de10) along with Echo's badges. Cached pre-v3.17.0
++ * HTML still boots Echo's badge JS, which builds the popup inside
++ * `.mw-echo-ui-overlay` -- a zero-height element Echo positions from the top.
++ * Without the overrides below the popup hangs off the bottom of the viewport
++ * and only its first rows are reachable.
++ *
++ * SUPPRESSION ON NEW HTML.
++ * `ext.echo.ui` is not badge-only: `ext.echo.special` depends on it, so this
++ * file also loads on Special:Notifications, where post-v3.17.0 HTML *does*
++ * carry `.mw-echo-ui-overlay` and (once the user has notifications)
++ * `.mw-echo-ui-notificationItemWidget`. Those three blocks are therefore gated
++ * on @old-notifications-portlet below. The rest of the file needs no gate --
++ * it is structurally unreachable on new HTML, see the notes at each block.
++ *
++ * The gate is wrapped in `:where()` so it contributes ZERO specificity. A bare
++ * `body:has( #p-notifications )` would add (1,0,1) and quietly promote every
++ * gated rule above overrides that currently beat it -- a (0,1,0) rule in
++ * MediaWiki:Citizen.css wins today and must keep winning. `:where()` makes the
++ * gate a pure matching filter: same specificity as the original rule, same
++ * cascade, just fewer pages matched. Do not "simplify" it away.
++*/
++
++@import '../../../resources/variables.less';
++@import '../../../resources/mixins.less';
++
++// Old-HTML gate. `#p-notifications` is Echo's badge portlet, rendered through
++// Menu.mustache up to v3.16.1. v3.17.0's SkinHooks::updateNotificationsMenu
++// unsets `$links['notifications']` wholesale and Header.mustache renders
++// Notifications.mustache instead, so no post-v3.17.0 page emits the portlet --
++// its presence *is* the generation test. Preferred over a root marker
++// (AGENTS.md "Preferred: a local discriminator"); it also needs no marker
++// stamped on `<html>`, which this branch does not have.
++@old-notifications-portlet: ~':where( body:has( #p-notifications ) )';
++
++// Ungated: `pt-talk-alert` is an *item inside* the notifications portlet
++// (Echo Hooks.php sets `$links['notifications']['talk-alert']`), so v3.17.0's
++// unset drops it from new HTML along with the badges. Self-gating.
++#pt-talk-alert {
++	display: none;
++}
++
++// Ungated: the whole selector needs a badge popup element, which only Echo's
++// badge JS creates and only the cached portlet boots. Special:Notifications
++// builds an inbox, not a popup.
++.skin-citizen {
++	.mw-echo-ui-notificationBadgeButtonPopupWidget-popup,
++	.mw-echo-ui-notificationBadgeController-popup {
++		top: unset !important;
++		bottom: calc( var( --header-size-block-end ) + env( safe-area-inset-bottom ) ) !important;
++		margin: var( --space-xs );
++		box-shadow: var( --box-shadow-large );
++
++		@media ( min-width: @min-width-breakpoint-desktop ) {
++			.citizen-header-position-left & {
++				right: unset !important;
++				bottom: 0 !important;
++				left: var( --header-size-inline-start ) !important;
++			}
++
++			.citizen-header-position-right & {
++				right: var( --header-size-inline-end ) !important;
++				bottom: 0 !important;
++				left: unset !important;
++			}
++
++			.citizen-header-position-top & {
++				top: var( --header-size-block-start ) !important;
++				right: 0 !important;
++				bottom: unset !important;
++				left: unset !important;
++			}
++
++			.citizen-header-position-bottom & {
++				right: 0 !important;
++				bottom: var( --header-size-block-end ) !important;
++				left: unset !important;
++			}
++		}
++
++		.oo-ui-popupWidget-body {
++			height: auto !important;
++			max-height: ~'calc( var( --header-card-maxheight ) - 2 * 3.1428571em )'; // 3.1428571em = height of .oo-ui-popupWidget-head & .oo-ui-popupWidget-footer
++		}
++
++		> .oo-ui-popupWidget-popup {
++			> .oo-ui-popupWidget-head {
++				display: flex;
++				align-items: center;
++				height: auto;
++				min-height: @size-300;
++				padding-inline: var( --space-md );
++				background: var( --color-surface-1 );
++				border-bottom-color: transparent;
++
++				> .oo-ui-iconWidget {
++					float: none;
++					margin: 0;
++				}
++
++				> .oo-ui-labelElement-label {
++					flex-grow: 1;
++					margin-left: var( --space-xs );
++					font-size: var( --font-size-medium );
++					font-weight: var( --font-weight-semi-bold );
++					line-height: var( --line-height-small );
++					color: var( --color-emphasized );
++				}
++
++				.mw-echo-ui-notificationsWidget-markAllReadButton {
++					position: relative;
++					margin: 0;
++				}
++			}
++		}
++	}
++}
++
++/* mw.echo.ui.mobile.less */
++@media all and ( max-width: 720px ) {
++	@{old-notifications-portlet} .mw-echo-ui-overlay {
++		.mw-echo-ui-notificationBadgeButtonPopupWidget-popup,
++		.mw-echo-ui-notificationBadgeController-popup {
++			right: 0 !important;
++			left: 0 !important;
++		}
++	}
++}
++
++/* mw.echo.ui.overlay.less */
++// Gated: Special:Notifications carries `.mw-echo-ui-overlay` on new HTML too,
++// where Echo's own `position: absolute` is correct and this block's
++// `fixed`/`bottom: 0` is not.
++@{old-notifications-portlet} .mw-echo-ui-overlay {
++	position: fixed; // Header is fixed
++	// The notification button is always bottom-aligned
++	// Setting a top value will break the 0 height hack used in the original
++	top: unset;
++	bottom: 0;
++	z-index: @z-index-overlay; // Higher than header
++
++	@media ( min-width: @min-width-breakpoint-desktop ) {
++		.citizen-header-position-top & {
++			top: 0;
++			bottom: unset;
++		}
++	}
++
++	// Add dismiss affordnance backdrop
++	@media ( max-width: @max-width-breakpoint-tablet ) {
++		&::before {
++			content: '';
++			background: var( --background-color-backdrop-light );
++			opacity: 0;
++			-webkit-backdrop-filter: var( --backdrop-filter-blur );
++			backdrop-filter: var( --backdrop-filter-blur );
++			transition-timing-function: var( --transition-timing-function-ease );
++			transition-duration: var( --transition-duration-base );
++			transition-property: opacity;
++		}
++
++		&:has( > :is( .mw-echo-ui-notificationBadgeButtonPopupWidget-popup, .mw-echo-ui-notificationBadgeController-popup ):not( .oo-ui-element-hidden ) ) {
++			&::before {
++				position: fixed;
++				inset: 0;
++				opacity: 1;
++				transition-duration: var( --transition-duration-medium );
++			}
++		}
++	}
++}
++
++// Gated: both widgets also render in Special:Notifications' inbox on new HTML.
++// Wrapped rather than prefixed per block, so the `&-suffix` concatenations
++// below still resolve against the widget class (a wrapper appends to the last
++// compound of the parent chain, which is what the original relied on).
++@{old-notifications-portlet} {
++	/* mw.echo.ui.PlaceholderItemWidget.less */
++	.mw-echo-ui-placeholderItemWidget {
++		display: grid;
++		place-content: center;
++		min-height: @size-800;
++		padding: var( --space-sm ) var( --space-md );
++		color: var( --color-subtle );
++		text-align: center;
++		background-color: transparent;
++	}
++
++	/* mw.echo.ui.NotificationItemWidget.less */
++	.mw-echo-ui-notificationItemWidget {
++		padding: var( --space-sm ) var( --space-md );
++		background-color: transparent;
++
++		&-unread {
++			background-color: var( --color-surface-2 );
++		}
++
++		&-icon {
++			img {
++				width: 20px;
++				// Sync with icon above
++				height: 20px;
++			}
++		}
++
++		&-content {
++			padding-left: var( --space-sm );
++			margin-left: 20px;
++
++			&-actions {
++				margin-top: var( --space-xs );
++				font-size: var( --font-size-small );
++
++				&-timestamp {
++					font-size: inherit;
++					line-height: var( --line-height-sm ) !important;
++					color: var( --color-subtle );
++					opacity: 1;
++				}
++			}
++		}
++	}
++}
 diff --git a/tests/vitest/skins.citizen.scripts/sections.test.js b/tests/vitest/skins.citizen.scripts/sections.test.js
 index 313244a5..1f664869 100644
 --- a/tests/vitest/skins.citizen.scripts/sections.test.js
