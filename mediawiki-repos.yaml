@@ -390,6 +390,9 @@ Femiwiki:
   commit: 737959be162fd9d8ffa56455793f386af943c38e
   path: skins/Femiwiki
   repo_url: https://github.com/femiwiki/FemiwikiSkin
+  npm_deploy_branch: _branch_
+  npm_deploy_alpha_branch: main
+  npm_deploy_repo_url: https://github.com/miraheze/femiwiki-deploy
 FlaggedRevs:
   branch: _branch_
   path: extensions/FlaggedRevs
