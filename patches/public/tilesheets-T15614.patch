@@ -1,0 +1,31 @@
+From 62a395f4f924808b075ad1d41def8af0f8aaa9c9 Mon Sep 17 00:00:00 2001
+From: The-Voidwalker <voidwalker.wikipedia@gmail.com>
+Date: Sun, 5 Jul 2026 23:59:14 -0400
+Subject: [PATCH] WhatUsesThisTileHooks simplify array_keys_exist expressions
+ in addTileLinksForPage
+
+This check will catch `Tilesheets::$tileLinks` being null (issue #119) on top of the existing (and previous) checks.
+
+Unfortunately, I think this means that the onPageUndeleteComplete hook doesn't actually do anything, as the issue heavily implies that `Tilesheets::$tileLinks` is not set when that hook runs, likely as a result of the parser not processing the page during an undelete.
+
+Fixes #119
+---
+ hooks/WhatUsesThisTileHooks.php | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/hooks/WhatUsesThisTileHooks.php b/hooks/WhatUsesThisTileHooks.php
+index 16ea3f9..fa666c7 100644
+--- a/hooks/WhatUsesThisTileHooks.php
++++ b/hooks/WhatUsesThisTileHooks.php
+@@ -59,7 +59,7 @@ class WhatUsesThisTileHooks implements PageDeleteCompleteHook, PageMoveCompleteH
+ 	}
+ 
+ 	private function addTileLinksForPage(int $pageID, int $namespaceID, string $pageName) {
+-		if (array_key_exists($namespaceID, Tilesheets::$tileLinks) && array_key_exists($pageName, Tilesheets::$tileLinks[$namespaceID])) {
++		if (array_key_exists($pageName, Tilesheets::$tileLinks[$namespaceID] ?? [])) {
+ 			array_unique(Tilesheets::$tileLinks[$namespaceID][$pageName]);
+ 			foreach (Tilesheets::$tileLinks[$namespaceID][$pageName] as $entryID) {
+ 				$this->addToTileLinks($pageID, $namespaceID, $entryID);
+-- 
+2.43.0
+
