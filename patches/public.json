@@ -32,9 +32,9 @@
 		"public": true,
 		"versions": [ "all" ],
 		"path": "extensions/Tilesheets",
-    "failureStrategy": "abort"
-  },
-  {
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "citizen-skinstyles-compat.patch",
 		"public": true,
 		"versions": [ "all" ],
