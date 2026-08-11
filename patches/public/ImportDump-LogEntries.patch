@@ -1,0 +1,46 @@
+From 6f97e30ff44a46f16734296c8a4380e9a9efd416 Mon Sep 17 00:00:00 2001
+From: SomeRandomDeveloper <git@srd.dev>
+Date: Mon, 10 Aug 2026 01:03:17 +0200
+Subject: [PATCH] Allow deserializing ScalarParams in log entries
+
+---
+ extension.json | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/extension.json b/extension.json
+index d6caa3a50..8154ec4a3 100644
+--- a/extension.json
++++ b/extension.json
+@@ -107,6 +107,32 @@
+ 			]
+ 		}
+ 	},
++	"LogParamsAllowedClasses": {
++		"importdump/interwiki": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"importdump/request": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"importdump/started": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"importdump/statusupdate": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"importdumpprivate/interwiki": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"importdumpprivate/request": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"importdumpprivate/started": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"importdumpprivate/statusupdate": [
++			"Wikimedia\\Message\\ScalarParam"
++		]
++	},
+ 	"SpecialPages": {
+ 		"RequestImport": {
+ 			"class": "Miraheze\\ImportDump\\Specials\\SpecialRequestImport",

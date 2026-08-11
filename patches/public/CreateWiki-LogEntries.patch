@@ -1,0 +1,55 @@
+From 81d8dda42c03aaa68309a5841eaf64de8f7f2918 Mon Sep 17 00:00:00 2001
+From: SomeRandomDeveloper <git@srd.dev>
+Date: Mon, 10 Aug 2026 00:50:03 +0200
+Subject: [PATCH] Allow deserializing ScalarParams in log entries
+
+---
+ extension.json | 35 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+
+diff --git a/extension.json b/extension.json
+index f2e20c0902..10bb6671c1 100644
+--- a/extension.json
++++ b/extension.json
+@@ -157,6 +157,41 @@
+ 			]
+ 		}
+ 	},
++	"LogParamsAllowedClasses": {
++		"farmer/comment": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmer/create-failure": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmer/requestapprove": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmer/requestabandon": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmer/requestdecline": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmer/requestonhold": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmer/requestreopen": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmer/requestmoredetails": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmersuppression/delete": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmersuppression/public": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"farmersuppression/suppress": [
++			"Wikimedia\\Message\\ScalarParam"
++		]
++	},
+ 	"SpecialPages": {
+ 		"CreateWiki": {
+ 			"class": "Miraheze\\CreateWiki\\Specials\\SpecialCreateWiki",
