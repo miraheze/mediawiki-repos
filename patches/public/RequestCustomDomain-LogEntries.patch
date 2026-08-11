@@ -1,0 +1,28 @@
+From 5b57e77cd9ec212e5c9aa5e3eac1921d45cca327 Mon Sep 17 00:00:00 2001
+From: SomeRandomDeveloper <git@srd.dev>
+Date: Mon, 10 Aug 2026 01:06:08 +0200
+Subject: [PATCH] Allow deserializing ScalarParams in log entries
+
+---
+ extension.json | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/extension.json b/extension.json
+index 1b53a36..63eb6e3 100644
+--- a/extension.json
++++ b/extension.json
+@@ -75,6 +75,14 @@
+ 			]
+ 		}
+ 	},
++	"LogParamsAllowedClasses": {
++		"requestcustomdomain/request": [
++			"Wikimedia\\Message\\ScalarParam"
++		],
++		"requestcustomdomain/statusupdate": [
++			"Wikimedia\\Message\\ScalarParam"
++		]
++	},
+ 	"SpecialPages": {
+ 		"RequestCustomDomain": {
+ 			"class": "Miraheze\\RequestCustomDomain\\Specials\\SpecialRequestCustomDomain",

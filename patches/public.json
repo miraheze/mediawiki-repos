@@ -35,6 +35,27 @@
 		"failureStrategy": "abort"
 	},
 	{
+		"file": "CreateWiki-LogEntries.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/CreateWiki",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "ImportDump-LogEntries.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/ImportDump",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "RequestCustomDomain-LogEntries.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/RequestCustomDomain",
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "citizen-skinstyles-compat.patch",
 		"public": true,
 		"versions": [ "all" ],
