@@ -1,0 +1,34 @@
+From 14bda910ed79ff5cded0bfe60c91bf359f12f85c Mon Sep 17 00:00:00 2001
+From: The-Voidwalker <voidwalker.wikipedia@gmail.com>
+Date: Wed, 12 Aug 2026 18:19:19 -0400
+Subject: [PATCH] BucketDatabase: remove use of utf8Mode
+
+MySQL and MariaDB have differing opinions as to what utf8 is due to
+MariaDB still aliasing utf8 to utf8mb3 by default for compatibility
+reasons. As such we can't use utf8 mode on Miraheze unless we remove
+that compatibility option, which we might not be able to do easily.
+Likewise, Weird Gloop can't remove utf8 mode because MySQL requires
+using a utf8 formatted connection in order to write to the JSON data
+type. Migrating from JSON to LONGTEXT is a similar headache, and not
+strictly necessary.
+
+Bug: T15144
+---
+ includes/BucketDatabase.php | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/includes/BucketDatabase.php b/includes/BucketDatabase.php
+index 9f6e44f..195d427 100644
+--- a/includes/BucketDatabase.php
++++ b/includes/BucketDatabase.php
+@@ -28,7 +28,6 @@ class BucketDatabase {
+ 			'user' => $bucketDBuser,
+ 			'password' => $bucketDBpassword,
+ 			'dbname' => $mainDB->getDBname(),
+-			'utf8Mode' => true,
+ 			'tablePrefix' => $mainDB->tablePrefix(),
+ 			// Weird Gloop specific tweak
+ 			'defaultMaxExecutionTimeForQueries' => 500
+-- 
+2.43.0
+

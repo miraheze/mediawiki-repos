@@ -28,6 +28,13 @@
 		"failureStrategy": "abort"
 	},
 	{
+		"file": "bucket-no-utf8mode-T15144.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/Bucket",
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "tilesheets-T15614.patch",
 		"public": true,
 		"versions": [ "all" ],
