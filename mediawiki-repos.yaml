@@ -994,7 +994,7 @@ ReplaceText:
   path: extensions/ReplaceText
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ReplaceText
 Report:
-  branch: master
+  branch: _branch_
   path: extensions/Report
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Report
 RequestCustomDomain:
