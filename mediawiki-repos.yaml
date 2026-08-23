@@ -1111,6 +1111,11 @@ SpeciallyCursed:
   branch: main
   path: extensions/SpeciallyCursed
   repo_url: https://git.average.name/BlankEclair/SpeciallyCursed
+Speedscope:
+  branch: main
+  path: extensions/Speedscope
+  repo_url: https://github.com/weirdgloop/mediawiki-extensions-Speedscope
+  versions: '1.46'
 Splash:
   branch: _branch_
   path: skins/Splash
