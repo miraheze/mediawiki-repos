@@ -61,12 +61,5 @@
 		"versions": [ "all" ],
 		"path": "extensions/RequestCustomDomain",
 		"failureStrategy": "abort"
-	},
-	{
-		"file": "citizen-skinstyles-compat.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "skins/Citizen",
-		"failureStrategy": "abort"
 	}
 ]
