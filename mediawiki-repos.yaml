@@ -1038,7 +1038,7 @@ Scribunto:
   path: extensions/Scribunto
   repo_url: https://github.com/wikimedia/mediawiki-extensions-Scribunto
 SearchDigest:
-  branch: master
+  branch: main
   path: extensions/SearchDigest
   repo_url: https://github.com/weirdgloop/mediawiki-extensions-SearchDigest
 SecureLinkFixer:
