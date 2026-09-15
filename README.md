@@ -16,6 +16,9 @@ example_repo:
   removed: true
   recurse_submodules: false
   shallow_submodules: true
+  npm_deploy_branch: REL1_X
+  npm_deploy_alpha_branch: main
+  npm_deploy_repo_url: https://github.com/example/example-repo
   versions: '1.45, 1.46'
 ```
 
@@ -51,7 +54,16 @@ example_repo:
 10. shallow_submodules:
     - Optional. If set to true, clones submodules with only the latest commit.
 
-11. versions:
+11. npm_deploy_branch:
+    - Optional. The Git branch to be cloned for `npm_deploy_repo_url`. If `_branch_` is used, it adapts based on the main MediaWiki branch.
+
+12. npm_deploy_alpha_branch:
+    - Optional. The alpha branch to be used for `npm_deploy_repo_url` if the MediaWiki core branch is `master`. This is only needed if `npm_deploy_branch` is not also `master`.
+
+13. npm_deploy_repo_url:
+    - Optional. The URL for an NPM deploy repo that will be cloned into the repository's `node_modules`.
+
+14. versions:
     - Optional. A comma-separated list of versions for which the repository should be installed. If undefined, the repository will be installed for all versions.
 
 **NOTE**: top-level keys in [mediawiki-repos.yaml](mediawiki-repos.yaml) **MUST** be sorted alphabetically.
