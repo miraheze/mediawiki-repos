@@ -14,13 +14,6 @@
 		"failureStrategy": "abort"
 	},
 	{
-		"file": "themetoggle-T15052.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/ThemeToggle",
-		"failureStrategy": "abort"
-	},
-	{
 		"file": "bucket-avoid-grantall-T14235.patch",
 		"public": true,
 		"versions": [ "all" ],
