@@ -158,10 +158,6 @@ Citizen:
   path: skins/Citizen
   repo_url: https://github.com/StarCitizenTools/mediawiki-skins-Citizen
   commit: e53016721750ef2224ced590a8066a6777df4d36
-CleanChanges:
-  branch: _branch_
-  path: extensions/CleanChanges
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-CleanChanges
 CodeEditor:
   branch: _branch_
   path: extensions/CodeEditor
