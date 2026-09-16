@@ -59,10 +59,6 @@ AutoCreateCategoryPages:
   branch: master
   path: extensions/AutoCreateCategoryPages
   repo_url: https://github.com/wikimedia/mediawiki-extensions-AutoCreateCategoryPages
-AutoCreatePage:
-  branch: master
-  path: extensions/AutoCreatePage
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-AutoCreatePage
 Babel:
   branch: _branch_
   path: extensions/Babel
