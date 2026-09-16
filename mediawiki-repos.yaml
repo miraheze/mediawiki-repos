@@ -426,10 +426,6 @@ GeoData:
   branch: _branch_
   path: extensions/GeoData
   repo_url: https://github.com/wikimedia/mediawiki-extensions-GeoData
-GeoGebra:
-  branch: _branch_
-  path: extensions/GeoGebra
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-GeoGebra
 GlobalBlocking:
   branch: _branch_
   path: extensions/GlobalBlocking
