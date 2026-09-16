@@ -573,10 +573,6 @@ Lakeus:
   path: skins/Lakeus
   repo_url: https://github.com/lakejason0/mediawiki-skins-Lakeus
   composer: true
-LanguageSelector:
-  branch: _branch_
-  path: extensions/LanguageSelector
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-LanguageSelector
 LastModified:
   branch: _branch_
   path: extensions/LastModified
