@@ -373,10 +373,6 @@ EventStreamConfig:
   branch: _branch_
   path: extensions/EventStreamConfig
   repo_url: https://github.com/wikimedia/mediawiki-extensions-EventStreamConfig
-ExternalData:
-  branch: master
-  path: extensions/ExternalData
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-ExternalData
 FeaturedFeeds:
   branch: _branch_
   path: extensions/FeaturedFeeds
