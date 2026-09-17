@@ -1,0 +1,38 @@
+From 9871546f9041b610016466a055be8bf870014952 Mon Sep 17 00:00:00 2001
+From: Peter Li <lihaohong6@gmail.com>
+Date: Wed, 16 Sep 2026 23:40:14 -0400
+Subject: [PATCH] Test patch for T16038
+
+I don't understand what's going on but this seems to fix the issue
+by querying all language fallbacks.
+---
+ includes/Language/MessageCache.php | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/includes/Language/MessageCache.php b/includes/Language/MessageCache.php
+index 8b925259454..c304e9a80ba 100644
+--- a/includes/Language/MessageCache.php
++++ b/includes/Language/MessageCache.php
+@@ -661,9 +661,16 @@ class MessageCache implements LoggerAwareInterface {
+ 		if ( $code === null ) {
+ 			// Bulk load
+ 			if ( $this->systemMessageNames === null ) {
+-				$this->systemMessageNames = array_fill_keys(
+-					$this->localisationCache->getSubitemList( $this->contLangCode, 'messages' ),
+-					true );
++				$this->systemMessageNames = [];
++				$codeSequence = [
++					$this->contLangCode,
++					...$this->languageFallback->getAll( $this->contLangCode )
++				];
++				foreach ( $codeSequence as $langCode ) {
++					$this->systemMessageNames += array_fill_keys(
++						$this->localisationCache->getSubitemList( $langCode, 'messages' ) ?: [],
++						true );
++				}
+ 			}
+ 			return isset( $this->systemMessageNames[$msg] );
+ 		} else {
+-- 
+2.55.0
+
