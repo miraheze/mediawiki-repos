@@ -259,11 +259,6 @@ DataMaps:
   branch: master
   path: extensions/DataMaps
   repo_url: https://github.com/wikimedia/mediawiki-extensions-DataMaps
-DataTransfer:
-  branch: master
-  path: extensions/DataTransfer
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-DataTransfer
-  composer: true
 DeleteUserPages:
   branch: _branch_
   path: extensions/DeleteUserPages
