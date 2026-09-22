@@ -996,6 +996,11 @@ SaneCase:
   branch: master
   path: extensions/SaneCase
   repo_url: https://github.com/ciencia/mediawiki-extensions-SaneCase
+ScheduledCacheExpiry:
+  branch: main
+  path: extensions/ScheduledCacheExpiry
+  repo_url: https://github.com/miraheze/ScheduledCacheExpiry
+  versions: '1.46'
 Score:
   branch: _branch_
   path: extensions/Score
