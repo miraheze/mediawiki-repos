@@ -14,6 +14,13 @@
 		"failureStrategy": "abort"
 	},
 	{
+		"file": "core-cache-expiry.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "1.46",
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "globaluserpage-limit-jobs.patch",
 		"public": true,
 		"versions": [ "1.45" ],

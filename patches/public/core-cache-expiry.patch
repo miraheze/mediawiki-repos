@@ -1,0 +1,84 @@
+From: Peter Li <lihaohong6@gmail.com>
+Subject: Remove minimum cache TTL changes when miser mode is on
+
+Partially reverts core commit 3ba2dc9726a5245ca9742e88c5b45c93a082dc56.
+
+Otherwise Extension:ScheduledCacheExpiry does not work properly.
+---
+diff --git a/includes/Parser/ParserOutput.php b/includes/Parser/ParserOutput.php
+index d0e73acbb77..51b13c37205 100644
+--- a/includes/Parser/ParserOutput.php
++++ b/includes/Parser/ParserOutput.php
+@@ -8,8 +8,6 @@ declare( strict_types = 1 );
+ 
+ namespace MediaWiki\Parser;
+ 
+-use DateTimeImmutable;
+-use DateTimeZone;
+ use InvalidArgumentException;
+ use LogicException;
+ use MediaWiki\DAO\WikiAwareEntity;
+@@ -21,7 +19,6 @@ use MediaWiki\Message\Message;
+ use MediaWiki\Output\OutputPage;
+ use MediaWiki\Page\PageReference;
+ use MediaWiki\Title\TitleValue;
+-use MediaWiki\Utils\MWTimestamp;
+ use UnhandledMatchError;
+ use Wikimedia\Assert\Assert;
+ use Wikimedia\Bcp47Code\Bcp47Code;
+@@ -2469,54 +2466,7 @@ class ParserOutput extends CacheTime implements ContentMetadataCollector {
+ 			// ::isCacheable() returns false.
+ 			return 0;
+ 		}
+-		// Raise the minimum to ~24 hrs for content pages on large
+-		// wiki farms when MiserMode is enabled. (T416616)
+-		// Implemented as expiring around the next midnight.  We take
+-		// both UTC midnight and midnight in a wiki-configured
+-		// timezone into account.  On English-language and
+-		// multilingual wikis we get 24 hours (given UTC is the
+-		// timezone), and other wikis split as 1h/23h or down to
+-		// 12h/12h.
+-		$services = MediaWikiServices::getInstance();
+-		$config = $services->getMainConfig();
+-		if (
+-			$config->get( MainConfigNames::MiserMode ) &&
+-			$services->getNamespaceInfo()->isContent(
+-				$this->getTitle()?->getNamespace() ?? NS_MAIN
+-			)
+-		) {
+-			$date = DateTimeImmutable::createFromInterface(
+-				MWTimestamp::fromMW( $this->getCacheTime() )->timestamp
+-			);
+-			// T419439: the deadline, skew, and stagger here should probably
+-			// be configurable.
+-			$utcMidnight = $date
+-				->modify( 'next day midnight' )
+-				->getTimestamp();
+-			$localMidnight = $date
+-				->setTimeZone( new DateTimeZone(
+-					$config->get( MainConfigNames::Localtimezone )
+-				) )
+-				->modify( 'next day midnight' )
+-				->getTimestamp();
+-			// Whichever comes first: UTC midnight, local midnight, or expiry
+-			$timeToNextMidnight = min( $utcMidnight, $localMidnight ) - $date->getTimestamp();
+-			// "Randomly" stagger expiry across a window to avoid cache
+-			// stampedes.
+-			$stagger = 60 * 60; // 1 hour
+-			if ( $timeToNextMidnight < ( $stagger / 2 ) ) {
+-				// Account for clock skew and unlucky parses just before
+-				// midnight by ensuring our "midnight" deadline is at least
+-				// half-a-stagger away (but halve the stagger in that case
+-				// so we never spread the expiry past midnight+stagger).
+-				$stagger /= 2;
+-				$timeToNextMidnight = $stagger;
+-			}
+-			// Stagger is a function of parse time, which should be random-ish.
+-			$timeToNextMidnight += ( $date->getTimestamp() % $stagger );
+-			$expiry = max( $expiry, $timeToNextMidnight );
+-		}
+-
++		$config = MediaWikiServices::getInstance()->getMainConfig();
+ 		if ( $this->getOutputFlag( ParserOutputFlags::ASYNC_NOT_READY ) ) {
+ 			$asyncExpireTime = $config->get(
+ 				MainConfigNames::ParserCacheAsyncExpireTime
