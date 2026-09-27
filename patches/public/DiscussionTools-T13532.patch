@@ -1,0 +1,24 @@
+From fd5944ab48e71074a52bd6d02f7ed83567d42f85 Mon Sep 17 00:00:00 2001
+From: Peter Li <lihaohong6@gmail.com>
+Date: Sat, 26 Sep 2026 17:44:56 -0400
+Subject: T13532: lower required MediaWiki version to 1.46
+---
+ extension.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/extension.json b/extension.json
+index 66266c8d..5e226e28 100644
+--- a/extension.json
++++ b/extension.json
+@@ -11,7 +11,7 @@
+ 	"license-name": "MIT",
+ 	"type": "other",
+ 	"requires": {
+-		"MediaWiki": ">= 1.47.0",
++		"MediaWiki": ">= 1.46.0",
+ 		"extensions": {
+ 			"VisualEditor": "*",
+ 			"Linter": "*"
+-- 
+2.55.0
+

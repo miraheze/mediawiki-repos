@@ -1,0 +1,24 @@
+From fe3dbc0bebe4799a604beed42b1cfbe47b2e6bba Mon Sep 17 00:00:00 2001
+From: Peter Li <lihaohong6@gmail.com>
+Date: Sat, 26 Sep 2026 17:44:55 -0400
+Subject: T13532: lower required MediaWiki version to 1.46
+---
+ extension.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/extension.json b/extension.json
+index 9a5c5aeb..e00e29d1 100644
+--- a/extension.json
++++ b/extension.json
+@@ -13,7 +13,7 @@
+ 	"license-name": "GPL-2.0-or-later",
+ 	"type": "antispam",
+ 	"requires": {
+-		"MediaWiki": ">= 1.47.0"
++		"MediaWiki": ">= 1.46.0"
+ 	},
+ 	"GroupPermissions": {
+ 		"*": {
+-- 
+2.55.0
+
