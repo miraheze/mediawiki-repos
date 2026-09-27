@@ -61,5 +61,19 @@
 		"versions": [ "all" ],
 		"path": "extensions/RequestCustomDomain",
 		"failureStrategy": "abort"
+	},
+	{
+		"file": "ConfirmEdit-T13532.patch",
+		"public": true,
+		"versions": [ "1.46" ],
+		"path": "extensions/ConfirmEdit",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "DiscussionTools-T13532.patch",
+		"public": true,
+		"versions": [ "1.46" ],
+		"path": "extensions/DiscussionTools",
+		"failureStrategy": "abort"
 	}
 ]

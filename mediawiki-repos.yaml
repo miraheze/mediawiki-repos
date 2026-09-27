@@ -187,7 +187,8 @@ CommonsMetadata:
   path: extensions/CommonsMetadata
   repo_url: https://github.com/wikimedia/mediawiki-extensions-CommonsMetadata
 ConfirmEdit:
-  branch: _branch_
+  branch: master
+  commit: fcc9100a9f2991072729f9020f173ffa7292e1f2
   path: extensions/ConfirmEdit
   repo_url: https://github.com/wikimedia/mediawiki-extensions-ConfirmEdit
 ContactPage:
@@ -280,7 +281,8 @@ DiscordNotifications:
   path: extensions/DiscordNotifications
   repo_url: https://github.com/miraheze/DiscordNotifications
 DiscussionTools:
-  branch: _branch_
+  branch: master
+  commit: 4f2a0901f022cb141a75a4cf48ee0a6e756749eb
   path: extensions/DiscussionTools
   repo_url: https://github.com/wikimedia/mediawiki-extensions-DiscussionTools
 DismissableSiteNotice:
