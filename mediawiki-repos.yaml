@@ -998,7 +998,6 @@ ScheduledCacheExpiry:
   branch: main
   path: extensions/ScheduledCacheExpiry
   repo_url: https://github.com/miraheze/ScheduledCacheExpiry
-  versions: '1.46'
 Score:
   branch: _branch_
   path: extensions/Score
@@ -1315,12 +1314,6 @@ WMAU:
   branch: master
   path: skins/WMAU
   repo_url: https://github.com/wikimedia/mediawiki-skins-WMAU
-WebAuthn:
-  branch: _branch_
-  path: extensions/WebAuthn
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-WebAuthn
-  composer: true
-  versions: '1.45'
 WebChat:
   branch: _branch_
   path: extensions/WebChat
