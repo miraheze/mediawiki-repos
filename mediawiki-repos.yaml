@@ -599,10 +599,6 @@ MachineTranslation:
   branch: master
   path: extensions/MachineTranslation
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MachineTranslation
-MagicNoCache:
-  branch: _branch_
-  path: extensions/MagicNoCache
-  repo_url: https://github.com/wikimedia/mediawiki-extensions-MagicNoCache
 ManageWiki:
   branch: main
   path: extensions/ManageWiki
