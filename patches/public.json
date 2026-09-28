@@ -21,13 +21,6 @@
 		"failureStrategy": "abort"
 	},
 	{
-		"file": "globaluserpage-limit-jobs.patch",
-		"public": true,
-		"versions": [ "1.45" ],
-		"path": "extensions/GlobalUserPage",
-		"failureStrategy": "abort"
-	},
-	{
 		"file": "bucket-avoid-grantall-T14235.patch",
 		"public": true,
 		"versions": [ "all" ],
