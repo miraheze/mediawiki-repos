@@ -848,7 +848,6 @@ PdfHandler:
   branch: _branch_
   path: extensions/PdfHandler
   repo_url: https://github.com/wikimedia/mediawiki-extensions-PdfHandler
-  commit: c7be05d
 PerPageLanguage:
   branch: _branch_
   path: extensions/PerPageLanguage
