@@ -63,6 +63,13 @@
 		"failureStrategy": "abort"
 	},
 	{
+		"file": "AbuseFilter-T16279.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "extensions/AbuseFilter",
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "ConfirmEdit-T13532.patch",
 		"public": true,
 		"versions": [ "1.46" ],
