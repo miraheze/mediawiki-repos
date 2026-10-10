@@ -82,12 +82,5 @@
 		"versions": [ "1.46" ],
 		"path": "extensions/DiscussionTools",
 		"failureStrategy": "abort"
-	},
-	{
-		"file": "ApprovedRevs-T15842.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/ApprovedRevs",
-		"failureStrategy": "abort"
 	}
 ]
