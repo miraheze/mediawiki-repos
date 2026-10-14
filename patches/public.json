@@ -21,9 +21,16 @@
 		"failureStrategy": "abort"
 	},
 	{
+		"file": "bucket-avoid-grantall-T14235-REL1_46.patch",
+		"public": true,
+		"versions": [ "1.46" ],
+		"path": "extensions/Bucket",
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "bucket-avoid-grantall-T14235.patch",
 		"public": true,
-		"versions": [ "all" ],
+		"versions": [ "1.47" ],
 		"path": "extensions/Bucket",
 		"failureStrategy": "abort"
 	},
