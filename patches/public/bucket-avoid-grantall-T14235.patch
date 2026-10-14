@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Universal Omega
+Date: Wed, 14 Oct 2026 13:49:00 -0600
+Subject: [PATCH] Remove unnecessary GRANT ALL section
+
+---
+ includes/BucketDatabase.php | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/includes/BucketDatabase.php b/includes/BucketDatabase.php
+--- a/includes/BucketDatabase.php
++++ b/includes/BucketDatabase.php
+@@ -144,14 +144,6 @@ class BucketDatabase {
+ 				$statements = self::getAlterTableStatement( $bucketSchema, $oldSchema, $dbw );
+ 			}
+ 			foreach ( $statements as $table ) {
+-				if ( isset( $table['permissionName'] ) ) {
+-					$bucketDBuser = self::getBucketDBUser();
+-					$escapedTableName = $dbw->tableName( $table['permissionName'] );
+-					// Note: The main database connection is only used to grant access to the new table.
+-					MediaWikiServices::getInstance()->getDBLoadBalancer()
+-						->getConnection( DB_PRIMARY )
+-						->query( "GRANT ALL ON $escapedTableName TO $bucketDBuser;", $methodName );
+-				}
+ 				$dbw->query( $table['statement'], $methodName );
+ 			}
+ 
+-- 
+2.53.0
