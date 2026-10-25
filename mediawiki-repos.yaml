@@ -703,6 +703,10 @@ MultimediaViewer:
   branch: _branch_
   path: extensions/MultimediaViewer
   repo_url: https://github.com/wikimedia/mediawiki-extensions-MultimediaViewer
+Mustache:
+  branch: master
+  path: extensions/Mustache
+  repo_url: https://github.com/lihaohong6/Mustache
 MyVariables:
   branch: _branch_
   path: extensions/MyVariables
