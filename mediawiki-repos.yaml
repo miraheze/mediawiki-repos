@@ -1284,6 +1284,7 @@ UserProfileV2:
   branch: main
   path: extensions/UserProfileV2
   repo_url: https://gitlab.com/telepedia/extensions/userprofilev2
+  commit: 747b32bfdd9b32ad2ebd4e4adf3e9eaf9b3cde01
 VEForAll:
   branch: _branch_
   path: extensions/VEForAll
