@@ -1280,7 +1280,6 @@ UserPageEditProtection:
   branch: _branch_
   path: extensions/UserPageEditProtection
   repo_url: https://github.com/wikimedia/mediawiki-extensions-UserPageEditProtection
-  versions: '1.46'
 UserProfileV2:
   branch: main
   path: extensions/UserProfileV2
