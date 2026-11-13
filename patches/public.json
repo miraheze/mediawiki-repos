@@ -14,10 +14,24 @@
 		"failureStrategy": "abort"
 	},
 	{
+		"file": "core-message-cache-fallback.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "1.47",
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "core-cache-expiry.patch",
 		"public": true,
 		"versions": [ "all" ],
 		"path": "1.46",
+		"failureStrategy": "abort"
+	},
+	{
+		"file": "core-cache-expiry.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "1.47",
 		"failureStrategy": "abort"
 	},
 	{
