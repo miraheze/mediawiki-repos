@@ -653,6 +653,10 @@ MirahezeMagic:
   branch: main
   path: extensions/MirahezeMagic
   repo_url: https://github.com/miraheze/MirahezeMagic
+MirahezeRequests:
+  branch: main
+  path: extensions/MirahezeRequests
+  repo_url: https://github.com/miraheze/MirahezeRequests
 MobileDetect:
   branch: master
   path: extensions/MobileDetect
