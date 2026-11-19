@@ -56,13 +56,6 @@
 		"failureStrategy": "abort"
 	},
 	{
-		"file": "CreateWiki-LogEntries.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/CreateWiki",
-		"failureStrategy": "abort"
-	},
-	{
 		"file": "RequestCustomDomain-LogEntries.patch",
 		"public": true,
 		"versions": [ "all" ],
