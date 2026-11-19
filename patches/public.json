@@ -63,13 +63,6 @@
 		"failureStrategy": "abort"
 	},
 	{
-		"file": "ImportDump-LogEntries.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/ImportDump",
-		"failureStrategy": "abort"
-	},
-	{
 		"file": "RequestCustomDomain-LogEntries.patch",
 		"public": true,
 		"versions": [ "all" ],
