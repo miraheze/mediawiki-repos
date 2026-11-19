@@ -54,12 +54,5 @@
 		"versions": [ "all" ],
 		"path": "extensions/Tilesheets",
 		"failureStrategy": "abort"
-	},
-	{
-		"file": "RequestCustomDomain-LogEntries.patch",
-		"public": true,
-		"versions": [ "all" ],
-		"path": "extensions/RequestCustomDomain",
-		"failureStrategy": "abort"
 	}
 ]
