@@ -35,6 +35,13 @@
 		"failureStrategy": "abort"
 	},
 	{
+		"file": "core-smtp.patch",
+		"public": true,
+		"versions": [ "all" ],
+		"path": "1.47",
+		"failureStrategy": "abort"
+	},
+	{
 		"file": "bucket-avoid-grantall-T14235.patch",
 		"public": true,
 		"versions": [ "all" ],
